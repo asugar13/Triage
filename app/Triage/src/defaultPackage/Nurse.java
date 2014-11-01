@@ -1,5 +1,5 @@
 package defaultPackage;
 
-public class Nurse {
+public class Nurse extends User {
 
 }
