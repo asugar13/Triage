@@ -5,6 +5,10 @@ import java.io.Serializable;
 
 public class Patient implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1280942052796823017L;
 	//Patient's name.
 	private String[] name;
 	//Patient's birth date.
