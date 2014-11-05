@@ -1,7 +1,7 @@
 package defaultPackage;
 
 import java.io.Serializable;
-import java.util.List;
+
 
 public class Patient implements Serializable{
 	
@@ -39,7 +39,9 @@ public class Patient implements Serializable{
 		this.healthCardNumber = String.valueOf(hcn);
 		
 	}
-	
+	/**
+	*Returns this patient's name.
+	*/
 	public String getName(){
 		String nameString = "";
 		for(String n: name){
@@ -48,41 +50,89 @@ public class Patient implements Serializable{
 		return nameString;
 	}
 	
+	/**
+	*Returns this patient's birth date.
+	*/
 	public String getBirthDate(){
 		return birthdate;
 	}
 	
+	/**
+	 * Returns health card number.
+	 */
 	public String getHealthCardNum(){
 		return healthCardNumber;
 	}
 	
-	
-	
-
-	
+	/**
+	*Returns the current symptoms of the patient.
+	*/
 	public String[] getSymptoms() {
 		return symptoms;
 	}
-
-
-
+	
+	/**
+	 * Sets to Patient's symptoms.
+	 */
 	public void setSymptoms(String[] symptoms) {
 		this.symptoms = symptoms;
 	}
+	
+	/**
+	*Returns the current urgency level of the patient.
+	*/
+	public int getUrgencyLevel() {
+		return urgencyLevel;
+	}
+	
+	/**
+	 * Sets to Patient's urgency level
+	 */
+	public void setUrgencyLevel(int urgencyLevel) {
+		this.urgencyLevel = urgencyLevel;
+	}
+	
+	/**
+	*Returns the current arrival time to the hospital.
+	*/
+	public String getArrivalTimeToHospital() {
+		return arrivalTimeToHospital;
+	}
 
+	/**
+	 * Sets to Patient's arrival time to the hospital.
+	 */
+	public void setArrivalTimeToHospital(String arrivalTimeToHospital) {
+		this.arrivalTimeToHospital = arrivalTimeToHospital;
+	}
+	
+	/**
+	*Returns if the patient was seen by a doctor as 'Yes' and 'No'.
+	*/
+	public String getSeenByDoctor() {
+		return seenByDoctor;
+	}
 
-
+	/**
+	 * Sets to the patient was seen by a doctor as 'Yes' and 'No'.
+	 */
+	public void setSeenByDoctor(String seenByDoctor) {
+		this.seenByDoctor = seenByDoctor;
+	}
+	
+	/**
+	*Returns the current vital signs of the patient.
+	*/
 	public String[] getVitalSigns() {
 		return vitalSigns;
 	}
 
-
-
+	/**
+	 * Sets to Patient's vital signs.
+	 */
 	public void setVitalSigns(String[] vitalSigns) {
 		this.vitalSigns = vitalSigns;
 	}
-
-
 
 	public String toString(){
 		String patientName = "";
