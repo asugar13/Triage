@@ -30,12 +30,11 @@ public class Patient {
 	 * @param UrgencyLevel is This Patient's current urgency level according to the hospital policy.
 	 * @param SeenByDoctor is This Patient's current situation of waiting to see a doctor unless was not seen by a doctor.
 	 */
-	public Patient(String[] name, int day, int month, int year, int hcn, int hour, int minutes, String seenbydoctor){
+	public Patient(String[] name, int day, int month, int year, int hcn) {
 		this.name = name.clone();
 		this.birthdate = String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
 		this.healthCardNumber = String.valueOf(hcn);
-		this.arrivalTimeToHospital = String.valueOf(hour) + ":" + String.valueOf(minutes);
-		this.seenByDoctor = seenbydoctor;
+		
 	}
 	
 
