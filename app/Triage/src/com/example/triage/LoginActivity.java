@@ -1,8 +1,10 @@
 package com.example.triage;
 
+import defaultPackage.EmergencyRoom;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +15,11 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		//TEMPORARY - FOR TESTING EMERGENCY ROOM
+		EmergencyRoom myEmergRoom = new EmergencyRoom(this, "patient_records.txt");
+		Log.d("TAG",myEmergRoom.getPatients().toString());
+		
 	}
 	 /**The Nurse logs in to the system from the login activity and goes to the patients
 	display activity
