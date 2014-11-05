@@ -10,10 +10,18 @@ import java.util.*;
 
 import android.content.Context;
 import android.util.Log;
-
+/**
+ * 
+ * @author Asier
+ *
+ */
 public class EmergencyRoom {
 	private List<Patient> patients;
-	
+	/**
+	 * 
+	 * @param context
+	 * @param fileName
+	 */
 	public EmergencyRoom(Context context, String fileName){
 		this.patients = new ArrayList<Patient>();
 		try{
@@ -24,11 +32,18 @@ public class EmergencyRoom {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Patient> getPatients(){
 		return patients;
 	}
-	
+	/**
+	 * 
+	 * @param patients_stream
+	 * @throws FileNotFoundException
+	 */
 	public void populate(InputStream patients_stream) throws FileNotFoundException {
 	Scanner scanner = new Scanner((patients_stream));
 	String[] patient_on_file;
