@@ -16,10 +16,6 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		//TEMPORARY - FOR TESTING EMERGENCY ROOM
-		EmergencyRoom myEmergRoom = new EmergencyRoom(this, "patient_records.txt");
-		Log.d("TAG",myEmergRoom.getPatients().toString());
-		
 	}
 	 /**The Nurse logs in to the system from the login activity and goes to the patients
 	display activity
