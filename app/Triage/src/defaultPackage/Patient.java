@@ -3,21 +3,21 @@ package defaultPackage;
 public class Patient {
 	
 	//Patient's name.
-	public String[] name;
+	private String[] name;
 	//Patient's birth date.
-	public String birthdate;
+	private String birthdate;
 	//Patient's health card number.
-	public String healthcardnumber;
+	private String healthCardNumber;
 	//Patient's arrival time to the hospital.
-	public String ArrivalTimeToHospital;
+	private String arrivalTimeToHospital;
 	//Patient's current symptoms.
-	public String[] Symptoms;
+	private String[] symptoms;
 	//Patient's current vital signs.
-	public String[] VitalSigns;
+	private String[] vitalSigns;
 	//Patient's current urgency level according to the hospital policy.
-	public int UrgencyLevel;
+	private int urgencyLevel;
 	//If patient was seen by a doctor 'Yes' unless 'No'.
-	public String SeenByDoctor;
+	private String seenByDoctor;
 	
 	/** @param name This patient's name.
 	 * @param day This Patient's day of birth.
@@ -30,71 +30,46 @@ public class Patient {
 	 * @param UrgencyLevel is This Patient's current urgency level according to the hospital policy.
 	 * @param SeenByDoctor is This Patient's current situation of waiting to see a doctor unless was not seen by a doctor.
 	 */
-	public Patient(String[] name, int day, int month, int year, int hcn, int hour, int minutes, String[] symptoms, 
-			String[] vitalsigns, int urgencylevel, String seenbydoctor){
+	public Patient(String[] name, int day, int month, int year, int hcn, int hour, int minutes, String seenbydoctor){
 		this.name = name.clone();
 		this.birthdate = String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
-		this.healthcardnumber = String.valueOf(hcn);
-		this.ArrivalTimeToHospital = String.valueOf(hour) + ":" + String.valueOf(minutes);
-		this.Symptoms = symptoms;
-		this.VitalSigns = vitalsigns;
-		this.UrgencyLevel = urgencylevel;
-		this.SeenByDoctor = seenbydoctor;
+		this.healthCardNumber = String.valueOf(hcn);
+		this.arrivalTimeToHospital = String.valueOf(hour) + ":" + String.valueOf(minutes);
+		this.seenByDoctor = seenbydoctor;
 	}
 	
-	//Returns this patient's name.
-	public String[] getName() {
-		return name.clone();
-	}
-		
-	//Sets to Patient's name.
-	public void setName(String[] name){
-		this.name = name.clone(); //To avoid unintended side-effects.
-	}
+
 	
-	//Returns this patient's birth date.
-	public String getbirthdate(){
-		return birthdate;
+	public String[] getSymptoms() {
+		return symptoms;
 	}
-	
-	/**
-	 * Returns health card number.
-	 */
-	public String gethealthcardnumber(){
-		return healthcardnumber;
+
+
+
+	public void setSymptoms(String[] symptoms) {
+		this.symptoms = symptoms;
 	}
-	
-	//Returns the current arrival time to the hospital.
-	public String getatth(){
-		return ArrivalTimeToHospital;
+
+
+
+	public String[] getVitalSigns() {
+		return vitalSigns;
 	}
-	
-	//Returns the current symptoms of the patient.
-	public String[] getsymptoms(){
-		return Symptoms;
+
+
+
+	public void setVitalSigns(String[] vitalSigns) {
+		this.vitalSigns = vitalSigns;
 	}
-		
-	//Returns the current vital signs of the patient.
-	public String[] getvitalsigns(){
-		return VitalSigns;
-	}
-	
-	//Returns the current urgency level of the patient.
-	public int geturgencylevel(){
-		return UrgencyLevel;
-	}
-	
-	//Returns if the patient was seen by a doctor as 'Yes' and 'No'.
-	public String getseenbydoctor(){
-		return SeenByDoctor;
-	}
-	
+
+
+
 	public String toString(){
 		String patientName = "";
 		for(String n: name){
 			patientName += n+ " ";
 		}
-		return patientName.trim() + " " + birthdate + healthcardnumber + ArrivalTimeToHospital + Symptoms + VitalSigns + 
-				UrgencyLevel + SeenByDoctor;
+		return patientName.trim() + " " + birthdate + healthCardNumber + arrivalTimeToHospital + symptoms + vitalSigns + 
+				urgencyLevel + seenByDoctor;
 	}
 }
