@@ -1,6 +1,8 @@
 package defaultPackage;
 
-public class Patient {
+import java.io.Serializable;
+
+public class Patient implements Serializable{
 	
 	//Patient's name.
 	private String[] name;
@@ -36,6 +38,20 @@ public class Patient {
 		this.healthCardNumber = String.valueOf(hcn);
 		
 	}
+	
+	public String getName(){
+		return name.toString();
+	}
+	
+	public String getBirthDate(){
+		return birthdate;
+	}
+	
+	public String getHealthCardNum(){
+		return healthCardNumber;
+	}
+	
+	
 	
 
 	
