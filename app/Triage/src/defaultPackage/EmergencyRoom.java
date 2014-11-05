@@ -28,7 +28,6 @@ public class EmergencyRoom {
 			InputStream patients_stream = context.getAssets().open("patient_records.txt");
 			populate(patients_stream);
 		}catch(Exception e){ //Change to specific exception
-			Log.d("Exception",e.getMessage());
 			e.printStackTrace();
 		}
 	}
