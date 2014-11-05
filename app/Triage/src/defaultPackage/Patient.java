@@ -1,6 +1,7 @@
 package defaultPackage;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Patient implements Serializable{
 	
@@ -40,7 +41,11 @@ public class Patient implements Serializable{
 	}
 	
 	public String getName(){
-		return name.toString();
+		String nameString = "";
+		for(String n: name){
+			nameString = nameString + n + " ";
+		}
+		return nameString;
 	}
 	
 	public String getBirthDate(){
