@@ -1,9 +1,12 @@
 package com.example.triage;
 
+import defaultPackage.Patient;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class PatientInfoActivity extends Activity {
 
@@ -11,7 +14,22 @@ public class PatientInfoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patient_info);
+		Intent intent = getIntent();
+		Patient patient = (Patient) intent.getSerializableExtra("Patient_Tag");
+		String name = patient.getName();
+		String health_num = patient.getHealthCardNum();
+		String birthdate = patient.getBirthDate();
+		
+		TextView name_patient = (TextView) findViewById(R.id.name_patient);
+		TextView patient_birthdate = (TextView) findViewById(R.id.patient_birthdate);
+		TextView health_num_patient = (TextView) findViewById(R.id.health_num_patient);
+		
+		name_patient.setText(name);
+		patient_birthdate.setText(birthdate);
+		health_num_patient.setText(health_num);
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

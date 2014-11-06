@@ -30,7 +30,7 @@ public class PatientsDisplayActivity extends Activity {
 		//Get list of patients
 		patients = (ArrayList<Patient>) myEmergRoom.getPatients();
 		//Get list view, and populate with adapter
-		ListView patientsList = (ListView) findViewById(R.id.listView1);
+		ListView patientsList = (ListView) findViewById(R.id.listViewOfPatients);
 		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
 
 	}

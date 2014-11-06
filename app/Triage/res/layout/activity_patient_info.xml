@@ -9,8 +9,31 @@
     tools:context="com.example.triage.PatientInfoActivity" >
 
     <TextView
+        android:id="@+id/name_patient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="36dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/health_num_patient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/name_patient"
+        android:layout_below="@+id/name_patient"
+        android:layout_marginTop="23dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/patient_birthdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/health_num_patient"
+        android:layout_below="@+id/health_num_patient"
+        android:layout_marginTop="25dp"
+        android:text="TextView" />
 
 </RelativeLayout>

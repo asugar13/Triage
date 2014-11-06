@@ -12,24 +12,21 @@
         android:id="@+id/patientNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:text="Name" />
+        android:layout_alignRight="@+id/name_patient"
+        android:layout_below="@+id/name_patient" />
 
     <TextView
         android:id="@+id/patientBirthText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_alignParentRight="true"
-        android:text="Birthdate" />
+        android:layout_alignBottom="@+id/name_patient"
+        android:layout_alignParentRight="true"/>
 
     <TextView
         android:id="@+id/patientHealthNumerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/patientNameText"
-        android:layout_below="@+id/patientNameText"
-        android:text="Health Card #" />
+        android:layout_below="@+id/patientNameText" />
 
 </RelativeLayout>
