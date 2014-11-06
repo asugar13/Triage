@@ -3,15 +3,24 @@
 
     <string name="app_name">Triage</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Hello World!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_patient_info">PatientInfoActivity</string>
     <string name="nurseid">ID: </string>
     <string name="btnlogin">Log In</string>
     <string name="password">Password: </string>
     <string name="title_activity_patients_display">PatientsDisplayActivity</string>
-    <string name="enter_hc">Look-Up by health card number:</string>
+    <string name="enter_hc">Look-Up by Health Card Number:</string>
     <string name="search">Search</string>
-    <string name="searchHint">Enter health card number</string>
+    <string name="searchHint">Enter Health Card Number</string>
+    <string name="title_activity_write__new__records">Write_New_Records</string>
+    <string name="title_activity_view_all_records">ViewAllRecords</string>
+    <string name="title_activity_enter_vitals">EnterVitalsActivity</string>
+    <string name="blood_pressure">Blood Pressure: </string>
+    <string name="temperature">Temperature: </string>
+    <string name="heart_rate">Heart rate: </string>
+    <string name="symptom_description">Description of Symptoms</string>
+    <string name="editRecords">Add Records</string>
+    <string name="viewRecords">View Patient History</string>
 
 </resources>
