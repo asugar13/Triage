@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 public class Patient implements Serializable{
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1280942052796823017L;
 	//Patient's name.
 	private String[] name;
@@ -40,8 +38,8 @@ public class Patient implements Serializable{
 		this.name = name.clone();
 		this.birthdate = String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
 		this.healthCardNumber = String.valueOf(hcn);
-		
-	} 
+	}
+	
 	/**
 	*Returns this patient's name.
 	*/
@@ -136,7 +134,10 @@ public class Patient implements Serializable{
 	public void setVitalSigns(String[] vitalSigns) {
 		this.vitalSigns = vitalSigns;
 	}
-
+	
+	/**
+	 * Returns the String description of this object.
+	 */
 	public String toString(){
 		String patientName = "";
 		for(String n: name){
