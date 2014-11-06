@@ -10,5 +10,8 @@
     <string name="btnlogin">Log In</string>
     <string name="password">Password: </string>
     <string name="title_activity_patients_display">PatientsDisplayActivity</string>
+    <string name="enter_hc">Look-Up by health card number:</string>
+    <string name="search">Search</string>
+    <string name="searchHint">Enter health card number</string>
 
 </resources>
