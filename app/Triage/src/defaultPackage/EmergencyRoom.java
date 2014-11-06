@@ -38,6 +38,16 @@ public class EmergencyRoom {
 	public List<Patient> getPatients(){
 		return patients;
 	}
+	
+	public Patient getPatientByHCNum(String hCardNum){
+		for(Patient p: patients){
+			if(p.getHealthCardNum().equals(hCardNum)){
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * 
 	 * @param patients_stream
