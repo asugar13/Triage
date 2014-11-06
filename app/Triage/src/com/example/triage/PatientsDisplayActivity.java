@@ -56,9 +56,12 @@ public class PatientsDisplayActivity extends Activity {
 				intent.putExtra("Patient_Tag",result);
 				startActivity(intent);
 			}
+			else{
+				Toast.makeText(this, "No patient found or invalid health card number", Toast.LENGTH_SHORT).show();
+			}
+		}else{
+			Toast.makeText(this, "Enter a health card number", Toast.LENGTH_SHORT).show();
 		}
-		//Invalid string
-		Toast.makeText(this, "Enter a valid health card number", Toast.LENGTH_SHORT).show();
 
 	}
 	
