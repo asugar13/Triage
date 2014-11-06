@@ -27,12 +27,13 @@
 
     <EditText
         android:id="@+id/searchHCtext"
-        android:hint = "@string/searchHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/searchTitle"
         android:layout_below="@+id/searchTitle"
-        android:ems="10" />
+        android:layout_toLeftOf="@+id/searchHC"
+        android:ems="10"
+        android:hint="@string/searchHint" />
 
     <Button
         android:id="@+id/searchHC"
@@ -40,7 +41,7 @@
         android:layout_height="32dp"
         android:layout_alignBaseline="@+id/searchHCtext"
         android:layout_alignBottom="@+id/searchHCtext"
-        android:layout_toRightOf="@+id/searchHCtext"
+        android:layout_alignRight="@+id/listView1"
         android:background="@android:drawable/ic_menu_search"
         android:onClick="searchClick" />
 
