@@ -1,12 +1,6 @@
 package defaultPackage;
 
 import java.io.Serializable;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.HashMap;
-import java.lang.Object;
 
 public class Patient implements Serializable{
 	
@@ -47,7 +41,7 @@ public class Patient implements Serializable{
 		this.birthdate = String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
 		this.healthCardNumber = String.valueOf(hcn);
 		
-	}
+	} 
 	/**
 	*Returns this patient's name.
 	*/
@@ -153,11 +147,6 @@ public class Patient implements Serializable{
 	}
 	
 	
-	
-	
-		
-		
-		
 		
 }
 	
