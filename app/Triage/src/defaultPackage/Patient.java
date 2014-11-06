@@ -1,7 +1,12 @@
 package defaultPackage;
 
 import java.io.Serializable;
-
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.HashMap;
+import java.lang.Object;
 
 public class Patient implements Serializable{
 	
@@ -146,4 +151,15 @@ public class Patient implements Serializable{
 		return patientName.trim() + " " + birthdate + healthCardNumber + arrivalTimeToHospital + symptoms + vitalSigns + 
 				urgencyLevel + seenByDoctor;
 	}
+	
+	
+	
+	
+		
+		
+		
+		
 }
+	
+		
+
