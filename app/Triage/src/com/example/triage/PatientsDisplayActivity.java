@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,8 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PatientsDisplayActivity extends Activity {
 	private EmergencyRoom myEmergRoom;
@@ -30,11 +33,35 @@ public class PatientsDisplayActivity extends Activity {
 		//Get list of patients
 		patients = (ArrayList<Patient>) myEmergRoom.getPatients();
 		//Get list view, and populate with adapter
-		ListView patientsList = (ListView) findViewById(R.id.listViewOfPatients);
+		ListView patientsList = (ListView) findViewById(R.id.listView1);
 		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
+		
+		
 
 	}
+	
+	public void searchClick(View view){
+		Patient result = null;
+		String hCardNumber = "";
 
+		EditText healthCardText = (EditText) this.findViewById(R.id.searchHCtext);
+		hCardNumber = healthCardText.getText().toString();
+		
+		
+		if(!(hCardNumber == "")){
+			result = myEmergRoom.getPatientByHCNum(hCardNumber);
+
+			if(result!=null){
+				Intent intent = new Intent(this,PatientInfoActivity.class);
+				intent.putExtra("Patient_Tag",result);
+				startActivity(intent);
+			}
+		}
+		//Invalid string
+		Toast.makeText(this, "Enter a valid health card number", Toast.LENGTH_SHORT).show();
+
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -54,7 +81,7 @@ public class PatientsDisplayActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	/**
-	 * 
+	 * Custom adapter for listview, populates textviews with patient info
 	 * 
 	 *
 	 */
@@ -108,7 +135,7 @@ public class PatientsDisplayActivity extends Activity {
 			healthCardTView.setText(thisPatient.getHealthCardNum());
 			birthDateTView.setText(thisPatient.getBirthDate());
 			
-			//Add a clicklistener to the list items
+			//Manages the click of the row
 			row.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
