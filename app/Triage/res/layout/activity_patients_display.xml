@@ -25,17 +25,6 @@
         android:text="@string/enter_hc"
         android:layout_alignParentTop="true"/>
 
-    <Button
-        android:id="@+id/searchHC"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_alignBottom="@+id/searchHCtext"
-        android:layout_alignRight="@+id/listView1"
-        android:layout_alignTop="@+id/searchHCtext"
-        android:onClick="searchClick"
-        android:layout_toRightOf="@+id/searchHCtext"
-        android:background="@android:drawable/ic_search_category_default" />
-
     <EditText
         android:id="@+id/searchHCtext"
         android:hint = "@string/searchHint"
@@ -44,5 +33,15 @@
         android:layout_alignLeft="@+id/searchTitle"
         android:layout_below="@+id/searchTitle"
         android:ems="10" />
+
+    <Button
+        android:id="@+id/searchHC"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignBaseline="@+id/searchHCtext"
+        android:layout_alignBottom="@+id/searchHCtext"
+        android:layout_toRightOf="@+id/searchHCtext"
+        android:background="@android:drawable/ic_menu_search"
+        android:onClick="searchClick" />
 
 </RelativeLayout>
