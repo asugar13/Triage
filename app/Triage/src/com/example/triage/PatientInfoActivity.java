@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class PatientInfoActivity extends Activity {
@@ -29,7 +30,12 @@ public class PatientInfoActivity extends Activity {
 		health_num_patient.setText(health_num);
 	}
 	
+	public void goToEdit(View view) {
+		Intent intent = new Intent(this, EnterVitalsActivity.class);
 	
+		startActivity(intent);
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

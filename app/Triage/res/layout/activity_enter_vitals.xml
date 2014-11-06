@@ -13,7 +13,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:text="Symptoms for: name of patient"/>
+
+    <TextView
+        android:id="@+id/bptitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/temp"
+        android:layout_marginTop="18dp"
+        android:text="@string/blood_pressure" />
 
     <TextView
         android:id="@+id/temp"
@@ -21,17 +30,17 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/name"
         android:layout_below="@+id/name"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="44dp"
         android:text="@string/temperature" />
 
     <TextView
-        android:id="@+id/bptitle"
+        android:id="@+id/sympDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/temp"
-        android:layout_below="@+id/temp"
-        android:layout_marginTop="18dp"
-        android:text="@string/blood_pressure" />
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="60dp"
+        android:text="@string/symptom_description" />
 
     <TextView
         android:id="@+id/textView1"
@@ -39,14 +48,19 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/bptitle"
         android:layout_below="@+id/bptitle"
+        android:layout_marginTop="34dp"
         android:text="@string/heart_rate" />
 
-    <TextView
-        android:id="@+id/sympDesc"
+    <EditText
+        android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:text="@string/symptom_description" />
+        android:layout_alignLeft="@+id/sympDesc"
+        android:layout_below="@+id/sympDesc"
+        android:ems="10"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>
