@@ -9,22 +9,40 @@
     tools:context="com.example.triage.PatientsDisplayActivity" >
 
     <ListView
-        android:id="@+id/listViewOfPatients"
+        android:id="@+id/listView1"
+        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="100dp" >
+        android:layout_alignParentLeft="true" >
 
     </ListView>
 
-    <SearchView
-        android:id="@+id/searchView1"
+    <TextView
+        android:id="@+id/searchTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/listViewOfPatients"
-        android:layout_marginRight="124dp"
-        android:layout_marginTop="44dp" >
-    </SearchView>
+        android:layout_alignParentLeft="true"
+        android:text="@string/enter_hc"
+        android:layout_alignParentTop="true"/>
+
+    <Button
+        android:id="@+id/searchHC"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignBottom="@+id/searchHCtext"
+        android:layout_alignRight="@+id/listView1"
+        android:layout_alignTop="@+id/searchHCtext"
+        android:onClick="searchClick"
+        android:layout_toRightOf="@+id/searchHCtext"
+        android:background="@android:drawable/ic_search_category_default" />
+
+    <EditText
+        android:id="@+id/searchHCtext"
+        android:hint = "@string/searchHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/searchTitle"
+        android:layout_below="@+id/searchTitle"
+        android:ems="10" />
 
 </RelativeLayout>
