@@ -30,6 +30,18 @@
             android:name=".PatientsDisplayActivity"
             android:label="@string/title_activity_patients_display" >
         </activity>
+        <activity
+            android:name=".Write_New_Records"
+            android:label="@string/title_activity_write__new__records" >
+        </activity>
+        <activity
+            android:name=".ViewAllRecordsActivity"
+            android:label="@string/title_activity_view_all_records" >
+        </activity>
+        <activity
+            android:name=".EnterVitalsActivity"
+            android:label="@string/title_activity_enter_vitals" >
+        </activity>
     </application>
 
 </manifest>
