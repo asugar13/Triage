@@ -37,8 +37,13 @@ public class EmergencyRoom {
 	 * 
 	 * @return
 	 */
-	public Set<Map.Entry<String, Patient>> getPatients(){
-		return patients.entrySet();
+	public List<Patient> getPatients(){
+		ArrayList<Patient> allPatients = new ArrayList<Patient>();
+		for(String key : patients.keySet()){
+			allPatients.add(patients.get(key));
+		}
+		
+		return allPatients;
 	}
 	
 	public Patient getPatientByHCNum(String hCardNum){
