@@ -2,6 +2,7 @@ package defaultPackage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Date;
 import java.util.TreeMap;
@@ -10,7 +11,8 @@ public class Vitals {
 	/**Simple date format, specifies string format of dates */
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 	/**Stores a patient's symptoms based on the time that they are written. */
-	private Map<Date, String[]> vitSymps;
+	private TreeMap<Date, String[]> vitSymps;
+	public boolean isEmpty = true;
 	
 	
 	/**
@@ -29,6 +31,7 @@ public class Vitals {
 	 * @param vitals A list of a patient's recorded vital signs
 	 */
 	public Vitals(String[] inputVital){
+		isEmpty = false;
 		this.vitSymps = new TreeMap<Date, String[]>();
 		
 		for(String s: inputVital){
@@ -50,9 +53,16 @@ public class Vitals {
 	 * @param newSympt The new symptoms that are recorded.
 	 */
 	public void add(String[] newVitSymp){
+		isEmpty = false;
 		Date date = new Date();
 		vitSymps.put(date, newVitSymp);
 	}
+	
+	public TreeMap<Date, String[]> getAllVitals(){
+		return vitSymps;
+	}
+	
+	
 	
 	/**
 	 * Returns a list of the history of a patient's vitals arranged by time.
@@ -81,6 +91,10 @@ public class Vitals {
 		
 		return vitSympString;
 	}
+	
+	
+	
+	
 	
 	
 }
