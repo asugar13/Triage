@@ -28,23 +28,6 @@
         android:text="@string/editRecords" />
 
     <TextView
-        android:id="@+id/heartRateView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/healthNumView"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="22dp"
-        android:text="@string/name_field" />
-
-    <TextView
-        android:id="@+id/health_num_patient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/patient_birthdate"
-        android:layout_alignRight="@+id/button1"
-        android:text="TextView" />
-
-    <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,39 +35,6 @@
         android:layout_alignBottom="@+id/textView1"
         android:layout_alignLeft="@+id/health_num_patient"
         android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/name_patient"
-        android:layout_alignRight="@+id/textView3"
-        android:text="Personal Data:" />
-
-    <TextView
-        android:id="@+id/birthdateView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/healthNumView"
-        android:layout_below="@+id/healthNumView"
-        android:text="@string/birthdate_field" />
-
-    <TextView
-        android:id="@+id/healthNumView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_below="@+id/name_patient"
-        android:text="@string/health_num_field" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView12"
-        android:layout_below="@+id/birthdateView"
-        android:layout_marginTop="15dp"
-        android:text="Urgency Level: " />
 
     <TextView
         android:id="@+id/textView12"
@@ -175,26 +125,58 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView13"
-        android:layout_alignBottom="@+id/textView13"
-        android:layout_alignLeft="@+id/textView6"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/patient_birthdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView13"
-        android:layout_alignLeft="@+id/health_num_patient"
+        android:layout_alignBaseline="@+id/birthdateView"
+        android:layout_alignBottom="@+id/birthdateView"
+        android:layout_alignLeft="@+id/name_patient"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/name_patient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/heartRateView"
-        android:layout_alignBottom="@+id/heartRateView"
+        android:layout_above="@+id/birthdateView"
         android:layout_alignLeft="@+id/health_num_patient"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_marginTop="20dp"
+        android:text="Personal Data:" />
+
+    <TextView
+        android:id="@+id/heartRateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/healthNumView"
+        android:layout_below="@+id/textView11"
+        android:text="@string/name_field" />
+
+    <TextView
+        android:id="@+id/health_num_patient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/healthNumView"
+        android:layout_alignRight="@+id/button1"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/healthNumView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_below="@+id/heartRateView"
+        android:text="@string/health_num_field" />
+
+    <TextView
+        android:id="@+id/birthdateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/healthNumView"
+        android:layout_below="@+id/healthNumView"
+        android:text="@string/birthdate_field" />
 
 </RelativeLayout>
