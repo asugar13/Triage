@@ -71,7 +71,7 @@ public class Vitals {
 			vitSympString = vitSympString + sdf.format(date) + "*";
 			//Add all vital strings separated by "|"
 			for(String vital : vitSymps.get(date)){
-				vitSympString = vitSympString + "|";
+				vitSympString = vitSympString + vital +  "|";
 			}
 			vitSympString = vitSympString.substring(0,-1);
 		
