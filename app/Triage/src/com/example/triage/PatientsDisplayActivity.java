@@ -35,8 +35,6 @@ public class PatientsDisplayActivity extends Activity {
 		//Get list view, and populate with adapter
 		ListView patientsList = (ListView) findViewById(R.id.listView1);
 		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
-		
-		
 
 	}
 	
