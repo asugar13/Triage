@@ -1,6 +1,5 @@
 package defaultPackage;
 
-import java.io.FileOutputStream;
 import java.io.Serializable;
 
 public class Patient implements Serializable{
