@@ -10,6 +10,8 @@ public class Vitals {
 	private String heartRate;
 	//Patient's symptoms description at a current time.
 	private String symptomsDescription;
+	//Patient's temperature at a current time
+	private String temperature;
 	
 	/**
 	 * @param dateandTime is the date and time that the vital signs and the symptoms were recorded. 
@@ -18,11 +20,13 @@ public class Vitals {
 	 * @param symptomsDescription Patient's symptoms' description at a current time
 	 */
 	
-	public Vitals(int day, int month, int year, int hour, int minutes, int bloodPressure, int heartRate, String symptomsDescription) {
+	public Vitals(int day, int month, int year, int hour, int minutes, int bloodPressure, int heartRate, int temperature, String symptomsDescription) {
 		this.dateandTime = String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year) + "//" + String.valueOf(hour) + ":" + String.valueOf(minutes);
 		this.bloodPressure = String.valueOf(bloodPressure);
 		this.heartRate = String.valueOf(heartRate);
 		this.symptomsDescription = symptomsDescription;
+		this.temperature = String.valueOf(temperature);
+		
 	}
 	
 	/**

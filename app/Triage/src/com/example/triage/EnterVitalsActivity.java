@@ -1,16 +1,24 @@
 package com.example.triage;
 
+import defaultPackage.Patient;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class EnterVitalsActivity extends Activity {
 
+	private Patient patient;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_enter_vitals);
+		Intent intent = getIntent();
+		patient = (Patient) intent.getSerializableExtra("Patient_Tag");
+		TextView name_patient = (TextView) findViewById(R.id.patient_name);
+		name_patient.setText(patient.getName());
 	}
 
 	@Override
