@@ -45,7 +45,7 @@ public class Vitals {
 	}
 	
 	/**
-	 * Adds a String of symtpoms to a patient's history of recorded symptoms.
+	 * Adds a String of symptoms to a patient's history of recorded symptoms.
 	 * @param t The time which the new symptoms are recorded.
 	 * @param newSympt The new symptoms that are recorded.
 	 */
