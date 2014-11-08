@@ -1,5 +1,6 @@
 package defaultPackage;
 
+import java.io.FileOutputStream;
 import java.io.Serializable;
 
 public class Patient implements Serializable{
@@ -22,6 +23,7 @@ public class Patient implements Serializable{
 	private int urgencyLevel;
 	//If patient was seen by a doctor 'Yes' unless 'No'.
 	private String seenByDoctor;
+	private Vitals vitals;
 	
 	/** @param name This patient's name.
 	 * @param day This Patient's day of birth.
@@ -34,10 +36,11 @@ public class Patient implements Serializable{
 	 * @param UrgencyLevel is This Patient's current urgency level according to the hospital policy.
 	 * @param SeenByDoctor is This Patient's current situation of waiting to see a doctor unless was not seen by a doctor.
 	 */
-	public Patient(String[] name, int day, int month, int year, int hcn) {
+	public Patient(String[] name, String birthdate, String hcn, Vitals vitals) {
 		this.name = name.clone();
-		this.birthdate = String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
-		this.healthCardNumber = String.valueOf(hcn);
+		this.birthdate = birthdate;
+		this.healthCardNumber = hcn;
+		this.vitals = vitals;
 	}
 	
 	/**
@@ -124,30 +127,21 @@ public class Patient implements Serializable{
 	/**
 	*Returns the current vital signs of the patient.
 	*/
-	public String[] getVitalSigns() {
-		return vitalSigns;
+	public void addVitals(String[] newVitals){
+		this.vitals.add(newVitals);
 	}
-
 	/**
-	 * Sets to Patient's vital signs.
-	 */
-	public void setVitalSigns(String[] vitalSigns) {
-		this.vitalSigns = vitalSigns;
+	*Returns the vital signs of the patient.
+	*/
+	public Vitals getVitals(){
+		return vitals;
 	}
-	
 	/**
 	 * Returns the String description of this object.
 	 */
 	public String toString(){
-		String patientName = "";
-		for(String n: name){
-			patientName += n+ " ";
-		}
-		return patientName.trim() + " " + birthdate + healthCardNumber + arrivalTimeToHospital + symptoms + vitalSigns + 
-				urgencyLevel + seenByDoctor;
+		return this.healthCardNumber + "," + name[0] + " " + name[1] + "," + birthdate + vitals.toString();
 	}
-	
-	
 		
 }
 	
