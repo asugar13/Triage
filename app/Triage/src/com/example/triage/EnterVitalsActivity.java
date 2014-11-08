@@ -39,4 +39,15 @@ public class EnterVitalsActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	public void getWrittenData(){
+		
+	}
+
+	
+	public void savePatientData(){
+		getWrittenData();
+		
+		//Write patients
+	}
 }
