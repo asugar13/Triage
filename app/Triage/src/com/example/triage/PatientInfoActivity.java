@@ -11,12 +11,14 @@ import android.widget.TextView;
 
 public class PatientInfoActivity extends Activity {
 
+	private Patient patient;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patient_info);
 		Intent intent = getIntent();
-		Patient patient = (Patient) intent.getSerializableExtra("Patient_Tag");
+		patient = (Patient) intent.getSerializableExtra("Patient_Tag");
 		String name = patient.getName();
 		String health_num = patient.getHealthCardNum();
 		String birthdate = patient.getBirthDate();
@@ -30,9 +32,16 @@ public class PatientInfoActivity extends Activity {
 		health_num_patient.setText(health_num);
 	}
 	
-	public void goToEdit(View view) {
+	public void editRecordsOnClick(View view) {
 		Intent intent = new Intent(this, EnterVitalsActivity.class);
+		intent.putExtra("Patient_Tag", patient);
 	
+		startActivity(intent);
+	}
+	
+	public void viewRecordsOnClick(View view) {
+		Intent intent = new Intent (this, ViewAllRecordsActivity.class);
+		
 		startActivity(intent);
 	}
 

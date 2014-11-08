@@ -9,22 +9,6 @@
     tools:context="com.example.triage.EnterVitalsActivity" >
 
     <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="Symptoms for: name of patient"/>
-
-    <TextView
-        android:id="@+id/bptitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/temp"
-        android:layout_marginTop="18dp"
-        android:text="@string/blood_pressure" />
-
-    <TextView
         android:id="@+id/temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,26 +17,8 @@
         android:layout_marginTop="44dp"
         android:text="@string/temperature" />
 
-    <TextView
-        android:id="@+id/sympDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="60dp"
-        android:text="@string/symptom_description" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bptitle"
-        android:layout_below="@+id/bptitle"
-        android:layout_marginTop="34dp"
-        android:text="@string/heart_rate" />
-
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/symptoms_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/sympDesc"
@@ -62,5 +28,102 @@
 
         <requestFocus />
     </EditText>
+
+    <TextView
+        android:id="@+id/bpsystolictitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/heartRateView"
+        android:layout_alignStart="@+id/heartRateView"
+        android:layout_below="@+id/diastolic_field"
+        android:text="@string/systolic_blood_pressure" />
+
+    <EditText
+        android:id="@+id/temperature_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/temp"
+        android:layout_alignBottom="@+id/temp"
+        android:layout_alignRight="@+id/symptoms_field"
+        android:layout_toRightOf="@+id/temp"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/heart_rate_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bpsystolictitle"
+        android:layout_marginTop="78dp"
+        android:layout_toRightOf="@+id/heartRateView"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/heartRateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/heart_rate_field"
+        android:layout_alignBottom="@+id/heart_rate_field"
+        android:layout_alignLeft="@+id/bpdiastolictitle"
+        android:text="@string/heart_rate" />
+
+    <EditText
+        android:id="@+id/diastolic_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bpdiastolictitle"
+        android:layout_marginTop="15dp"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/systolic_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/temperature_field"
+        android:layout_alignStart="@+id/temperature_field"
+        android:layout_centerVertical="true"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/patient_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/temp"
+        android:layout_toRightOf="@+id/sympDesc" />
+
+    <TextView
+        android:id="@+id/sympDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/heartRateView"
+        android:layout_below="@+id/heart_rate_field"
+        android:layout_marginTop="20dp"
+        android:text="@string/symptom_description" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bpdiastolictitle"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:text="@string/add_new_records" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/btn_save" />
+
+    <TextView
+        android:id="@+id/bpdiastolictitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/diastolic_field"
+        android:layout_below="@+id/temperature_field"
+        android:layout_marginTop="18dp"
+        android:text="@string/diastolic_blood_pressure" />
 
 </RelativeLayout>
