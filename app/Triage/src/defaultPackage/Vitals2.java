@@ -1,23 +1,25 @@
 package defaultPackage;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Date;
 import java.util.TreeMap;
 
 public class Vitals2 {
+	/**Simple date format, specifies string format of dates */
+	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 	/**Stores a patient's symptoms based on the time that they are written. */
-	private Map<Date, String> symptoms;
+	private Map<Date, String[]> vitSymps;
 	
 	/**Stores a patient's vital signs based on the time that they are written. */
-	private Map<Date, int[]> vitals;
 	
 	/**
 	 * Constructs a Vitals object with no vitals and symptoms yet recorder. 
 	 */
 	public Vitals2(){
-		symptoms = new TreeMap<Date, String>();
-		vitals = new TreeMap<Date, int[]>();
+		vitSymps = new TreeMap<Date, String[]>();
 	}
 	
 	/**
@@ -28,12 +30,19 @@ public class Vitals2 {
 	 * @param t2 A list of times of when a patient's vital signs were recorded.
 	 * @param vitals A list of a patient's recorded vital signs
 	 */
-	public Vitals2(List<Date> t1, List<String> symptoms, List<Date> t2, List<int[]> vitals){
-		this.symptoms = new TreeMap<Date, String>();
-		this.vitals = new TreeMap<Date, int[]>();
-		for (int i = 0; i < t1.size(); i++){
-			this.symptoms.put(t1.get(i), symptoms.get(i));
-			this.vitals.put(t2.get(i), vitals.get(i));		
+	public Vitals2(String[] inputVital){
+		this.vitSymps = new TreeMap<Date, String[]>();
+		
+		for(String s: inputVital){
+			String[] dateVitalSplit = s.split("*");
+			try {
+				Date date = sdf.parse(dateVitalSplit[0]);
+				String[] vitalReadings = dateVitalSplit[1].split("|");
+				vitSymps.put(date, vitalReadings);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
 		}
 	}
 	
@@ -42,31 +51,39 @@ public class Vitals2 {
 	 * @param t The time which the new symptoms are recorded.
 	 * @param newSympt The new symptoms that are recorded.
 	 */
-	public void addSymptoms(Date t, String newSympt){
-		this.symptoms.put(t, newSympt);
-	}
-	
-	/**
-	 * Returns a list of the history of a patient's symptoms arranged by time.
-	 */
-	public Map<Date, String> getSymptoms(){
-		return this.symptoms;
-	}
-	
-	/**
-	 * Adds a set of vital signs to a patient's history of recorded vitals.
-	 * @param t The time which the new vitals are recorded.
-	 * @param new The new vitals that are recorded.
-	 */
-	public void addVitals(Date t, int[] newVitals){
-		this.vitals.put(t, newVitals);
+	public void add(String[] newVitSymp){
+		Date date = new Date();
+		vitSymps.put(date, newVitSymp);
 	}
 	
 	/**
 	 * Returns a list of the history of a patient's vitals arranged by time.
 	 */
-	public Map<Date, int[]> getVitals(){
-		return this.vitals;
+	public Map<Date, String[]> getVitSymps(){
+		return this.vitSymps;
 	}
+	/**
+	 * @return String representation of vitals for writing to internal storage
+	 */
+	@Override
+	public String toString(){
+		String vitSympString = "";
+		for(Date date : vitSymps.keySet()){
+			//Add date string
+			vitSympString = vitSympString + date.toString() + "*";
+			//Add all vital strings separated by "|"
+			for(String vital : vitSymps.get(date)){
+				vitSympString = vitSympString + "|";
+			}
+			vitSympString = vitSympString.substring(0,-1);
+		
+		vitSympString = vitSympString + "&";
+		}
+		vitSympString = vitSympString.substring(0,-1);
+		
+		return vitSympString;
+	}
+	
+	
 }
 	
