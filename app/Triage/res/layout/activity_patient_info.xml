@@ -122,7 +122,7 @@
         android:text="Heart rate: " />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/patient_birthdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/birthdateView"
