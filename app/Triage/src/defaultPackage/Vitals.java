@@ -12,7 +12,6 @@ public class Vitals {
 	/**Stores a patient's symptoms based on the time that they are written. */
 	private Map<Date, String[]> vitSymps;
 	
-	/**Stores a patient's vital signs based on the time that they are written. */
 	
 	/**
 	 * Constructs a Vitals object with no vitals and symptoms yet recorder. 
@@ -69,7 +68,7 @@ public class Vitals {
 		String vitSympString = "";
 		for(Date date : vitSymps.keySet()){
 			//Add date string
-			vitSympString = vitSympString + date.toString() + "*";
+			vitSympString = vitSympString + sdf.format(date) + "*";
 			//Add all vital strings separated by "|"
 			for(String vital : vitSymps.get(date)){
 				vitSympString = vitSympString + "|";
