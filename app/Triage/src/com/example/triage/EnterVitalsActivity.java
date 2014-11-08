@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.*;
 
 public class EnterVitalsActivity extends Activity {
 
@@ -20,6 +21,25 @@ public class EnterVitalsActivity extends Activity {
 		TextView name_patient = (TextView) findViewById(R.id.patient_name);
 		name_patient.setText(patient.getName());
 	}
+	
+	public void saveData(View view) {
+		Intent intent = new Intent(this, PatientInfoActivity.class);
+		EditText temperatureText = (EditText) findViewById(R.id.temperature_field);
+		EditText diastolicText = (EditText) findViewById(R.id.diastolic_field);
+		EditText systolicText = (EditText) findViewById(R.id.systolic_field);
+		EditText heart_rateText = (EditText) findViewById(R.id.heart_rate_field);
+		EditText symptomsText = (EditText) findViewById(R.id.symptoms_field);
+		String temperature = temperatureText.getText().toString();
+		String diastolic = diastolicText.getText().toString();
+		String systolic = systolicText.getText().toString();
+		String heart_rate = heart_rateText.getText().toString();
+		String symptoms = symptomsText.getText().toString();
+		String[] new_vitals = {temperature, diastolic, systolic, heart_rate, symptoms};
+		patient.addVitals(new_vitals);
+	
+		startActivity(intent);
+	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
