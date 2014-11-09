@@ -137,14 +137,16 @@ public class ViewAllRecordsActivity extends Activity {
 			
 			//Get the text views from the layout
 			TextView dateTView = (TextView) row.findViewById(R.id.patientDateText);
-			TextView bpTView = (TextView) row.findViewById(R.id.patientBPText);
+			TextView bpdTView = (TextView) row.findViewById(R.id.patientBPDText);
+			TextView bpsTView = (TextView) row.findViewById(R.id.patientBPSText);
 			TextView hrTView = (TextView) row.findViewById(R.id.patientHRText);
 			TextView sympTView = (TextView) row.findViewById(R.id.patientSympText);
 			TextView tempTView = (TextView) row.findViewById(R.id.patientTempText);
 			
 			//Assign values to the text views
 			dateTView.setText(sortedDates.get(position).toString());
-			bpTView.setText(vitalsData[1] + "/" + vitalsData[2]);
+			bpdTView.setText(vitalsData[1]);
+			bpsTView.setText(vitalsData[2]);
 			hrTView.setText(vitalsData[3]);
 			sympTView.setText(vitalsData[4]);
 			tempTView.setText(vitalsData[0]);

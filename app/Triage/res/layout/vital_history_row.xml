@@ -12,35 +12,10 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/patientBPText"
-        android:layout_alignBottom="@+id/patientBPText"
+        android:layout_alignBaseline="@+id/patientBPDText"
+        android:layout_alignBottom="@+id/patientBPDText"
         android:layout_alignLeft="@+id/textView1"
-        android:text="@string/blood_pressure" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_below="@+id/textView4"
-        android:text="@string/temperature" />
-
-    <TextView
-        android:id="@+id/patientTempText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignRight="@+id/patientBPText"
-        android:text="Temp" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_below="@+id/textView3"
-        android:text="@string/Symptoms" />
+        android:text="@string/diastolic_blood_pressure" />
 
     <TextView
         android:id="@+id/textView1"
@@ -58,20 +33,12 @@
         android:text="Date" />
 
     <TextView
-        android:id="@+id/patientSympText"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView5"
-        android:layout_below="@+id/textView5"
-        android:text="Symp" />
-
-    <TextView
-        android:id="@+id/patientBPText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/patientHRText"
-        android:layout_centerHorizontal="true"
-        android:text="BP" />
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView4"
+        android:text="@string/systolic_blood_pressure" />
 
     <TextView
         android:id="@+id/patientHRText"
@@ -79,7 +46,57 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView1"
         android:layout_alignBottom="@+id/textView1"
-        android:layout_alignRight="@+id/patientBPText"
+        android:layout_marginLeft="35dp"
+        android:layout_toRightOf="@+id/textView4"
         android:text="HR" />
+
+    <TextView
+        android:id="@+id/patientTempText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignLeft="@+id/patientHRText"
+        android:text="Temp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/textView2"
+        android:text="@string/temperature" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/textView3"
+        android:text="@string/Symptoms" />
+
+    <TextView
+        android:id="@+id/patientSympText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/textView5"
+        android:text="Symp" />
+
+    <TextView
+        android:id="@+id/patientBPSText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/patientTempText"
+        android:layout_alignLeft="@+id/patientTempText"
+        android:text="BPS" />
+
+    <TextView
+        android:id="@+id/patientBPDText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/patientHRText"
+        android:layout_below="@+id/patientHRText"
+        android:text="BPD" />
 
 </RelativeLayout>
