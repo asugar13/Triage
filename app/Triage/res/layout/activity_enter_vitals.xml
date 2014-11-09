@@ -115,7 +115,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="@string/btn_save" />
+        android:text="@string/btn_save" 
+        android:onClick="saveData"/>
 
     <TextView
         android:id="@+id/bpdiastolictitle"
