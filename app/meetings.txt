@@ -2,11 +2,14 @@ Planning meetings 1:
  Current state of project:
  - agreed on crc and design merging
  Tasks for this week:
+ - Merge CRC & Descriptions
  - Set up project in Eclipse with svn
  - Implement Patient, EmergencyRoom, and Nurse Classes
  - Set up basic Android activities
 
 Status Meeting one:
+ - Merged CRC (Amit & Asier)
+ - Merged Descriptions (Daniel & Doga)
  - Set up project in Eclipse with SVN (Daniel)
  - Implemented Patient (Doga)
  - Stuck getting SVN and eclipse working on personal machines (Doga, Asier, Amit)
@@ -38,13 +41,21 @@ Planning meeting 2:
 
 
 Status Meeting three:
- - Added Vitals (Amit & Doga)
- - Added functionality to add new vitals (Daniel)
+ - Added Vitals class (Amit & Doga)
+ - Added functionality to add new vitals (Daniel & Asier)
  - Added display all previous vitals (Doga & Daniel)
  - Add display most recent vitals (Asier)
- - Added writing to file functionality (Amit)
+ - Added writing to file functionality in EmergencyRoom (Amit)
  - implemented vitals tostring (Daniel)
  - implemented patients toString (Amit)
+
+Current State of project end if phase ||:
+ - Can read/write patient info
+ - Can add new vitals to patient
+ - Can access all of patients records
+ - Can view all patients
+ - Can search for patients by health card number
+ 
 
 
 
