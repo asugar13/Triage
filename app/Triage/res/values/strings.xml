@@ -21,7 +21,7 @@
     <string name="blood_pressure">Blood Pressure: </string>
     <string name="temperature">Temperature: </string>
     <string name="heart_rate">Heart rate: </string>
-    <string name="symptom_description">Description of Symptoms</string>
+    <string name="symptom_description">Description of Symptoms: </string>
     <string name="editRecords">Add Records</string>
     <string name="viewRecords">View Patient History</string>
     <string name="name_field">Full Name: </string>
