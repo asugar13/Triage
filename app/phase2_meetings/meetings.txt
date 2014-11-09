@@ -14,7 +14,7 @@ Status Meeting one:
  - Implemented Patient (Doga)
  - Stuck getting SVN and eclipse working on personal machines (Doga, Asier, Amit)
  - Realized we don’t need Nurse or EmergencyRoomDataBase class
- - Worked on EmergecnyRoom reading files (Amit)
+ - Worked on EmergencyRoom reading files (Amit)
  - Created Basic Android activities (Daniel & Asier)
 
 
@@ -39,7 +39,6 @@ Planning meeting 2:
  - Add display all previous vitals
  - Add display most recent vitals
 
-
 Status Meeting three:
  - Added Vitals class (Amit & Doga)
  - Added functionality to add new vitals (Daniel & Asier)
@@ -49,7 +48,7 @@ Status Meeting three:
  - implemented vitals tostring (Daniel)
  - implemented patients toString (Amit)
 
-Current State of project end if phase ||:
+Current State of project end if phase II:
  - Can read/write patient info
  - Can add new vitals to patient
  - Can access all of patients records
