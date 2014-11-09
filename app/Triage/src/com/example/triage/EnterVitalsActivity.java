@@ -38,7 +38,7 @@ public class EnterVitalsActivity extends Activity {
 		String[] new_vitals = {temperature, diastolic, systolic, heart_rate, symptoms};
 		patient.addVitals(new_vitals);
 		EmergencyRoom.savePatientData(this);
-		
+		intent.putExtra("Patient_Tag", patient);
 		startActivity(intent);
 	}
 	

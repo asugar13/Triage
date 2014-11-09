@@ -11,6 +11,10 @@ import java.util.TreeMap;
 import android.util.Log;
 
 public class Vitals implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2939547818890631643L;
 	/**Simple date format, specifies string format of dates */
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 	/**Stores a patient's symptoms based on the time that they are written. */
@@ -90,9 +94,11 @@ public class Vitals implements Serializable{
 			
 			for(int j = 0 ; j < vitSymps.get(this_date).length; j ++){
 				if(j == vitSymps.get(this_date).length - 1){
-					vitSympString = vitSympString + vitSymps.get(this_date)[j];
+					vitSympString = vitSympString + vitSymps.get(this_date)[j] + "&";
 				}
-				vitSympString = vitSympString + vitSymps.get(this_date)[j] + "|";	
+				else {vitSympString = vitSympString + vitSymps.get(this_date)[j] + "|";	
+				
+				}
 			}	
 		}
 		return vitSympString;
