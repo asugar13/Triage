@@ -129,9 +129,8 @@ public class Patient implements Serializable{
 	*Returns the current vital signs of the patient.
 	*/
 	public void addVitals(String[] newVitals){
-		Log.d("PATIENT VITALS BEFORE",vitals.toString());
 		this.vitals.add(newVitals);
-		Log.d("Patient Vitals AFter",vitals.toString());
+		EmergencyRoom.updatePatient(this);
 		
 	}
 	/**
@@ -145,7 +144,7 @@ public class Patient implements Serializable{
 	 */
 	@Override
 	public String toString(){
-		return this.healthCardNumber + "," + getName() + "," + birthdate + vitals.toString();
+		return this.healthCardNumber + "," + getName() + "," + birthdate + ","+ vitals.toString();
 	}
 		
 }
