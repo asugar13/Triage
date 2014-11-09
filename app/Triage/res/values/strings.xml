@@ -31,6 +31,6 @@
     <string name="add_new_records">Add new records for: </string>
     <string name="btn_save">Save</string>
     <string name="Symptoms">Symptoms: </string>
-	<string name="patient_name">Patient Name: </string>
+    <string name="patient_records">Patient Records:</string>
 	<string name="patient_records_history">Records of the Patient</string>
 </resources>
