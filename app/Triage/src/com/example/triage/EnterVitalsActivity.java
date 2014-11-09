@@ -10,7 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-
+/**
+ * Activity for nurses to enter and save new vital & symptom information
+ * 
+ */
 public class EnterVitalsActivity extends Activity {
 
 	private Patient patient;
@@ -23,7 +26,10 @@ public class EnterVitalsActivity extends Activity {
 		TextView name_patient = (TextView) findViewById(R.id.patient_name);
 		name_patient.setText(patient.getName());
 	}
-	
+	/**
+	 * Adds the new vitals to patient, and saves
+	 * @param view
+	 */
 	public void saveData(View view) {
 		Intent intent = new Intent(this, PatientInfoActivity.class);
 		EditText temperatureText = (EditText) findViewById(R.id.temperature_field);
