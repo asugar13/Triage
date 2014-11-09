@@ -30,9 +30,9 @@ public class PatientInfoActivity extends Activity {
 		Intent intent = getIntent();
 		patient = (Patient) intent.getSerializableExtra("Patient_Tag");
 		String name = patient.getName();
-		String health_num = patient.getHealthCardNum();
-		String birthdate = patient.getBirthDate();
-		Vitals patient_vitals = patient.getVitals();
+		String healthNum = patient.getHealthCardNum();
+		String birthDate = patient.getBirthDate();
+		Vitals patientVitals = patient.getVitals();
 		
 		TextView name_patient = (TextView) findViewById(R.id.name_patient);
 		TextView patient_birthdate = (TextView) findViewById(R.id.patient_birthdate);
@@ -41,22 +41,22 @@ public class PatientInfoActivity extends Activity {
 		TextView diastolic = (TextView) findViewById(R.id.diastolic_catch);
 		TextView systolic = (TextView) findViewById(R.id.systolic_catch);
 		TextView heartRate = (TextView) findViewById(R.id.heart_rate_catch);
-		TextView temp_patient = (TextView) findViewById(R.id.temperature_catch);
+		TextView tempPatient = (TextView) findViewById(R.id.temperature_catch);
 		TextView symptoms = (TextView) findViewById(R.id.symptoms_description_catch);
 
 		
 		name_patient.setText(name);
-		patient_birthdate.setText(birthdate);
-		health_num_patient.setText(health_num);
+		patient_birthdate.setText(birthDate);
+		health_num_patient.setText(healthNum);
 		Log.d("here", "all good");
-		ArrayList<Date> keys = new ArrayList<Date>(patient_vitals.getVitSymps().keySet());
+		ArrayList<Date> keys = new ArrayList<Date>(patientVitals.getVitSymps().keySet());
 		//TreeMap<Date, String[]> vit_symps_map = new TreeMap<Date, String[]>(patient_vitals.getVitSymps());
 		Log.d("here", "maybe not");
 		if (!(keys.isEmpty())) {
 			Date current_date = keys.get(keys.size() - 1);
-			String[] current_vit_symps = patient_vitals.getVitSymps().get(current_date);
+			String[] current_vit_symps = patientVitals.getVitSymps().get(current_date);
 			
-			temp_patient.setText(current_vit_symps[0]);
+			tempPatient.setText(current_vit_symps[0]);
 			diastolic.setText(current_vit_symps[1]);
 			systolic.setText(current_vit_symps[2]);
 			heartRate.setText(current_vit_symps[3]);
@@ -65,7 +65,7 @@ public class PatientInfoActivity extends Activity {
 			
 		}
 		else {
-			temp_patient.setText("N/A");
+			tempPatient.setText("N/A");
 			diastolic.setText("N/A");
 			systolic.setText("N/A");
 			heartRate.setText("N/A");

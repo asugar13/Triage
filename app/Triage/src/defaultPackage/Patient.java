@@ -11,7 +11,7 @@ public class Patient implements Serializable{
 	//Patient's name.
 	private String[] name;
 	//Patient's birth date.
-	private String birthdate;
+	private String birthDate;
 	//Patient's health card number.
 	private String healthCardNumber;
 	//Patient's arrival time to the hospital.
@@ -37,7 +37,7 @@ public class Patient implements Serializable{
 	 */
 	public Patient(String[] name, String birthdate, String hcn, Vitals vitals) {
 		this.name = name.clone();
-		this.birthdate = birthdate;
+		this.birthDate = birthdate;
 		this.healthCardNumber = hcn;
 		this.vitals = vitals;
 	}
@@ -57,7 +57,7 @@ public class Patient implements Serializable{
 	*Returns this patient's birth date.
 	*/
 	public String getBirthDate(){
-		return birthdate;
+		return birthDate;
 	}
 	
 	/**
@@ -142,7 +142,7 @@ public class Patient implements Serializable{
 	 */
 	@Override
 	public String toString(){
-		return this.healthCardNumber + "," + getName() + "," + birthdate + ","+ vitals.toString();
+		return this.healthCardNumber + "," + getName() + "," + birthDate + ","+ vitals.toString();
 	}
 		
 }

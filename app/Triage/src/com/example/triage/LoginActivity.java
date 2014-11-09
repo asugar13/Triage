@@ -8,9 +8,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 /**
  * Activity to manage logging in into the application
- *
+ * 
  */
 public class LoginActivity extends Activity {
 
@@ -18,14 +19,15 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		
+
 	}
-	 /**The Nurse logs in to the system from the login activity and goes to the patients
-	display activity
-	*/
+
+	/**
+	 * The Nurse logs in to the system from the login activity and goes to the
+	 * patients display activity
+	 */
 	public void logInNurse(View view) {
 		Intent intent = new Intent(this, PatientsDisplayActivity.class);
-		
 		startActivity(intent);
 	}
 
