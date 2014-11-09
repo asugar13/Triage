@@ -1,5 +1,6 @@
 package com.example.triage;
 
+import defaultPackage.EmergencyRoom;
 import defaultPackage.Patient;
 import android.app.Activity;
 import android.content.Intent;
@@ -36,7 +37,8 @@ public class EnterVitalsActivity extends Activity {
 		String symptoms = symptomsText.getText().toString();
 		String[] new_vitals = {temperature, diastolic, systolic, heart_rate, symptoms};
 		patient.addVitals(new_vitals);
-	
+		EmergencyRoom.savePatientData(this);
+		
 		startActivity(intent);
 	}
 	
