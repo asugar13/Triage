@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Date;
 import java.util.TreeMap;
 
+import android.util.Log;
+
 public class Vitals implements Serializable{
 	/**Simple date format, specifies string format of dates */
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
@@ -56,7 +58,10 @@ public class Vitals implements Serializable{
 	public void add(String[] newVitSymp){
 		isEmpty = false;
 		Date date = new Date();
+		Log.d("Before",vitSymps.toString());
 		vitSymps.put(date, newVitSymp);
+		Log.d("After",vitSymps.toString());
+
 	}
 	
 	public TreeMap<Date, String[]> getAllVitals(){
@@ -77,25 +82,21 @@ public class Vitals implements Serializable{
 	@Override
 	public String toString(){
 		String vitSympString = "";
-		for(Date date : vitSymps.keySet()){
-			//Add date string
-			vitSympString = vitSympString + sdf.format(date) + "*";
-			//Add all vital strings separated by "|"
-			for(String vital : vitSymps.get(date)){
-				vitSympString = vitSympString + vital +  "|";
-			}
-			vitSympString = vitSympString.substring(0,-1);
+		ArrayList<Date> keys = new ArrayList<Date>(vitSymps.keySet());
 		
-		vitSympString = vitSympString + "&";
+		for(int i = 0;i < keys.size(); i ++ ){
+			Date this_date = keys.get(i);
+			vitSympString = vitSympString + sdf.format(this_date) + "*";
+			
+			for(int j = 0 ; j < vitSymps.get(this_date).length; j ++){
+				if(j == vitSymps.get(this_date).length - 1){
+					vitSympString = vitSympString + vitSymps.get(this_date)[j];
+				}
+				vitSympString = vitSympString + vitSymps.get(this_date)[j] + "|";	
+			}	
 		}
-		vitSympString = vitSympString.substring(0,-1);
-		
 		return vitSympString;
 	}
-	
-	
-	
-	
 	
 	
 }
