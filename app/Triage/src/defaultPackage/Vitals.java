@@ -80,7 +80,10 @@ public class Vitals implements Serializable{
 		Log.d("After",vitSymps.toString());
 
 	}
-	
+	/**
+	 * Returns all vitals mapped by date
+	 * @return Treemap maping date to list of vitals
+	 */
 	public TreeMap<Date, String[]> getAllVitals(){
 		return vitSymps;
 	}
