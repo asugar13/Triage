@@ -18,8 +18,6 @@ public class Patient implements Serializable{
 	private String arrivalTimeToHospital;
 	//Patient's current symptoms.
 	private String[] symptoms;
-	//Patient's current vital signs.
-	private String[] vitalSigns;
 	//Patient's current urgency level according to the hospital policy.
 	private int urgencyLevel;
 	//If patient was seen by a doctor 'Yes' unless 'No'.
