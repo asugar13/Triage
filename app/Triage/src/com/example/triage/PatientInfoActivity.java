@@ -41,7 +41,7 @@ public class PatientInfoActivity extends Activity {
 	
 	public void viewRecordsOnClick(View view) {
 		Intent intent = new Intent (this, ViewAllRecordsActivity.class);
-		
+		intent.putExtra("Patient_Tag", patient);
 		startActivity(intent);
 	}
 

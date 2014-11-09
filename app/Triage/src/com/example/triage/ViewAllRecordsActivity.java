@@ -77,7 +77,7 @@ public class ViewAllRecordsActivity extends Activity {
 			this.context = context;
 			this.layoutId = layoutId;
 			this.vitals = vitals.getAllVitals();
-			sortedDates = (ArrayList) vitals.getAllVitals().keySet();
+			sortedDates = new ArrayList(vitals.getAllVitals().keySet());
 			
 		}
 		
