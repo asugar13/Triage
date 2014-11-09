@@ -33,10 +33,17 @@ public class PatientInfoActivity extends Activity {
 		String health_num = patient.getHealthCardNum();
 		String birthdate = patient.getBirthDate();
 		Vitals patient_vitals = patient.getVitals();
+		
 		TextView name_patient = (TextView) findViewById(R.id.name_patient);
 		TextView patient_birthdate = (TextView) findViewById(R.id.patient_birthdate);
 		TextView health_num_patient = (TextView) findViewById(R.id.health_num_patient);
+		
+		TextView diastolic = (TextView) findViewById(R.id.diastolic_catch);
+		TextView systolic = (TextView) findViewById(R.id.systolic_catch);
+		TextView heartRate = (TextView) findViewById(R.id.heart_rate_catch);
 		TextView temp_patient = (TextView) findViewById(R.id.temperature_catch);
+		TextView symptoms = (TextView) findViewById(R.id.symptoms_description_catch);
+
 		
 		name_patient.setText(name);
 		patient_birthdate.setText(birthdate);
@@ -48,10 +55,21 @@ public class PatientInfoActivity extends Activity {
 		if (!(keys.isEmpty())) {
 			Date current_date = keys.get(keys.size() - 1);
 			String[] current_vit_symps = patient_vitals.getVitSymps().get(current_date);
+			
 			temp_patient.setText(current_vit_symps[0]);
+			diastolic.setText(current_vit_symps[1]);
+			systolic.setText(current_vit_symps[2]);
+			heartRate.setText(current_vit_symps[3]);
+			symptoms.setText(current_vit_symps[4]);
+
+			
 		}
 		else {
 			temp_patient.setText("N/A");
+			diastolic.setText("N/A");
+			systolic.setText("N/A");
+			heartRate.setText("N/A");
+			symptoms.setText("N/A");
 		}
 		
 	}
