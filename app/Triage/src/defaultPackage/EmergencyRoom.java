@@ -92,6 +92,12 @@ public class EmergencyRoom {
 	public static Patient getPatientByHCNum(String hCardNum) {
 		return patients.get(hCardNum);
 	}
+	
+	public static void updatePatient(Patient patient){
+		patients.put(patient.getHealthCardNum(), patient);
+		
+	}
+	
 
 	/**
 	 * 
