@@ -1,5 +1,6 @@
 package com.example.triage;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
@@ -41,13 +42,16 @@ public class PatientInfoActivity extends Activity {
 		patient_birthdate.setText(birthdate);
 		health_num_patient.setText(health_num);
 		Log.d("here", "all good");
-		
-		TreeMap<Date, String[]> vit_symps_map = new TreeMap<Date, String[]>(patient_vitals.getVitSymps());
-		Date curren_date =  vit_symps_map.lastKey();
-		String[] current_vit_symps = vit_symps_map.get(curren_date);
+		ArrayList<Date> keys = new ArrayList<Date>(patient_vitals.getVitSymps().keySet());
+		//TreeMap<Date, String[]> vit_symps_map = new TreeMap<Date, String[]>(patient_vitals.getVitSymps());
 		Log.d("here", "maybe not");
-		if (!(current_vit_symps == null)) {
+		if (!(keys == null)) {
+			Date current_date = keys.get(-1);
+			String[] current_vit_symps = patient_vitals.getVitSymps().get(current_date);
 			temp_patient.setText(current_vit_symps[0]);
+		}
+		else {
+			temp_patient.setText("N/A");
 		}
 		
 	}
