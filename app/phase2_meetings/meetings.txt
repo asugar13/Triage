@@ -7,18 +7,19 @@ Planning meetings 1:
  - Implement Patient, EmergencyRoom, and Nurse Classes
  - Set up basic Android activities
 
-Status Meeting one:
+Status Meeting 1:
  - Merged CRC (Amit & Asier)
  - Merged Descriptions (Daniel & Doga)
  - Set up project in Eclipse with SVN (Daniel)
  - Implemented Patient (Doga)
  - Stuck getting SVN and eclipse working on personal machines (Doga, Asier, Amit)
  - Realized we don’t need Nurse or EmergencyRoomDataBase class
+ - Implemented Emergency Room (Asier)
  - Worked on EmergencyRoom reading files (Amit)
  - Created Basic Android activities (Daniel & Asier)
 
 
-Status Meeting two:
+Status Meeting 2:
  - SVN and eclipse now working on personal machines (Doga,Asier,Amit)
  - Added Read/writing functionality to EmergencyRoom (Amit)
  - Worked on android layouts for EnterVitalsActivity & LoginActivity (Asier & Doga)
@@ -39,16 +40,16 @@ Planning meeting 2:
  - Add display all previous vitals
  - Add display most recent vitals
 
-Status Meeting three:
+Status Meeting 3:
  - Added Vitals class (Amit & Doga)
  - Added functionality to add new vitals (Daniel & Asier)
  - Added display all previous vitals (Doga & Daniel)
  - Add display most recent vitals (Asier)
  - Added writing to file functionality in EmergencyRoom (Amit)
- - implemented vitals tostring (Daniel)
- - implemented patients toString (Amit)
+ - Implemented vitals toString (Daniel)
+ - Implemented patients toString (Amit)
 
-Current State of project end if phase II:
+Current State of project end of phase II:
  - Can read/write patient info
  - Can add new vitals to patient
  - Can access all of patients records
