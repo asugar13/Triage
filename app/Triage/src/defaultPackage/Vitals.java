@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Date;
 import java.util.TreeMap;
@@ -40,15 +41,20 @@ public class Vitals implements Serializable{
 	 * @param vitals A list of a patient's recorded vital signs
 	 */
 	public Vitals(String[] inputVital){
+		Log.d("inputVital",Arrays.toString(inputVital));
 		isEmpty = false;
 		this.vitSymps = new TreeMap<Date, String[]>();
 		
 		for(String s: inputVital){
 			if(!s.equals("")){
 				String[] dateVitalSplit = s.split(Pattern.quote("*"));
+				Log.d("dateVital",Arrays.toString(dateVitalSplit));
+
 				try {
 					Date date = sdf.parse(dateVitalSplit[0]);
-					String[] vitalReadings = dateVitalSplit[1].split("|");
+					String[] vitalReadings = dateVitalSplit[1].split("[\\x7C]");
+					Log.d("vitalReadings",Arrays.toString(vitalReadings));
+
 					vitSymps.put(date, vitalReadings);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
