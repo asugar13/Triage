@@ -45,7 +45,7 @@ public class PatientInfoActivity extends Activity {
 		ArrayList<Date> keys = new ArrayList<Date>(patient_vitals.getVitSymps().keySet());
 		//TreeMap<Date, String[]> vit_symps_map = new TreeMap<Date, String[]>(patient_vitals.getVitSymps());
 		Log.d("here", "maybe not");
-		if (!(keys == null)) {
+		if (!(keys.isEmpty())) {
 			Date current_date = keys.get(keys.size() - 1);
 			String[] current_vit_symps = patient_vitals.getVitSymps().get(current_date);
 			temp_patient.setText(current_vit_symps[0]);
