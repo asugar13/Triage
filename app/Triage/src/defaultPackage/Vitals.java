@@ -42,15 +42,20 @@ public class Vitals implements Serializable{
 		this.vitSymps = new TreeMap<Date, String[]>();
 		
 		for(String s: inputVital){
-			String[] dateVitalSplit = s.split("*");
-			try {
-				Date date = sdf.parse(dateVitalSplit[0]);
-				String[] vitalReadings = dateVitalSplit[1].split("|");
-				vitSymps.put(date, vitalReadings);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
+			if(!s.equals("")){
+				String[] dateVitalSplit = s.split("*");
+				try {
+					Date date = sdf.parse(dateVitalSplit[0]);
+					String[] vitalReadings = dateVitalSplit[1].split("|");
+					vitSymps.put(date, vitalReadings);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+			}else{
+				//Do nothing
+			}
+	
 		}
 	}
 	
