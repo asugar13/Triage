@@ -2,6 +2,7 @@ package com.example.triage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.TreeMap;
 
@@ -88,8 +89,8 @@ public class ViewAllRecordsActivity extends Activity {
 			this.layoutId = layoutId;
 			this.vitals = vitals.getAllVitals();
 			sortedDates = new ArrayList<Date>(vitals.getAllVitals().keySet());
-			Log.d("SORTED DATES",sortedDates.toString());
-			
+			//Most recent first
+			Collections.reverse(sortedDates);
 		}
 		
 		@Override
