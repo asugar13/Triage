@@ -1,9 +1,15 @@
 package com.example.triage;
 
+import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
+
 import defaultPackage.Patient;
+import defaultPackage.Vitals;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,14 +31,25 @@ public class PatientInfoActivity extends Activity {
 		String name = patient.getName();
 		String health_num = patient.getHealthCardNum();
 		String birthdate = patient.getBirthDate();
-		
+		Vitals patient_vitals = patient.getVitals();
 		TextView name_patient = (TextView) findViewById(R.id.name_patient);
 		TextView patient_birthdate = (TextView) findViewById(R.id.patient_birthdate);
 		TextView health_num_patient = (TextView) findViewById(R.id.health_num_patient);
+		TextView temp_patient = (TextView) findViewById(R.id.temperature_catch);
 		
 		name_patient.setText(name);
 		patient_birthdate.setText(birthdate);
 		health_num_patient.setText(health_num);
+		Log.d("here", "all good");
+		
+		TreeMap<Date, String[]> vit_symps_map = new TreeMap<Date, String[]>(patient_vitals.getVitSymps());
+		Date curren_date =  vit_symps_map.lastKey();
+		String[] current_vit_symps = vit_symps_map.get(curren_date);
+		Log.d("here", "maybe not");
+		if (!(current_vit_symps == null)) {
+			temp_patient.setText(current_vit_symps[0]);
+		}
+		
 	}
 	/**
 	 * Launches EditVitalsActivity for adding new vital and symptom information.
