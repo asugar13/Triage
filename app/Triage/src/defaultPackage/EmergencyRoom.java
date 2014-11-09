@@ -30,12 +30,49 @@ public class EmergencyRoom {
 	public static void loadPatients(Context context, String fileName) {
 		patients = new TreeMap<String, Patient>();
 		try {
-			InputStream patients_stream = context.getAssets().open(
-					"patient_records.txt");
-			populate(patients_stream);
+			// InputStream patients_stream = context.getAssets().open(
+			// "patient_records.txt");
+
+			populate(openFile(context, fileName));
 		} catch (Exception e) { // Change to specific exception
 			e.printStackTrace();
 		}
+	}
+
+	private static InputStream openFile(Context context, String fileName) {
+		InputStream is = null;
+		try {
+			is = context.openFileInput(fileName);
+		} catch (FileNotFoundException e) {
+			try {
+				return context.getAssets().open(fileName);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return is;
+	}
+
+	private static FileOutputStream getOutputStream(Context context, String fileName) {
+		try {
+			return context.openFileOutput("patient_records.txt",
+					context.MODE_PRIVATE);
+		} catch (FileNotFoundException e) {
+
+			boolean fileCreated = new File(context.getFilesDir()
+					+ "/patient_records.txt").mkdir();
+			if (fileCreated) {
+				try {
+					return context.openFileOutput("patient_records.txt",
+							context.MODE_PRIVATE);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -65,7 +102,7 @@ public class EmergencyRoom {
 		Scanner scanner = new Scanner((patients_stream));
 		String[] patient_on_file;
 		while (scanner.hasNextLine()) {
-			
+
 			patient_on_file = scanner.nextLine().split(",");
 			String hcn = patient_on_file[0];
 			String birthdate = patient_on_file[2];
@@ -82,10 +119,10 @@ public class EmergencyRoom {
 		scanner.close();
 	}
 
-	public static void savePatientData(FileOutputStream outputStreamPatients) {
+	public static void savePatientData(Context context) {
 		try {
 			for (String hc : patients.keySet()) {
-				outputStreamPatients.write((patients.get(hc).toString() + "\n")
+				getOutputStream(context,"patient_records.txt").write((patients.get(hc).toString() + "\n")
 						.getBytes());
 			}
 		} catch (IOException e) {
