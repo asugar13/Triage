@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
@@ -32,7 +33,6 @@ public class EmergencyRoom {
 		try {
 			// InputStream patients_stream = context.getAssets().open(
 			// "patient_records.txt");
-
 			populate(openFile(context, fileName));
 		} catch (Exception e) { // Change to specific exception
 			e.printStackTrace();
@@ -42,8 +42,9 @@ public class EmergencyRoom {
 	private static InputStream openFile(Context context, String fileName) {
 		InputStream is = null;
 		try {
-			is = context.openFileInput(fileName);
+			is = context.openFileInput(fileName+"a");
 		} catch (FileNotFoundException e) {
+			Log.d("asd","asdasd");
 			try {
 				return context.getAssets().open(fileName);
 			} catch (IOException e1) {
@@ -121,8 +122,10 @@ public class EmergencyRoom {
 
 	public static void savePatientData(Context context) {
 		try {
+			OutputStream outStream = getOutputStream(context,"patient_records.txt");
 			for (String hc : patients.keySet()) {
-				getOutputStream(context,"patient_records.txt").write((patients.get(hc).toString() + "\n")
+				Log.d("PATIENTSTOSTRING",patients.get(hc).toString());
+				outStream.write((patients.get(hc).toString() + "\n")
 						.getBytes());
 			}
 		} catch (IOException e) {

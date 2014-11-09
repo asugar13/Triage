@@ -2,6 +2,8 @@ package defaultPackage;
 
 import java.io.Serializable;
 
+import android.util.Log;
+
 public class Patient implements Serializable{
 	
 	
@@ -127,7 +129,10 @@ public class Patient implements Serializable{
 	*Returns the current vital signs of the patient.
 	*/
 	public void addVitals(String[] newVitals){
+		Log.d("PATIENT VITALS BEFORE",vitals.toString());
 		this.vitals.add(newVitals);
+		Log.d("Patient Vitals AFter",vitals.toString());
+		
 	}
 	/**
 	*Returns the vital signs of the patient.
@@ -138,8 +143,9 @@ public class Patient implements Serializable{
 	/**
 	 * Returns the String description of this object.
 	 */
+	@Override
 	public String toString(){
-		return this.healthCardNumber + "," + name[0] + " " + name[1] + "," + birthdate + vitals.toString();
+		return this.healthCardNumber + "," + getName() + "," + birthdate + vitals.toString();
 	}
 		
 }
