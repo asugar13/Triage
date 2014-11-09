@@ -20,8 +20,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/**
+ * Activity for displaying all patients, nurses can search by health card number.
+ *
+ */
 public class PatientsDisplayActivity extends Activity {
+	/**List of all patient objects  */
 	private ArrayList<Patient> patients;
 	
 	@Override
@@ -37,7 +41,10 @@ public class PatientsDisplayActivity extends Activity {
 		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
 
 	}
-	
+	/**
+	 * Handles the search by health card number function
+	 * @param view
+	 */
 	public void searchClick(View view){
 		Patient result = null;
 		String hCardNumber = "";
@@ -50,14 +57,17 @@ public class PatientsDisplayActivity extends Activity {
 			result = EmergencyRoom.getPatientByHCNum(hCardNumber);
 
 			if(result!=null){
+				//Valid result -> display patient in patientInfoActivity
 				Intent intent = new Intent(this,PatientInfoActivity.class);
 				intent.putExtra("Patient_Tag",result);
 				startActivity(intent);
 			}
 			else{
+				//Invalid Healthcard number entered
 				Toast.makeText(this, "No patient found or invalid health card number", Toast.LENGTH_SHORT).show();
 			}
 		}else{
+			//Edit text was empty
 			Toast.makeText(this, "Enter a health card number", Toast.LENGTH_SHORT).show();
 		}
 
@@ -83,7 +93,6 @@ public class PatientsDisplayActivity extends Activity {
 	}
 	/**
 	 * Custom adapter for listview, populates textviews with patient info
-	 * 
 	 *
 	 */
 	private class patientsAdapter extends BaseAdapter{
@@ -97,11 +106,18 @@ public class PatientsDisplayActivity extends Activity {
 		}
 		
 		@Override
+		/**
+		 * @return int size of list to make
+		 */
 		public int getCount() {
 			return patientList.size();
 		}
 
 		@Override
+		/**
+		 * @param position in the list
+		 * @return Patient object appropriate for that position
+		 */
 		public Object getItem(int position) {
 			return patientList.get(position);
 		}
@@ -114,7 +130,10 @@ public class PatientsDisplayActivity extends Activity {
 
 		@Override
 		/**
-		 * 
+		 * @param position an int that specifies the position in the listview
+		 * @param convertView a View for the specific row of the listview
+		 * @param parent the parent view (ListView) that the convertView will be attached to
+		 * @return row a view populated with the patient info
 		 */
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
@@ -140,6 +159,9 @@ public class PatientsDisplayActivity extends Activity {
 			row.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
+				/**
+				 * Handles click events of listview rows. Displays patient info in PatientInfoActivity
+				 */
 				public void onClick(View v) {
 					//Launch the patientInfo class with the patient from this row
 					Intent intent = new Intent(context,PatientInfoActivity.class);

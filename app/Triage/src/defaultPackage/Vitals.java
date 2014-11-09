@@ -10,11 +10,12 @@ import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 import android.util.Log;
-
+/**
+ * Stores current and previous vitals and symptoms for a patient 
+ *
+ */
 public class Vitals implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2939547818890631643L;
 	/**Simple date format, specifies string format of dates */
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");

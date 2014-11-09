@@ -38,32 +38,43 @@ public class EmergencyRoom {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Gets the inputstream for a given filename
+	 * @param context
+	 * @param fileName
+	 * @return input stream for reading
+	 */
 	private static InputStream openFile(Context context, String fileName) {
 		InputStream is = null;
 		try {
+			//Tries to read from data/data/Files directory
 			is = context.openFileInput(fileName);
-			Log.d("IS",is.toString());
 		} catch (FileNotFoundException e) {
-			Log.d("ERROR","FILENOTFOUND");
+			//If file not found, get .txt from assets
 			try {
 				return context.getAssets().open(fileName);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
 		return is;
 	}
-
+	/**
+	 * Gets the outputstream for writing to a given file
+	 * @param context
+	 * @param fileName
+	 * @return
+	 */
 	private static FileOutputStream getOutputStream(Context context, String fileName) {
 		try {
+			//Tries to open file from /data/data/Files for reading
 			return context.openFileOutput("patient_records.txt",
 					context.MODE_PRIVATE);
+			
 		} catch (FileNotFoundException e) {
-
-			boolean fileCreated = new File(context.getFilesDir()
-					+ "/patient_records.txt").mkdir();
+			//If file does not exist, creates it
+			boolean fileCreated = new File(context.getFilesDir()+ "/patient_records.txt").mkdir();
 			if (fileCreated) {
 				try {
 					return context.openFileOutput("patient_records.txt",
@@ -78,10 +89,10 @@ public class EmergencyRoom {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Returns a list of all of the patients
+	 * @return ArrayList of all patients
 	 */
-	public static List<Patient> getPatients() {
+	public static ArrayList<Patient> getPatients() {
 		ArrayList<Patient> allPatients = new ArrayList<Patient>();
 		for (String key : patients.keySet()) {
 			allPatients.add(patients.get(key));
@@ -90,19 +101,28 @@ public class EmergencyRoom {
 		return allPatients;
 	}
 
+	/**
+	 * Find a patient by healthcardNumber
+	 * @param hCardNum
+	 * @return Patient object, or null if no patient
+	 */
 	public static Patient getPatientByHCNum(String hCardNum) {
 		return patients.get(hCardNum);
 	}
 	
+	/**
+	 * Update the patient in emergency room, vitals have been added
+	 * @param patient
+	 */
 	public static void updatePatient(Patient patient){
+		//Necessary becuase .putExtra() passes a copy of Patient not reference
 		patients.put(patient.getHealthCardNum(), patient);
 		
 	}
 	
-
 	/**
-	 * 
-	 * @param patients_stream
+	 *  Populates patients Map 
+	 * @param patients_stream inputStream from .txt file containing patients info
 	 * @throws FileNotFoundException
 	 */
 	public static void populate(InputStream patients_stream)
@@ -126,7 +146,10 @@ public class EmergencyRoom {
 		}
 		scanner.close();
 	}
-
+	/**
+	 * Saves patient information to .txt file
+	 * @param context
+	 */
 	public static void savePatientData(Context context) {
 		try {
 			OutputStream outStream = getOutputStream(context,"patient_records.txt");

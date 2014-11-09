@@ -18,9 +18,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
+/**
+ * Activity for displaying all vitals and symptom information for a specific patient 
+ *
+ */
 public class ViewAllRecordsActivity extends Activity {
-	
+	/**The given patient - display there information */
 	private Patient patient;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +66,8 @@ public class ViewAllRecordsActivity extends Activity {
 	
 	
 	/**
-	 * Custom adapter for listview, populates textviews with patient info
+	 * Custom adapter for listview, populates textviews all patient vitals info
 	 * 
-	 *
 	 */
 	private class patientHistoryAdapter extends BaseAdapter{
 		Context context;
@@ -73,6 +75,12 @@ public class ViewAllRecordsActivity extends Activity {
 		TreeMap<Date, String[]> vitals;
 		ArrayList<Date> sortedDates = new ArrayList<Date>();
 		
+		/**
+		 * Instantiates PatientHistoryAdapter
+		 * @param context - context that adapter is used in
+		 * @param layoutId layout for rows in listview
+		 * @param vitals data to display
+		 */
 		public patientHistoryAdapter(Context context,int layoutId,Vitals vitals){
 			this.context = context;
 			this.layoutId = layoutId;
@@ -82,11 +90,17 @@ public class ViewAllRecordsActivity extends Activity {
 		}
 		
 		@Override
+		/**
+		 * @return size (int) of list to fill Listview
+		 */
 		public int getCount() {
 			return sortedDates.size();
 		}
 
 		@Override
+		/**
+		 * @return vital information for each row
+		 */
 		public String[] getItem(int position) {
 			return vitals.get(sortedDates.get(position));
 		}
@@ -99,7 +113,10 @@ public class ViewAllRecordsActivity extends Activity {
 
 		@Override
 		/**
-		 * 
+		 * @param position an int that specifies the position in the listview
+		 * @param convertView a View for the specific row of the listview
+		 * @param parent the parent view (ListView) that the convertView will be attached to
+		 * @return row a view populated with the vitals info
 		 */
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
