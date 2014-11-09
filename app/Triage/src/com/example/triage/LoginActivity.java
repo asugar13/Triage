@@ -8,7 +8,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+/**
+ * Activity to manage logging in into the application
+ *
+ */
 public class LoginActivity extends Activity {
 
 	@Override

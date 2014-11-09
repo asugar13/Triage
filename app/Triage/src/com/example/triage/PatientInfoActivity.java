@@ -8,7 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
+/**
+ * Activity that displays patient specific information.
+ * Option to view previous records, or add new data
+ */
 public class PatientInfoActivity extends Activity {
 
 	private Patient patient;
@@ -31,14 +34,18 @@ public class PatientInfoActivity extends Activity {
 		patient_birthdate.setText(birthdate);
 		health_num_patient.setText(health_num);
 	}
-	
+	/**
+	 * Launches EditVitalsActivity for adding new vital and symptom information.
+	 */
 	public void editRecordsOnClick(View view) {
 		Intent intent = new Intent(this, EnterVitalsActivity.class);
 		intent.putExtra("Patient_Tag", patient);
-	
 		startActivity(intent);
 	}
-	
+	/**
+	 * Launches ViewAllRecordsActivity for viewing old vital and symptom information
+	 * @param view
+	 */
 	public void viewRecordsOnClick(View view) {
 		Intent intent = new Intent (this, ViewAllRecordsActivity.class);
 		intent.putExtra("Patient_Tag", patient);
