@@ -42,9 +42,10 @@ public class EmergencyRoom {
 	private static InputStream openFile(Context context, String fileName) {
 		InputStream is = null;
 		try {
-			is = context.openFileInput(fileName+"a");
+			is = context.openFileInput(fileName);
+			Log.d("IS",is.toString());
 		} catch (FileNotFoundException e) {
-			Log.d("asd","asdasd");
+			Log.d("ERROR","FILENOTFOUND");
 			try {
 				return context.getAssets().open(fileName);
 			} catch (IOException e1) {
