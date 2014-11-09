@@ -43,24 +43,6 @@
         android:text="@string/Symptoms" />
 
     <TextView
-        android:id="@+id/patientHRText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_marginLeft="14dp"
-        android:layout_toRightOf="@+id/textView4"
-        android:text="HR" />
-
-    <TextView
-        android:id="@+id/patientBPText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/patientHRText"
-        android:layout_below="@+id/patientHRText"
-        android:text="BP" />
-
-    <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,5 +64,22 @@
         android:layout_alignLeft="@+id/textView5"
         android:layout_below="@+id/textView5"
         android:text="Symp" />
+
+    <TextView
+        android:id="@+id/patientBPText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/patientHRText"
+        android:layout_centerHorizontal="true"
+        android:text="BP" />
+
+    <TextView
+        android:id="@+id/patientHRText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignRight="@+id/patientBPText"
+        android:text="HR" />
 
 </RelativeLayout>

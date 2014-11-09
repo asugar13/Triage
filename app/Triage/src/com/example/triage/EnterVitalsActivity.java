@@ -31,24 +31,39 @@ public class EnterVitalsActivity extends Activity {
 	 * @param view
 	 */
 	public void saveData(View view) {
+		boolean all_empty = true;
 		Intent intent = new Intent(this, PatientInfoActivity.class);
 		EditText temperatureText = (EditText) findViewById(R.id.temperature_field);
 		EditText diastolicText = (EditText) findViewById(R.id.diastolic_field);
 		EditText systolicText = (EditText) findViewById(R.id.systolic_field);
 		EditText heart_rateText = (EditText) findViewById(R.id.heart_rate_field);
 		EditText symptomsText = (EditText) findViewById(R.id.symptoms_field);
+		
 		String temperature = temperatureText.getText().toString();
 		String diastolic = diastolicText.getText().toString();
 		String systolic = systolicText.getText().toString();
 		String heart_rate = heart_rateText.getText().toString();
 		String symptoms = symptomsText.getText().toString();
+		
 		String[] new_vitals = {temperature, diastolic, systolic, heart_rate, symptoms};
-		Log.d("PATIENTSAVEDATA",patient.toString());
-		patient.addVitals(new_vitals);
-		Log.d("AFTERP",patient.toString());
-		EmergencyRoom.savePatientData(this);
-		intent.putExtra("Patient_Tag", patient);
-		startActivity(intent);
+
+		for(int i=0;i<new_vitals.length;i++){
+			if(new_vitals[i].equals("")){
+				new_vitals[i] = "N/A";
+			}else{
+				all_empty = false;
+			}
+		}
+		
+		if(!all_empty){
+			patient.addVitals(new_vitals);
+			EmergencyRoom.savePatientData(this);
+			intent.putExtra("Patient_Tag", patient);
+			startActivity(intent);
+		}else{
+			Toast.makeText(this, "No vitals entered", Toast.LENGTH_SHORT).show();
+		}
+
 	}
 	
 
