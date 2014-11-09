@@ -1,6 +1,7 @@
 package com.example.triage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.TreeMap;
 
@@ -10,6 +11,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -85,7 +87,8 @@ public class ViewAllRecordsActivity extends Activity {
 			this.context = context;
 			this.layoutId = layoutId;
 			this.vitals = vitals.getAllVitals();
-			sortedDates = new ArrayList(vitals.getAllVitals().keySet());
+			sortedDates = new ArrayList<Date>(vitals.getAllVitals().keySet());
+			Log.d("SORTED DATES",sortedDates.toString());
 			
 		}
 		
@@ -119,9 +122,12 @@ public class ViewAllRecordsActivity extends Activity {
 		 * @return row a view populated with the vitals info
 		 */
 		public View getView(int position, View convertView, ViewGroup parent) {
+			
 			View row = convertView;
 			//The patient for this position in the list
 			final String[] vitalsData = getItem(position);
+			Log.d("GETVIEW",Arrays.toString(vitalsData));
+
 			//if the row is null instantiate it from the given xml layoutID
 			if(row == null){
 				LayoutInflater mInflator = ((Activity) context).getLayoutInflater();
