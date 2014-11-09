@@ -12,3 +12,5 @@ Description of Code:
 - PatientInfoActivity displays all information about a specific patient, and links to EnterVitalsActivity and ViewAllRecordsActivity
 - EnterVitalsActivity allows a nurse to add new vitals and symptom descriptions to a patient
 - ViewAllRecordsActivity allows a nurse to view all previous vital and symptom descriptions of a patient 
+
+Some commits were done together on one group members computer. Commit logs may not match meetings.txt exactly.
