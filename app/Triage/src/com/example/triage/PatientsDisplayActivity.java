@@ -22,16 +22,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class PatientsDisplayActivity extends Activity {
-	private EmergencyRoom myEmergRoom;
 	private ArrayList<Patient> patients;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patients_display);
-		myEmergRoom = new EmergencyRoom(this,"patient_records.txt");
+		EmergencyRoom.loadPatients(this, "patient_records.txt");
 		//Get list of patients
-		patients = (ArrayList<Patient>) myEmergRoom.getPatients();
+		patients = (ArrayList<Patient>) EmergencyRoom.getPatients();
+		
 		//Get list view, and populate with adapter
 		ListView patientsList = (ListView) findViewById(R.id.listView1);
 		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
@@ -47,7 +47,7 @@ public class PatientsDisplayActivity extends Activity {
 		
 		
 		if(!(hCardNumber == "")){
-			result = myEmergRoom.getPatientByHCNum(hCardNumber);
+			result = EmergencyRoom.getPatientByHCNum(hCardNumber);
 
 			if(result!=null){
 				Intent intent = new Intent(this,PatientInfoActivity.class);
