@@ -18,6 +18,7 @@
     <string name="title_activity_enter_vitals">EnterVitalsActivity</string>
     <string name="diastolic_blood_pressure">Blood Pressure (diastolic): </string>
     <string name="systolic_blood_pressure">Blood Pressure (systolic): </string>
+    <string name="blood_pressure">Blood Pressure: </string>
     <string name="temperature">Temperature: </string>
     <string name="heart_rate">Heart rate: </string>
     <string name="symptom_description">Description of Symptoms</string>
@@ -29,6 +30,7 @@
     <string name="date_time_field">Date and Time: </string>
     <string name="add_new_records">Add new records for: </string>
     <string name="btn_save">Save</string>
+    <string name="Symptoms">Symptoms: </string>
 	<string name="patient_name">Patient Name: </string>
 	<string name="patient_records_history">Records of the Patient</string>
 </resources>
