@@ -57,6 +57,7 @@
         android:layout_alignBottom="@+id/passwordfield"
         android:layout_alignParentLeft="true"
         android:layout_toStartOf="@+id/passwordfield"
+        android:layout_toLeftOf="@+id/passwordfield"
         android:text="@string/password" />
 
 </RelativeLayout>
