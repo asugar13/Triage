@@ -57,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignStart="@+id/temperature_field"
+        android:layout_alignLeft="@+id/temperature_field"
         android:layout_below="@+id/temperature_field"
         android:layout_marginTop="14dp"
         android:layout_toRightOf="@+id/sympDesc"
@@ -100,6 +101,7 @@
         android:layout_alignBaseline="@+id/systolic_field"
         android:layout_alignBottom="@+id/systolic_field"
         android:layout_alignStart="@+id/heartRateView"
+        android:layout_alignLeft="@+id/heartRateView"
         android:layout_toLeftOf="@+id/diastolic_field"
         android:text="@string/systolic_blood_pressure" />
 
