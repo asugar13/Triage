@@ -1,5 +1,6 @@
 package defaultPackage;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.Map;
 import java.util.Date;
 import java.util.TreeMap;
 
-public class Vitals {
+public class Vitals implements Serializable{
 	/**Simple date format, specifies string format of dates */
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 	/**Stores a patient's symptoms based on the time that they are written. */
