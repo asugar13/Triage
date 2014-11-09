@@ -5,6 +5,7 @@ import defaultPackage.Patient;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +37,9 @@ public class EnterVitalsActivity extends Activity {
 		String heart_rate = heart_rateText.getText().toString();
 		String symptoms = symptomsText.getText().toString();
 		String[] new_vitals = {temperature, diastolic, systolic, heart_rate, symptoms};
+		Log.d("PATIENTSAVEDATA",patient.toString());
 		patient.addVitals(new_vitals);
+		Log.d("AFTERP",patient.toString());
 		EmergencyRoom.savePatientData(this);
 		intent.putExtra("Patient_Tag", patient);
 		startActivity(intent);
@@ -62,14 +65,5 @@ public class EnterVitalsActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public void getWrittenData(){
-		
-	}
 
-	
-	public void savePatientData(){
-		getWrittenData();
-		
-		//Write patients
-	}
 }
