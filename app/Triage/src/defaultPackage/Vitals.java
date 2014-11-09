@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Date;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 import android.util.Log;
 
@@ -43,7 +44,7 @@ public class Vitals implements Serializable{
 		
 		for(String s: inputVital){
 			if(!s.equals("")){
-				String[] dateVitalSplit = s.split("*");
+				String[] dateVitalSplit = s.split(Pattern.quote("*"));
 				try {
 					Date date = sdf.parse(dateVitalSplit[0]);
 					String[] vitalReadings = dateVitalSplit[1].split("|");
