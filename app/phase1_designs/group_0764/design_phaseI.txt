@@ -1,0 +1,62 @@
+﻿Patient:
+A Patient object is only used to store the patient’s data.
+ 
+Fields:
+-“Personal Data” contains the name, birthdate and health card number of the patient.
+-“Arrival Time to Hospital” contains arrival time of the patient to the hospital.
+-“Symptoms” is a text description of the current symptoms of the patient.
+-“Vital Signs” contains the current temperature, blood pressure and heart rate of the patient.
+-“Seen by doctor” shows whether or not the patient has been seen by a doctor for the current visit.
+-“Urgency level” contains the current urgency level of the patient based on the hospital policy.
+-“History of Vital Signs” contains a record of the patient’s vital signs over time.
+-“History of Symptoms” contains a record of the patient’s symptoms over time.
+-“History of Urgency level” contains the improvement/regression of the patient’s urgency level.
+-“History of dates and times of Meetings with Doctors” contains a record of all the dates and times where the patient has seen a doctor.
+ 
+Nurse:
+Nurse is the only user of this application. She uses the Patient and the Emergency Room class.
+ 
+Methods:
+-“Log in”: Launches the application
+-“Record patient’s personal data (name, birthdate, health card number)”:  This is only done once for each patient.
+-“Record arrival time to hospital”: Writes the patient’s arrival time to the hospital for the current visit.
+-“Record and update patient’s vital signs”: Overwrites (or just writes when used for the first time) the patient’s Vital Signs and adds them to the patient’s History of Vital Signs.
+-“Record and update patient’s symptoms”: Overwrites (or just writes when used for the first time) the patient’s Symptoms and adds them to the patient’s History of Symptoms.
+-“Write whether or not patient has been seen by a doctor”: Writes “yes” or “no” depending on whether or not the patient has been seen by a doctor for the current visit.
+-“Record and update date and time of meeting with doctor”: Overwrites (or just writes when used for the first time) the time and date of the last meeting with the doctor and adds it to the patient’s History of dates and times of Meetings with Doctors.
+-”Save all collected data”: saves all the collected data for the patient that has been modified.
+“Log Out”: The nurse closes the application.
+
+
+
+
+Emergency Room:
+The Emergency Room class is where all the patients are stored when they are in the hospital. It uses the Patient and the Emergency Room Database class.
+
+
+Fields:
+“Patients in Emergency Room” is all the loaded data of patients that are currently in the emergency room.
+
+
+Methods:
+-“Create New Patient”: Creates a new patient who arrived to the Emergency Room for the first time.
+-“Record and update urgency level on patient based on hospital policy”: After the nurse records and updates the patient’s vital signs. This method overwrites (or just writes when used for the first time), the patient’s current urgency level based on the hospital policy and adds it to the History of Urgency Level of the patient.
+-“Show patient’s record using health card number” Shows all the patient’s parameters, based on the provided health card number (here we can also see the patient’s improvement/regression over time by looking at his History fields).
+-“Show list of patients not seen by doctor ordered by decreasing urgency level”: This is self-descriptive.
+-“Show list of patients not seen by doctor ordered by arrival time (from least recent to most recent”: this is self descriptive
+-“Send patient to Emergency Room Database”: When the patient leaves the hospital, his symptoms, vital signs, arrival time to hospital, urgency level and “seen by doctor” fields are overwritten to blank content. He is removed from the Emergency Room but we keep a record of his visits by sending it to the Emergency Room Database.
+-”Add patient from Emergency Room Database”: The patient that has been sent from the Emergency Room Database is added to the “Patients in Emergency Room” field
+
+
+Emergency Room Database:
+The main role of this class is to store the records of the previous patients of the Emergency Room. This class is a subclass of Emergency Room class. It interacts with Patient class and Emergency Room class.
+
+
+Fields:
+-“Patients in Emergency Room Database”: The patients who were in the Emergency Room at some point but left the hospital.
+
+
+Methods:
+-“Send patient to Emergency Room”: When a returning patient comes back to the hospital, he is temporally removed from the Emergency Room Database and sent to the Emergency Room to be manipulated by the nurse.
+-“Add patient from Emergency Room”: The patient that has been sent from the Emergency Room is added to the “Patients in Emergency Room Database” field.
+-“ Show patient’s record using health card number”: Shows all the patient’s parameters, based on the provided health card number (here we can see what’s on his History fields).
