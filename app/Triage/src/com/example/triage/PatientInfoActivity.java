@@ -24,6 +24,9 @@ public class PatientInfoActivity extends Activity {
 	private Patient patient;
 	
 	@Override
+	/**
+	 * Sets the appropriate layout of this activity based on the attributes of this Patient object.
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patient_info);
