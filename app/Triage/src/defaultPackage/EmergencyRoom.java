@@ -14,18 +14,16 @@ import java.util.Map.Entry;
 import android.content.Context;
 import android.util.Log;
 
-/**
- * 
- * @author Asier
- * 
- */
+
 public class EmergencyRoom {
 	private static Map<String, Patient> patients;
 
 	/**
+	 * Constructor for the static instantiation of Emergency Room.
+	 * The Emergency Room gets populated with Patient objects.
 	 * 
-	 * @param context
-	 * @param fileName
+	 * @param context the context we are loading patients from.
+	 * @param fileName the name of the file we are loading patients from.
 	 */
 
 	public static void loadPatients(Context context, String fileName) {
@@ -40,10 +38,11 @@ public class EmergencyRoom {
 	}
 	
 	/**
-	 * Gets the inputstream for a given filename
-	 * @param context
-	 * @param fileName
-	 * @return input stream for reading
+	 * Gets the InputStream for a given filename.
+	 * 
+	 * @param context the context where the file is stored.
+	 * @param fileName the name of the file to be opened.
+	 * @return InputStream for reading.
 	 */
 	private static InputStream openFile(Context context, String fileName) {
 		InputStream is = null;
@@ -61,10 +60,11 @@ public class EmergencyRoom {
 		return is;
 	}
 	/**
-	 * Gets the outputstream for writing to a given file
-	 * @param context
-	 * @param fileName
-	 * @return
+	 * Gets the OutputStream for writing to a given file.
+	 * 
+	 * @param context the context where the file is stored.
+	 * @param fileName the name of the file to be opened.
+	 * @return OutputStream for writing.
 	 */
 	private static FileOutputStream getOutputStream(Context context, String fileName) {
 		try {
@@ -89,8 +89,9 @@ public class EmergencyRoom {
 	}
 
 	/**
-	 * Returns a list of all of the patients
-	 * @return ArrayList of all patients
+	 * Returns a list of all of the patients.
+	 * 
+	 * @return ArrayList containing all the Patient objects in the Emergency Room.
 	 */
 	public static ArrayList<Patient> getPatients() {
 		ArrayList<Patient> allPatients = new ArrayList<Patient>();
@@ -102,27 +103,30 @@ public class EmergencyRoom {
 	}
 
 	/**
-	 * Find a patient by healthcardNumber
-	 * @param hCardNum
-	 * @return Patient object, or null if no patient
+	 * Find a patient using a health card number.
+	 * 
+	 * @param hCardNum a health card number
+	 * @return Patient object, or null if there is no patient with given health card number
 	 */
 	public static Patient getPatientByHCNum(String hCardNum) {
 		return patients.get(hCardNum);
 	}
 	
 	/**
-	 * Update the patient in emergency room, vitals have been added
-	 * @param patient
+	 * Updates the Patient object whose vitals have been edited in the Emergency Room.
+	 * 
+	 * @param patient a Patient object
 	 */
 	public static void updatePatient(Patient patient){
-		//Necessary becuase .putExtra() passes a copy of Patient not reference
+		//Necessary because .putExtra() passes a copy of Patient, not a reference
 		patients.put(patient.getHealthCardNum(), patient);
 		
 	}
 	
 	/**
-	 *  Populates patients Map 
-	 * @param patients_stream inputStream from .txt file containing patients info
+	 * Populates the patients Map attribute in EmergencyRoom with all the patients from a given InputStream.
+	 *  
+	 * @param patients_stream InputStream from .txt file containing patients info
 	 * @throws FileNotFoundException
 	 */
 	public static void populate(InputStream patients_stream)
@@ -148,7 +152,8 @@ public class EmergencyRoom {
 	}
 	/**
 	 * Saves patient information to .txt file
-	 * @param context
+	 * 
+	 * @param context the context where the .txt file is stored.
 	 */
 	public static void savePatientData(Context context) {
 		try {
