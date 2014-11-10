@@ -20,25 +20,22 @@ public class Vitals implements Serializable{
 	private static final long serialVersionUID = 2939547818890631643L;
 	/**Simple date format, specifies string format of dates */
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-	/**Stores a patient's symptoms based on the time that they are written. */
+	/**Stores patient's vitals based on the time that they are written. */
 	private TreeMap<Date, String[]> vitSymps;
 	public boolean isEmpty = true;
 	
 	
 	/**
-	 * Constructs a Vitals object with no vitals and symptoms yet recorder. 
+	 * Constructs a Vitals object with no vital signs or symptoms yet recorded. 
 	 */
 	public Vitals(){
 		vitSymps = new TreeMap<Date, String[]>();
 	}
 	
 	/**
-	 * Constructs a Vitals object with a patient's vital signs and symptoms
-	 * arranged by time.
-	 * @param t1 A list of times of when a patient's symptoms were recorded.
-	 * @param symptoms A list of a patient's recorded symptoms.
-	 * @param t2 A list of times of when a patient's vital signs were recorded.
-	 * @param vitals A list of a patient's recorded vital signs
+	 * Constructs a Vitals object with vital signs and symptoms sorted by time.
+	 * 
+	 * @param inputVital Contains all the vital signs and symptoms to be instantiated.
 	 */
 	public Vitals(String[] inputVital){
 		Log.d("inputVital",Arrays.toString(inputVital));
@@ -68,9 +65,9 @@ public class Vitals implements Serializable{
 	}
 	
 	/**
-	 * Adds a String of symptoms to a patient's history of recorded symptoms.
-	 * @param t The time which the new symptoms are recorded.
-	 * @param newSympt The new symptoms that are recorded.
+	 * Adds new vital signs and symptoms to the Vitals object.
+	 * 
+	 * @param newVitSympt The new vital signs and symptoms that are being recorded.
 	 */
 	public void add(String[] newVitSymp){
 		isEmpty = false;
@@ -81,8 +78,9 @@ public class Vitals implements Serializable{
 
 	}
 	/**
-	 * Returns all vitals mapped by date
-	 * @return Treemap maping date to list of vitals
+	 * Returns all vitals mapped by date.
+	 * 
+	 * @return TreeMap mapping dates to vitals
 	 */
 	public TreeMap<Date, String[]> getAllVitals(){
 		return vitSymps;
