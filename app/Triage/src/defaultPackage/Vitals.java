@@ -89,7 +89,7 @@ public class Vitals implements Serializable{
 	
 	
 	/**
-	 * Returns a list of the history of a patient's vitals arranged by time.
+	 * Returns a Map of the history of a patient's vitals arranged by time.
 	 */
 	public Map<Date, String[]> getVitSymps(){
 		return this.vitSymps;

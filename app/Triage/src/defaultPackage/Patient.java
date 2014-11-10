@@ -11,10 +11,6 @@ public class Patient implements Serializable{
 	private String[] name;
 	private String birthDate;
 	private String healthCardNumber;
-	private String arrivalTimeToHospital;
-	private String[] symptoms;
-	private int urgencyLevel;
-	private String seenByDoctor;
 	private Vitals vitals;
 	
 	/** Constructor for Patient class.
