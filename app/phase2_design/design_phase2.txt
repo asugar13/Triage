@@ -2,7 +2,7 @@ Introduction - Triage Android application:
 The purpose of this application is to aid in the organization and management of an emergency room (ER). Nurses will use the application to track and manage patients’ personal data, vitals, and symptoms. From this data the app will assign patients urgency based on the hospitals policy.
 
 Emergency room:
-The emergency room class manages all of the patients. This class handles the creation, storage, and manipulation of all patient personal data. When the app is loaded this class stores all patients as a Map, mapping health card number and birthdate to patient objects. The emergency room can assign an urgency rating to patients based on their vital signs(hospital policy).
+The emergency room class manages all of the patients. This class handles the creation, storage, and manipulation of all patient personal data. When the app is loaded this class stores all patients as a Map, mapping health card number and birthdate to patient objects. The emergency room can assign an urgency rating to patients based on their vital signs (hospital policy).
 
 Patient:
 The patient class manages all the information that revolves around ER patients. Patients themselves cannot change the data, it is assigned to them by nurses. The patient class stores the name, birthdate, health card number, vital signs and symptoms of the patient. 
