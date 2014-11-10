@@ -29,6 +29,9 @@ public class ViewAllRecordsActivity extends Activity {
 	/**The given patient - display there information */
 	private Patient patient;
 	@Override
+	/**
+	 * Sets the appropriate layout of this activity based on patient_records.txt and vital_history_row.xml.
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_all_records);
@@ -80,6 +83,7 @@ public class ViewAllRecordsActivity extends Activity {
 		
 		/**
 		 * Instantiates PatientHistoryAdapter
+		 * 
 		 * @param context - context that adapter is used in
 		 * @param layoutId layout for rows in listview
 		 * @param vitals data to display

@@ -29,6 +29,9 @@ public class PatientsDisplayActivity extends Activity {
 	private ArrayList<Patient> patients;
 	
 	@Override
+	/**
+	 * Sets the appropriate layout of this activity based on patient_records.txt and patient_list_row.xml.
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patients_display);
@@ -42,7 +45,8 @@ public class PatientsDisplayActivity extends Activity {
 
 	}
 	/**
-	 * Handles the search by health card number function
+	 * Handles the search by health card number function.
+	 * 
 	 * @param view
 	 */
 	public void searchClick(View view){
@@ -92,7 +96,7 @@ public class PatientsDisplayActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	/**
-	 * Custom adapter for listview, populates textviews with patient info
+	 * Custom adapter for listview, populates textviews with patient info.
 	 *
 	 */
 	private class patientsAdapter extends BaseAdapter{

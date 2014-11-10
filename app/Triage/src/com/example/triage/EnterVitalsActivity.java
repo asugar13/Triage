@@ -30,7 +30,7 @@ public class EnterVitalsActivity extends Activity {
 	}
 
 	/**
-	 * Adds the new vitals to patient, and saves
+	 * Adds and saves the new vitals written to patient.
 	 * 
 	 * @param view
 	 */
