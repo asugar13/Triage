@@ -35,7 +35,7 @@ public class PatientsDisplayActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patients_display);
-		EmergencyRoom.loadPatients(this, "patient_records.txt");
+		EmergencyRoom.loadPatients(getApplicationContext(), "patient_records.txt");
 		//Get list of patients
 		patients = (ArrayList<Patient>) EmergencyRoom.getPatients();
 		
