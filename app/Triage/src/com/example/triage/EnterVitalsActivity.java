@@ -62,7 +62,7 @@ public class EnterVitalsActivity extends Activity {
 
 		if (!allEmpty) {
 			patient.addVitals(newVitals);
-			EmergencyRoom.savePatientData(this);
+			EmergencyRoom.savePatient(patient);
 			intent.putExtra("Patient_Tag", patient);
 			startActivity(intent);
 		} else {

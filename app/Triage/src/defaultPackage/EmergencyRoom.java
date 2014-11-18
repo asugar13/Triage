@@ -11,87 +11,99 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
-
+/**
+ * 
+ * @author Asier
+ * 
+ */
 public class EmergencyRoom {
 	private static Map<String, Patient> patients;
+	private static DatabaseManager dbManager;
+	private static String userType;
+	private class InvalidTypeException extends Exception{};
+	public static final String patientTable = "patient_records";
+	public static final String loginTable = "login_information";
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	/**
-	 * Constructor for the static instantiation of Emergency Room.
-	 * The Emergency Room gets populated with Patient objects.
-	 * 
-	 * @param context the context we are loading patients from.
-	 * @param fileName the name of the file we are loading patients from.
-	 */
 
+
+	/**
+	 * TEMPORARY, ACTS AS a constructor kinda, will fix and changle EmergencyRoom to singleton once servers are up
+	 * @param context
+	 * @param fileName
+	 */
 	public static void loadPatients(Context context, String fileName) {
+		dbManager = new DatabaseManager(context);
 		patients = new TreeMap<String, Patient>();
-		try {
-			// InputStream patients_stream = context.getAssets().open(
-			// "patient_records.txt");
-			populate(openFile(context, fileName));
-		} catch (Exception e) { // Change to specific exception
-			e.printStackTrace();
-		}
+//		try {
+//			// InputStream patients_stream = context.getAssets().open(
+//			// "patient_records.txt");
+//			populate(openFile(context, fileName));
+//		} catch (Exception e) { // Change to specific exception
+//			e.printStackTrace();
+//		}
+		//patients = dbManager.getAllPatients();
+		loadAllPatients();
 	}
 	
-	/**
-	 * Gets the InputStream for a given filename.
-	 * 
-	 * @param context the context where the file is stored.
-	 * @param fileName the name of the file to be opened.
-	 * @return InputStream for reading.
-	 */
-	private static InputStream openFile(Context context, String fileName) {
-		InputStream is = null;
-		try {
-			//Tries to read from data/data/Files directory
-			is = context.openFileInput(fileName);
-		} catch (FileNotFoundException e) {
-			//If file not found, get .txt from assets
-			try {
-				return context.getAssets().open(fileName);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		}
-		return is;
-	}
-	/**
-	 * Gets the OutputStream for writing to a given file.
-	 * 
-	 * @param context the context where the file is stored.
-	 * @param fileName the name of the file to be opened.
-	 * @return OutputStream for writing.
-	 */
-	private static FileOutputStream getOutputStream(Context context, String fileName) {
-		try {
-			//Tries to open file from /data/data/Files for reading
-			return context.openFileOutput("patient_records.txt",
-					context.MODE_PRIVATE);
-			
-		} catch (FileNotFoundException e) {
-			//If file does not exist, creates it
-			boolean fileCreated = new File(context.getFilesDir()+ "/patient_records.txt").mkdir();
-			if (fileCreated) {
-				try {
-					return context.openFileOutput("patient_records.txt",
-							context.MODE_PRIVATE);
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		}
-		return null;
-	}
+	
+	
+//	/**
+//	 * Gets the inputstream for a given filename
+//	 * @param context
+//	 * @param fileName
+//	 * @return input stream for reading
+//	 */
+//	private static InputStream openFile(Context context, String fileName) {
+//		InputStream is = null;
+//		try {
+//			//Tries to read from data/data/Files directory
+//			is = context.openFileInput(fileName);
+//		} catch (FileNotFoundException e) {
+//			//If file not found, get .txt from assets
+//			try {
+//				return context.getAssets().open(fileName);
+//			} catch (IOException e1) {
+//				e1.printStackTrace();
+//			}
+//		}
+//		return is;
+//	}
+//	/**
+//	 * Gets the outputstream for writing to a given file
+//	 * @param context
+//	 * @param fileName
+//	 * @return
+//	 */
+//	private static FileOutputStream getOutputStream(Context context, String fileName) {
+//		try {
+//			//Tries to open file from /data/data/Files for reading
+//			return context.openFileOutput("patient_records.txt",
+//					context.MODE_PRIVATE);
+//			
+//		} catch (FileNotFoundException e) {
+//			//If file does not exist, creates it
+//			boolean fileCreated = new File(context.getFilesDir()+ "/patient_records.txt").mkdir();
+//			if (fileCreated) {
+//				try {
+//					return context.openFileOutput("patient_records.txt",
+//							context.MODE_PRIVATE);
+//				} catch (FileNotFoundException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//			}
+//		}
+//		return null;
+//	}
 
 	/**
-	 * Returns a list of all of the patients.
-	 * 
-	 * @return ArrayList containing all the Patient objects in the Emergency Room.
+	 * Returns a list of all of the patients
+	 * @return ArrayList of all patients
 	 */
 	public static ArrayList<Patient> getPatients() {
 		ArrayList<Patient> allPatients = new ArrayList<Patient>();
@@ -103,25 +115,24 @@ public class EmergencyRoom {
 	}
 
 	/**
-	 * Find a patient using a health card number.
-	 * 
-	 * @param hCardNum a health card number
-	 * @return Patient object, or null if there is no patient with given health card number
+	 * Find a patient by healthcardNumber
+	 * @param hCardNum
+	 * @return Patient object, or null if no patient
 	 */
 	public static Patient getPatientByHCNum(String hCardNum) {
 		return patients.get(hCardNum);
 	}
 	
 	/**
-	 * Updates the Patient object whose vitals have been edited in the Emergency Room.
-	 * 
-	 * @param patient a Patient object
+	 * Update the patient in emergency room, vitals have been added
+	 * @param patient
 	 */
 	public static void updatePatient(Patient patient){
-		//Necessary because .putExtra() passes a copy of Patient, not a reference
+		//Necessary becuase .putExtra() passes a copy of Patient not reference
 		patients.put(patient.getHealthCardNum(), patient);
 		
 	}
+
 	/**
 	*Calculates the urgency rating of the patient and adds to the patient's record
 	*
@@ -159,49 +170,115 @@ public class EmergencyRoom {
 		patient.addUrgency(urgency);
 	}
 
-	
-	/**
-	 * Populates the patients Map attribute in EmergencyRoom with all the patients from a given InputStream.
-	 *  
-	 * @param patients_stream InputStream from .txt file containing patients info
-	 * @throws FileNotFoundException
-	 */	
-	public static void populate(InputStream patients_stream)
-			throws FileNotFoundException {
-		Scanner scanner = new Scanner((patients_stream));
-		String[] patient_on_file;
-		while (scanner.hasNextLine()) {
 
-			patient_on_file = scanner.nextLine().split(",");
-			String hcn = patient_on_file[0];
-			String birthdate = patient_on_file[2];
-			String[] name = patient_on_file[1].split(" ");
-			if (patient_on_file.length == 3) {
-				patients.put(hcn, new Patient(name, birthdate, hcn,
-						new Vitals()));
-			} else {
-				String[] vitalInfo = patient_on_file[3].split("&");
-				patients.put(hcn, new Patient(name, birthdate, hcn, new Vitals(
-						vitalInfo)));
-			}
-		}
-		scanner.close();
-	}
+	
+//	/**
+//	 *  Populates patients Map 
+//	 * @param patients_stream inputStream from .txt file containing patients info
+//	 * @throws FileNotFoundException
+//	 */
+//	public static void populate(InputStream patients_stream)
+//			throws FileNotFoundException {
+//		Scanner scanner = new Scanner((patients_stream));
+//		String[] patient_on_file;
+//		while (scanner.hasNextLine()) {
+//
+//			patient_on_file = scanner.nextLine().split(",");
+//			String hcn = patient_on_file[0];
+//			String birthdate = patient_on_file[2];
+//			String[] name = patient_on_file[1].split(" ");
+//			if (patient_on_file.length == 3) {
+//				patients.put(hcn, new Patient(name, birthdate, hcn,
+//						new Vitals()));
+//			} else {
+//				String[] vitalInfo = patient_on_file[3].split("&");
+//				patients.put(hcn, new Patient(name, birthdate, hcn, new Vitals(
+//						vitalInfo)));
+//			}
+//		}
+//		scanner.close();
+//	}
+//	/**
+//	 * Saves patient information to .txt file
+//	 * @param context
+//	 */
+//	public static void savePatientData(Context context) {
+//		try {
+//			OutputStream outStream = getOutputStream(context,"patient_records.txt");
+//			for (String hc : patients.keySet()) {
+//				Log.d("PATIENTSTOSTRING",patients.get(hc).toString());
+//				outStream.write((patients.get(hc).toString() + "\n")
+//						.getBytes());
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	/**
-	 * Saves patient information to .txt file
-	 * 
-	 * @param context the context where the .txt file is stored.
+	 * Saves patient data to SQLite database
+	 * @param patient
 	 */
-	public static void savePatientData(Context context) {
-		try {
-			OutputStream outStream = getOutputStream(context,"patient_records.txt");
-			for (String hc : patients.keySet()) {
-				Log.d("PATIENTSTOSTRING",patients.get(hc).toString());
-				outStream.write((patients.get(hc).toString() + "\n")
-						.getBytes());
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+	public static void savePatient(Patient patient){
+		ContentValues patientValues = new ContentValues();
+		patientValues.put("health_card_number", patient.getHealthCardNum());
+		patientValues.put("name", patient.getName());
+		patientValues.put("seen_by_doctor", "false");
+		patientValues.put("date_of_birth", patient.getBirthDate());
+		patientValues.put("vitals", patient.getVitals().toString());
+		
+		if(dbManager.rowExists("patient_records","health_card_number = " + patient.getHealthCardNum())){
+			//Modify row
+			String whereClause = "health_card_number = " + patient.getHealthCardNum();
+			dbManager.modifyRow(patientTable,patientValues,whereClause);
+		}else{
+			//Add patient
+
+			dbManager.addRow(patientValues, patientTable);
 		}
 	}
-}
+	
+	
+	public boolean logIn(String username, String password){
+		String sqlWhere = "username = " + username + " AND password = " + password;
+		if(dbManager.rowExists(loginTable,sqlWhere)){
+			//Login successful
+			setUserType(sqlWhere);
+			return true;
+		}else{
+			//Login failed
+			return false;
+		}
+	}
+	
+	private void setUserType(String sqlWhere){
+		String[] columns = {"user_type"};
+		Cursor c = dbManager.getRow(loginTable,sqlWhere,columns);
+		String userType = c.getString(0);
+		this.userType = userType;
+		
+	}
+	
+	private static void loadAllPatients(){
+		Cursor c = dbManager.getAllRows(patientTable);
+		if (c.moveToFirst()){
+			do{
+
+				Vitals currentVitals;
+				if(c.getString(4) !=null){
+					currentVitals = new Vitals(c.getString(4).split("&"));
+				}else{
+					currentVitals = new Vitals();
+				}
+				Patient currentPatient = new Patient(c.getString(1).split(" "),c.getString(2),c.getString(0),currentVitals);
+				patients.put(c.getString(0), currentPatient);
+				
+				c.moveToNext();
+			}while(!c.isAfterLast());
+		}
+		
+	}
+	
+	}
+	
+
+
