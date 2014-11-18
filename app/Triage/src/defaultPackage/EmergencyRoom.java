@@ -17,7 +17,7 @@ import android.util.Log;
 
 public class EmergencyRoom {
 	private static Map<String, Patient> patients;
-
+	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	/**
 	 * Constructor for the static instantiation of Emergency Room.
 	 * The Emergency Room gets populated with Patient objects.
@@ -122,13 +122,50 @@ public class EmergencyRoom {
 		patients.put(patient.getHealthCardNum(), patient);
 		
 	}
+	/**
+	*Calculates the urgency rating of the patient and adds to the patient's record
+	*
+	*@param patient The patient that is having their urgency calculate.
+	*/
+	public static void calcUrgency(Patient patient){
+		int urgency = 0;
+		String[] birthDate = patient.getBirthDate().split("-");
+		int birthDay = Integer.parseInt(birthDate[0]) + Integer.parseInt(birthDate[1]) * 12 + Integer.parseInt(birthDate[2]) * 365;
+		String[] currentDate = sdf.format(new Date()).split("-");
+		int currentDay = Integer.parseInt(currentDate[0]) * 365 + Integer.parseInt(currentDate[1]) * 12 + Integer.parseInt(currentDate[2]);
+		float age = ((float) (currentDay - birthDay)) / 365;
+		Vitals vitals = patient.getVitals();
+		
+		String[] vitSymp = vitals.getAllVitals().get(vitals.getAllVitals().firstKey());
+		int temp = Integer.parseInt(vitSymp[0]);
+		int diastolic = Integer.parseInt(vitSymp[1]);
+		int systolic = Integer.parseInt(vitSymp[2]);
+		int heartRate = Integer.parseInt(vitSymp[3]);
+		if (age < 2){
+			urgency++;
+		}
+		if (temp >= 39){
+			urgency++;
+		}
+		if (systolic >= 140){
+			urgency++;
+		}
+		else if (diastolic >= 90){
+			urgency++;
+		}
+		if (heartRate >= 100 || heartRate <= 50){
+			urgency++;
+		}
+		patient.addUrgency(urgency);
+	}
+
 	
 	/**
 	 * Populates the patients Map attribute in EmergencyRoom with all the patients from a given InputStream.
 	 *  
 	 * @param patients_stream InputStream from .txt file containing patients info
 	 * @throws FileNotFoundException
-	 */
+	 */	
 	public static void populate(InputStream patients_stream)
 			throws FileNotFoundException {
 		Scanner scanner = new Scanner((patients_stream));
