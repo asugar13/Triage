@@ -12,6 +12,7 @@ public class Patient implements Serializable{
 	private String birthDate;
 	private String healthCardNumber;
 	private Vitals vitals;
+	private int urgency;
 	
 	/** Constructor for Patient class.
 	 * 
@@ -70,12 +71,24 @@ public class Patient implements Serializable{
 	}
 	/**
 	*Returns the vitals of this patient.
+	*
+	*@return vitals The vitals of this patient
 	*/
 	public Vitals getVitals(){
 		return vitals;
 	}
+	
+	/**
+	*Adds an urgency rating to this patient
+	*/
+	public void addUrgency(int urgency){
+		this.urgency = urgency;
+	}
+	
 	/**
 	 * Returns the String representation of this Patient object.
+	 * 
+	 * @return The string representation of this Patient object
 	 */
 	@Override
 	public String toString(){
