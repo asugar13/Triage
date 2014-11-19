@@ -95,6 +95,13 @@ public class Patient implements Serializable{
 	}
 	
 	/**
+	*Gets this patient's urgency
+	*/
+	public int getUrgency(){
+		return urgency;
+	}
+	
+	/**
 	 * Returns the String representation of this Patient object.
 	 * 
 	 * @return The string representation of this Patient object
