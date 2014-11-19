@@ -134,7 +134,13 @@ public class EmergencyRoom {
 	 */
 	public static ArrayList<Patient> getUnseenSortedPatients(){
 		ArrayList<Patient> sortedPatients = new ArrayList<Patient>();
-		sortedPatients.addAll((Collection<? extends Patient>) patients.entrySet());
+		ArrayList<Patient> unsortedPatients = new ArrayList<Patient>();
+		unsortedPatients.addAll((Collection<? extends Patient>) patients.entrySet());
+		for (Patient p: unsortedPatients){
+			if (p.getSeenByDoctorStatus()){
+				sortedPatients.add(p);
+			}
+		}
 		Collections.sort(sortedPatients, new Comparator<Patient>() {
 	        @Override public int compare(Patient p1, Patient p2) {
 	            return p2.getUrgency()- p1.getUrgency();//descending
