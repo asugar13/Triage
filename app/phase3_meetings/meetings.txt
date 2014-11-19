@@ -3,12 +3,12 @@ Current state of project:
 End of Phase 2
 Tasks:
  - Implement sign in functionality to LoginActivity
-   - Access password/username/usertype information from passwords.txt or mySQLite database
+   - Access password/username/usertype information from passwords.txt or mySQLite database/
    - Restrict functionality of certain features based on user type
-	- Store user type in EmergencyRoom??
+	- Store user type in EmergencyRoom??/
  - Implement AddPatientActivity for adding new patients
  - Add functionality to PatientInfoActivity for recording seen by doctor status
- - Implement Urgency rating assignment of Patients
+ - Implement Urgency rating assignment of Patients/
  - Implement method in EmergencyRoom to return patients not seen by a doctor sorted by urgency
  - Add View Patients: All/Not seen by a doctor sorted by urgency pulldown menu to PatientsDisplayActivity
  - Figure out how to store prescription information
@@ -18,3 +18,28 @@ Tasks:
         - Options to add new prescriptions
 - SQLite database access for Patient records and passwords
 - Put processor intensive tasks on separate thread from UI (to improve User experience)
+
+Status Meeting 1
+Implemented:
+ - SQLite database implemented for patient_records & login_information
+ - Storing user type in EmergencyRoom
+ - Urgency rating implemented for EmergencyRoom
+ - 
+To do:
+ - Make loginActivity use EmergencyRoom to sign in user
+ - Add addPatientActivity for adding new patients
+ - Make Patients assign urgency to themselves when vitals are updated/users created
+ - Add seen by doctor assignment option
+ - Make EmergencyRoom return patients sorted by not seen by doctor and urgency
+ - Add View Patients: All/Not seen by a doctor sorted by urgency pulldown menu to PatientsDisplayActivity
+ - Figure out how to store prescription information
+ - Add Button to Add prescription information to PatientInfoActivity
+ - Add PerscriptionInfoActivity???
+	- Displays prescription information
+        - Options to add new prescriptions
+ - Put processor intensive tasks on separate thread from UI (to improve User experience)
+
+
+
+
+Planning meeting 2:
