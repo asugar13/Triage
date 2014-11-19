@@ -14,19 +14,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 /**
  * Activity for displaying all patients, nurses can search by health card number.
  *
  */
-public class PatientsDisplayActivity extends Activity {
+public class PatientsDisplayActivity extends Activity implements OnItemSelectedListener {
 	/**List of all patient objects  */
 	private ArrayList<Patient> patients;
+	private String allPatientsSelection;
+	private String sortedPatientsSelection;
 	
 	@Override
 	/**
@@ -35,13 +40,27 @@ public class PatientsDisplayActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patients_display);
-		EmergencyRoom.loadPatients(getApplicationContext(), "patient_records.txt");
-		//Get list of patients
-		patients = (ArrayList<Patient>) EmergencyRoom.getPatients();
+		String[] spinnerOptions = getResources().getStringArray(R.array.list_options);
+		allPatientsSelection = spinnerOptions[0];
+		sortedPatientsSelection = spinnerOptions[1];
 		
-		//Get list view, and populate with adapter
-		ListView patientsList = (ListView) findViewById(R.id.listView1);
-		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
+		Spinner dropDown = (Spinner) findViewById(R.id.list_sort);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+		        R.array.list_options, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		dropDown.setAdapter(adapter);
+		dropDown.setOnItemSelectedListener(this);
+		dropDown.setSelection(0);
+		
+		
+		
+//		EmergencyRoom.loadPatients(getApplicationContext(), "patient_records.txt");
+//		//Get list of patients
+//		patients = (ArrayList<Patient>) EmergencyRoom.getPatients();
+//		
+//		//Get list view, and populate with adapter
+//		ListView patientsList = (ListView) findViewById(R.id.listView1);
+//		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
 
 	}
 	/**
@@ -176,6 +195,32 @@ public class PatientsDisplayActivity extends Activity {
 			
 			return row;
 		}
+		
+	}
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int position,
+			long id) {
+		EmergencyRoom.loadPatients(getApplicationContext(), "patient_records.txt");
+		//Get list of patients
+		String selection = (String) parent.getItemAtPosition(position);
+		Log.d("SELECTION",selection);
+		
+		if(selection.equals(allPatientsSelection)){
+			patients = (ArrayList<Patient>) EmergencyRoom.getPatients();
+		}
+		if(selection.equals(sortedPatientsSelection)){
+			patients = (ArrayList<Patient>) EmergencyRoom.getUnseenSortedPatients();
+		}
+		
+		//Get list view, and populate with adapter
+		ListView patientsList = (ListView) findViewById(R.id.listView1);
+		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
+		
+		
+	}
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
+		// TODO Auto-generated method stub
 		
 	}
 
