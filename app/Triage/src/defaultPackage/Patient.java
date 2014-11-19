@@ -12,7 +12,8 @@ public class Patient implements Serializable{
 	private String[] name;
 	private String birthDate;
 	private String healthCardNumber;
-	private Date seenByDoctor = null;
+	private Date seenByDoctor;
+	private boolean seenByDoctorStatus;
 	private Vitals vitals;
 	private int urgency;
 	
@@ -28,6 +29,7 @@ public class Patient implements Serializable{
 		this.birthDate = birthdate;
 		this.healthCardNumber = hcn;
 		this.vitals = vitals;
+		this.seenByDoctorStatus = false;
 	}
 	
 	/**
@@ -99,6 +101,18 @@ public class Patient implements Serializable{
 	*/
 	public int getUrgency(){
 		return urgency;
+	}
+	
+	/**
+	*Updates this patient's record to having been seen by a doctor
+	*/
+	public void setSeenByDoctor(){
+		this.seenByDoctorStatus = true;
+		this.seenByDoctor = new Date();
+	}
+	
+	public boolean getSeenByDoctorStatus(){
+		return this.seenByDoctorStatus;
 	}
 	
 	/**
