@@ -1,6 +1,7 @@
 package defaultPackage;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import android.util.Log;
 
@@ -11,6 +12,7 @@ public class Patient implements Serializable{
 	private String[] name;
 	private String birthDate;
 	private String healthCardNumber;
+	private Date seenByDoctor = null;
 	private Vitals vitals;
 	private int urgency;
 	
@@ -26,6 +28,13 @@ public class Patient implements Serializable{
 		this.birthDate = birthdate;
 		this.healthCardNumber = hcn;
 		this.vitals = vitals;
+	}
+	
+	/**
+	 * Sets the time that the patient has been seen by a doctor
+	 */
+	public void setSeenByDoctor(Date timeSeen){
+		this.seenByDoctor = timeSeen;
 	}
 	
 	/**
