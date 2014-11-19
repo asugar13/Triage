@@ -134,10 +134,12 @@ public class EmergencyRoom {
 	 */
 	public static ArrayList<Patient> getUnseenSortedPatients(){
 		ArrayList<Patient> sortedPatients = new ArrayList<Patient>();
-		
-		
-		
-		
+		sortedPatients.addAll((Collection<? extends Patient>) patients.entrySet());
+		Collections.sort(sortedPatients, new Comparator<Patient>() {
+	        @Override public int compare(Patient p1, Patient p2) {
+	            return p2.getUrgency()- p1.getUrgency();//descending
+	        }
+		});
 		return sortedPatients;
 	}
 	
@@ -197,8 +199,6 @@ public class EmergencyRoom {
 		}
 		patient.addUrgency(urgency);
 	}
-
-
 	
 	/**
 	 *  Populates patients Map 
