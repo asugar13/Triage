@@ -41,13 +41,14 @@ public class DatabaseManager {
 	public DatabaseManager(Context context){
 		this.context = context;
 		//dbHelper = new DatabaseHelper(context);
-		open();
+		//open();
 	}
 	
 	/**
 	 * Manages opening creation, and upgrading of SQLite databases
 	 *
 	 */
+	//NOT sure if needed
 	private static class DatabaseHelper extends SQLiteOpenHelper{
 
 		public DatabaseHelper(Context context) {
@@ -68,43 +69,33 @@ public class DatabaseManager {
 		}
 	}
 	/**
+	 * Checks if the SQLite database exists
+	 * @return whether the SQLite database exists
+	 */
+	public boolean databaseExists(){
+		File file = new File(databasePath);
+		return file.exists();
+	}
+	
+	/**
 	 * Opens the database for reading/writing
 	 */
 	public void open(){
 		File file = new File(databasePath);
+		
 		if(!file.exists()){
-			file.mkdirs();
-			AssetManager assetManager = context.getResources().getAssets();
-			try{
-				Log.d("ASSETS","COPYING DB FROM ASSETS -> internal");
-				InputStream is = assetManager.open("" + databaseName);
-				OutputStream os = new FileOutputStream(databasePath + databaseName);
-				copyDatabase(is,os);
-			}catch (IOException io){
-				io.printStackTrace();
-			}
+			//Create new database with specified tables
+			Log.d("HERE","HERE");
+			mDatabase = new DatabaseHelper(context).getWritableDatabase();
+			mDatabase.execSQL("CREATE TABLE IF NOT EXISTS patient_records(health_card_number TEXT,"
+					+ "name TEXT,date_of_birth TEXT,seen_by_doctor TEXT,vitals TEXT);");
+
+		}else{
+			mDatabase = new DatabaseHelper(context).getWritableDatabase();
 		}
 
-		mDatabase = new DatabaseHelper(context).getWritableDatabase();
 	}
-	
-	/**
-	 * Copies the database from the given input stream to the given output stream
-	 * @param is: predefined database located in assets folder
-	 * @param os: location to copy database too
-	 */
-	public void copyDatabase(InputStream is, OutputStream os){
-		byte[] buffer = new byte[1024];
-		int length;
-		try{
-			while((length = is.read(buffer))>0){
-				os.write(buffer,0,length);
-				
-			}
-		}catch (IOException e){
-			e.printStackTrace();
-		}
-	}
+
 	/**
 	 * Close the SQLiteDatabase
 	 */
