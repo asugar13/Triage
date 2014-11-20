@@ -47,7 +47,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="71dp"
-        android:onClick="logInNurse"
+        android:onClick="logInUser"
         android:text="@string/btnlogin" />
 
     <TextView
