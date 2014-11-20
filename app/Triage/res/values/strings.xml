@@ -32,7 +32,11 @@
     <string name="btn_save">Save</string>
     <string name="Symptoms">Symptoms: </string>
     <string name="patient_records">Patient Records:</string>
-	<string name="patient_records_history">Records of the Patient</string>
+    <string name="patient_records_history">Records of the Patient</string>
+    <string name="title_activity_add_new_patient">AddNewPatient</string>
+    <string name="btnAddPatient">Add Patient</string>
+    <string name="btnSavePatient">Save Patient</string>
+
 	
 	 <string-array name="list_options">
         <item>All patients</item>

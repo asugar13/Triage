@@ -63,6 +63,11 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 //		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
 
 	}
+	
+	public void addPatient(View view) {
+		Intent intent = new Intent(this, AddNewPatient.class);
+		startActivity(intent);
+	}
 	/**
 	 * Handles the search by health card number function.
 	 * 

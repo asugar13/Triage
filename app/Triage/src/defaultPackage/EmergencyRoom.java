@@ -132,6 +132,7 @@ public class EmergencyRoom {
 	 * Returns sorted list of unseen patients sorted by urgency
 	 * @return ArrayList of sorted patients
 	 */
+	//not yet implemented
 	public static ArrayList<Patient> getUnseenSortedPatients(){
 		ArrayList<Patient> sortedPatients = new ArrayList<Patient>();
 		ArrayList<Patient> unsortedPatients = new ArrayList<Patient>();
@@ -259,7 +260,7 @@ public class EmergencyRoom {
 		ContentValues patientValues = new ContentValues();
 		patientValues.put("health_card_number", patient.getHealthCardNum());
 		patientValues.put("name", patient.getName());
-		patientValues.put("seen_by_doctor", "false");
+		patientValues.put("seen_by_doctor", "false"); //might change after implementation of seen by doctor attribute and getters/setters
 		patientValues.put("date_of_birth", patient.getBirthDate());
 		patientValues.put("vitals", patient.getVitals().toString());
 		
