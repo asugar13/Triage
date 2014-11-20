@@ -48,7 +48,7 @@ public class AddNewPatient extends Activity {
 		
 		Patient patient = new Patient(full_name, birthdate, hcn, null);
 		patient.addVitals(vitals);
-		EmergencyRoom.savePatient(patient);
+		EmergencyRoom.getInstance().savePatient(patient);
 		
 		intent.putExtra("Patient_Tag", patient);
 		startActivity(intent);
