@@ -43,11 +43,13 @@ public class AddNewPatient extends Activity {
 		String systolic = systolicText.getText().toString();
 		String heart_rate = heart_rateText.getText().toString();
 		String symptoms = symptomsText.getText().toString();
-		String[] vitals = { temperature, diastolic, systolic, heart_rate,
+		String[] vitalInfo = { temperature, diastolic, systolic, heart_rate,
 				symptoms };
+		//
+		Vitals vitals = new Vitals();
+		vitals.add(vitalInfo);
+		Patient patient = new Patient(full_name, birthdate, hcn,vitals);
 		
-		Patient patient = new Patient(full_name, birthdate, hcn, null);
-		patient.addVitals(vitals);
 		EmergencyRoom.getInstance().savePatient(patient);
 		
 		intent.putExtra("Patient_Tag", patient);
