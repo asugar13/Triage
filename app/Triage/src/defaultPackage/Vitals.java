@@ -38,7 +38,7 @@ public class Vitals implements Serializable{
 	 * @param inputVital Contains all the vital signs and symptoms to be instantiated.
 	 */
 	public Vitals(String[] inputVital){
-		Log.d("inputVital",Arrays.toString(inputVital));
+		//Log.d("inputVital",Arrays.toString(inputVital));
 		isEmpty = false;
 		this.vitSymps = new TreeMap<Date, String[]>();
 		
