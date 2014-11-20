@@ -17,14 +17,6 @@
 
     </ListView>
 
-    <TextView
-        android:id="@+id/searchTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:text="@string/enter_hc"
-        android:layout_alignParentTop="true"/>
-
     <EditText
         android:id="@+id/searchHCtext"
         android:layout_width="wrap_content"
@@ -51,5 +43,25 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/listView1"
         android:layout_below="@+id/searchHC" />
+
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/searchHC"
+        android:text="@string/btnAddPatient"
+        android:onClick="addPatient"
+         />
+
+    <TextView
+        android:id="@+id/searchTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignLeft="@+id/list_sort"
+        android:text="@string/enter_hc" />
 
 </RelativeLayout>

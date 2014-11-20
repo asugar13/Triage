@@ -42,6 +42,10 @@
             android:name=".EnterVitalsActivity"
             android:label="@string/title_activity_enter_vitals" >
         </activity>
+        <activity
+            android:name=".AddNewPatient"
+            android:label="@string/title_activity_add_new_patient" >
+        </activity>
     </application>
 
 </manifest>
