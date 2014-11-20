@@ -84,7 +84,7 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 		
 		
 		if(!(hCardNumber == "")){
-			result = EmergencyRoom.getPatientByHCNum(hCardNumber);
+			result = EmergencyRoom.getInstance().getPatientByHCNum(hCardNumber);
 
 			if(result!=null){
 				//Valid result -> display patient in patientInfoActivity
@@ -207,16 +207,15 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
-		EmergencyRoom.loadPatients(getApplicationContext(), "patient_records.txt");
 		//Get list of patients
 		String selection = (String) parent.getItemAtPosition(position);
 		Log.d("SELECTION",selection);
 		
 		if(selection.equals(allPatientsSelection)){
-			patients = (ArrayList<Patient>) EmergencyRoom.getPatients();
+			patients = (ArrayList<Patient>) EmergencyRoom.getInstance().getPatients();
 		}
 		if(selection.equals(sortedPatientsSelection)){
-			patients = (ArrayList<Patient>) EmergencyRoom.getUnseenSortedPatients();
+			patients = (ArrayList<Patient>) EmergencyRoom.getInstance().getUnseenSortedPatients();
 		}
 		
 		//Get list view, and populate with adapter
