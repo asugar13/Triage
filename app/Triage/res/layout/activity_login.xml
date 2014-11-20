@@ -9,7 +9,7 @@
     tools:context="com.example.triage.LoginActivity" >
 
     <EditText
-        android:id="@+id/nurseIdtext"
+        android:id="@+id/userIdfield"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/passwordfield"
@@ -31,7 +31,7 @@
         android:inputType="textPassword" />
 
     <TextView
-        android:id="@+id/nurseID"
+        android:id="@+id/userID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/nurseIdtext"
@@ -47,7 +47,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="71dp"
-        android:onClick="logInNurse"
+        android:onClick="logInUser"
         android:text="@string/btnlogin" />
 
     <TextView
