@@ -22,50 +22,78 @@ import android.util.Log;
  * 
  */
 public class EmergencyRoom {
-	private static Map<String, Patient> patients;
-	private static DatabaseManager dbManager;
-	private static String userType;
+	private static EmergencyRoom instance = null;
+	private Map<String, Patient> patients;
+	private DatabaseManager dbManager;
+	private String userType;
+	private Context context;
 	private class InvalidTypeException extends Exception{};
+	
 	public static final String patientTable = "patient_records";
 	public static final String loginTable = "login_information";
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
-
+	
+	protected EmergencyRoom(){	
+		dbManager.open();
+		loadPatients(context,"patient_records");
+	}
+	
+	public static EmergencyRoom getInstance(){
+		if(instance == null){
+			instance = new EmergencyRoom();
+		}
+		return instance;	
+	}
 	/**
-	 * TEMPORARY, ACTS AS a constructor kinda, will fix and changle EmergencyRoom to singleton once servers are up
+	 * Pass emergencyRoom application context for reading files from assets.
+	 */
+	public void setContext(Context context){
+		this.context = context;
+	}
+	
+	/**
+	 * Loads patients from database
+	 * If database doesn't exist loads from .txt file, and copies to new database for future use
 	 * @param context
 	 * @param fileName
 	 */
-	
-	//FILENAME NOT USED
-	public static void loadPatients(Context context, String fileName) {
+	private void loadPatients(Context context, String fileName) {
 		dbManager = new DatabaseManager(context);
 		patients = new TreeMap<String, Patient>();
 		
-		if(dbManager.databaseExists()){
+		if(dbManager.tableExists(patientTable)){
 			//Read from database
-			
-			dbManager.open();
 			loadPatientsFromDB();
-			Log.d("EXISTS","EXISTS");
+			Log.d("Patients TABLE","EXISTS");
 		}else{
-			//Read from textfile
+			Log.d("Patients TABLE","DOES NOT EXIST");
+			//Read from textfile - ONLY HAPPENS FIRST TIME THE APP IS RUN
 			try {
-				
-				populate(openFile(context, fileName));
+				populate(getInputStream(fileName));
 			} catch (Exception e) { // Change to specific exception
 				e.printStackTrace();
 			}
-			//Save to patient data to database for future use
-			Log.d("PATIENTS",Arrays.asList(getPatients()).toString());
-			dbManager.open();
-			for(Patient p: getPatients()){
-				savePatient(p);
+			//Save patient data to database for future use.
+			initPatientsDB();
 			}
-			
-			
+	
+		}
+	/**
+	 * Save all patients data to database for future use
+	 */
+	private void initPatientsDB(){
+		//Creates patients table
+		String[] patientColumns = {"health_card_number","name",
+								"date_of_birth","seen_by_doctor",
+								"vitals","prescriptions"};
+		String[] patientColumnTypes = {"TEXT","TEXT","TEXT","TEXT","TEXT","TEXT"};
+		dbManager.createTable(patientTable,patientColumns,patientColumnTypes);
+		//Copies patients to database for future use.
+		for(Patient p: getPatients()){
+			savePatient(p);
 		}
 	}
+	
 	
 	/**
 	 * Gets the inputstream for a given filename
@@ -73,7 +101,7 @@ public class EmergencyRoom {
 	 * @param fileName
 	 * @return input stream for reading
 	 */
-	private static InputStream openFile(Context context, String fileName) {
+	private  InputStream getInputStream(String fileName) {
 		InputStream is = null;
 		try {
 			//Tries to read from data/data/Files directory
@@ -94,7 +122,7 @@ public class EmergencyRoom {
 	 * @param fileName
 	 * @return
 	 */
-	private static FileOutputStream getOutputStream(Context context, String fileName) {
+	private FileOutputStream getOutputStream(String fileName) {
 		try {
 			//Tries to open file from /data/data/Files for reading
 			return context.openFileOutput("patient_records.txt",
@@ -120,7 +148,7 @@ public class EmergencyRoom {
 	 * Returns a list of all of the patients
 	 * @return ArrayList of all patients
 	 */
-	public static ArrayList<Patient> getPatients() {
+	public ArrayList<Patient> getPatients() {
 		ArrayList<Patient> allPatients = new ArrayList<Patient>();
 		for (String key : patients.keySet()) {
 			allPatients.add(patients.get(key));
@@ -132,8 +160,7 @@ public class EmergencyRoom {
 	 * Returns sorted list of unseen patients sorted by urgency
 	 * @return ArrayList of sorted patients
 	 */
-	//not yet implemented
-	public static ArrayList<Patient> getUnseenSortedPatients(){
+	public ArrayList<Patient> getUnseenSortedPatients(){
 		ArrayList<Patient> sortedPatients = new ArrayList<Patient>();
 		ArrayList<Patient> unsortedPatients = new ArrayList<Patient>();
 		unsortedPatients.addAll((Collection<? extends Patient>) patients.entrySet());
@@ -156,7 +183,7 @@ public class EmergencyRoom {
 	 * @param hCardNum
 	 * @return Patient object, or null if no patient
 	 */
-	public static Patient getPatientByHCNum(String hCardNum) {
+	public Patient getPatientByHCNum(String hCardNum) {
 		return patients.get(hCardNum);
 	}
 	
@@ -164,7 +191,7 @@ public class EmergencyRoom {
 	 * Update the patient in emergency room, vitals have been added
 	 * @param patient
 	 */
-	public static void updatePatient(Patient patient){
+	public void updatePatient(Patient patient){
 		//Necessary becuase .putExtra() passes a copy of Patient not reference
 		patients.put(patient.getHealthCardNum(), patient);
 		
@@ -175,7 +202,7 @@ public class EmergencyRoom {
 	*
 	*@param patient The patient that is having their urgency calculate.
 	*/
-	public static void calcUrgency(Patient patient){
+	public void calcUrgency(Patient patient){
 		int urgency = 0;
 		String[] birthDate = patient.getBirthDate().split("-");
 		int birthDay = Integer.parseInt(birthDate[0]) + Integer.parseInt(birthDate[1]) * 12 + Integer.parseInt(birthDate[2]) * 365;
@@ -208,13 +235,12 @@ public class EmergencyRoom {
 	}
 	
 	/**
-	 *  Populates patients Map 
+	 *  Populates patients Map from text file
 	 * @param patients_stream inputStream from .txt file containing patients info
 	 * @throws FileNotFoundException
 	 */
-	public static void populate(InputStream patients_stream)
+	private void populate(InputStream patients_stream)
 			throws FileNotFoundException {
-		Log.d("POPULATE","CALLED");
 		Scanner scanner = new Scanner((patients_stream));
 		String[] patient_on_file;
 		while (scanner.hasNextLine()) {
@@ -234,7 +260,6 @@ public class EmergencyRoom {
 		}
 		scanner.close();
 	}
-	
 //	/**
 //	 * Saves patient information to .txt file
 //	 * @param context
@@ -256,13 +281,14 @@ public class EmergencyRoom {
 	 * Saves patient data to SQLite database
 	 * @param patient
 	 */
-	public static void savePatient(Patient patient){
+	public void savePatient(Patient patient){
 		ContentValues patientValues = new ContentValues();
 		patientValues.put("health_card_number", patient.getHealthCardNum());
 		patientValues.put("name", patient.getName());
-		patientValues.put("seen_by_doctor", "false"); //might change after implementation of seen by doctor attribute and getters/setters
+		patientValues.put("seen_by_doctor", "false");
 		patientValues.put("date_of_birth", patient.getBirthDate());
 		patientValues.put("vitals", patient.getVitals().toString());
+		//patientValues.put("prescriptions", patient.getPrescriptions());
 		
 		if(dbManager.rowExists("patient_records","health_card_number = " + patient.getHealthCardNum())){
 			//Modify row
@@ -275,20 +301,63 @@ public class EmergencyRoom {
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	public boolean logIn(String username, String password){
-		//Change to work with .txt file
-		String sqlWhere = "username = " + username + " AND password = " + password;
-		if(dbManager.rowExists(loginTable,sqlWhere)){
-			//Login successful
-			setUserType(sqlWhere);
-			return true;
+		if(dbManager.tableExists(loginTable)){
+			String sqlWhere = "username = " + username + " AND password = " + password;
+			if(dbManager.rowExists(loginTable,sqlWhere)){
+				//Login successful
+				setUserType(sqlWhere);
+				return true;
+			}else{
+				//Login failed
+				return false;
+			}	
 		}else{
-			//Login failed
-			return false;
+			//First time app has been run, username password info in .txt file
+			initLoginInfoDB();
+			return logIn(username,password);	
 		}
 	}
 	
+	
+	/**
+	 * Loads the passwords,usernames, and usertypes from passwords.txt
+	 * and copies to local SQLite database
+	 */
+	private void initLoginInfoDB(){
+		Scanner scanner = new Scanner(getInputStream("passwords.txt"));
+		ArrayList<String[]> usersLoginInfo = new ArrayList<String[]>();
+		
+		while(scanner.hasNextLine()){
+			usersLoginInfo.add(scanner.nextLine().split(","));
+		}
+		String[] columns = {"username","password","user_type"};
+		String[] columnTypes = {"TEXT","TEXT","TEXT"};
+		dbManager.createTable(loginTable,columns,columnTypes);
+		
+		//Stores login information in database for future use
+		for(String[] userInfo: usersLoginInfo){
+			ContentValues cv = new ContentValues();
+			cv.put("username", userInfo[0]);
+			cv.put("password", userInfo[1]);
+			cv.put("user_type",userInfo[2]);
+			dbManager.addRow(cv, loginTable);
+		}
+		
+	}
+	
+	
+	
+	/**
+	 * Sets the usertype given a successful login 
+	 * @param sqlWhere
+	 */
 	private void setUserType(String sqlWhere){
 		String[] columns = {"user_type"};
 		Cursor c = dbManager.getRow(loginTable,sqlWhere,columns);
@@ -296,8 +365,10 @@ public class EmergencyRoom {
 		this.userType = userType;
 		
 	}
-	
-	private static void loadPatientsFromDB(){
+	/**
+	 * Loads the patients from the database 
+	 */
+	private void loadPatientsFromDB(){
 		Cursor c = dbManager.getAllRows(patientTable);
 		if (c.moveToFirst()){
 			do{
