@@ -1,14 +1,20 @@
 package com.example.triage;
 
+import defaultPackage.EmergencyRoom;
+import defaultPackage.Patient;
+import defaultPackage.Vitals;
+import defaultPackage.DatabaseManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.*;
 
 public class AddNewPatient extends Activity {
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -17,9 +23,34 @@ public class AddNewPatient extends Activity {
 		
 	}
 	
-	public void savePatient(View view) {
+	public void saveNewPatient(View view) {
 		Intent intent = new Intent(this, PatientsDisplayActivity.class);
+		EditText nameText = (EditText) findViewById(R.id.new_name);
+		EditText hcnText = (EditText) findViewById(R.id.new_hcn);
+		EditText birthdateText = (EditText) findViewById(R.id.new_birthdate);
+		EditText temperatureText = (EditText) findViewById(R.id.new_temp);
+		EditText diastolicText = (EditText) findViewById(R.id.new_diastolic);
+		EditText systolicText = (EditText) findViewById(R.id.new_systolic);
+		EditText heart_rateText = (EditText) findViewById(R.id.new_heartRate);
+		EditText symptomsText = (EditText) findViewById(R.id.new_symptoms);
 		
+		String name = nameText.getText().toString();
+		String[] full_name = name.split(" ");
+		String hcn = hcnText.getText().toString();
+		String birthdate = birthdateText.getText().toString();
+		String temperature = temperatureText.getText().toString();
+		String diastolic = diastolicText.getText().toString();
+		String systolic = systolicText.getText().toString();
+		String heart_rate = heart_rateText.getText().toString();
+		String symptoms = symptomsText.getText().toString();
+		String[] vitals = { temperature, diastolic, systolic, heart_rate,
+				symptoms };
+		
+		Patient patient = new Patient(full_name, birthdate, hcn, null);
+		patient.addVitals(vitals);
+		EmergencyRoom.savePatient(patient);
+		
+		intent.putExtra("Patient_Tag", patient);
 		startActivity(intent);
 	}
 	@Override
