@@ -30,12 +30,13 @@ public class EmergencyRoom {
 	private class InvalidTypeException extends Exception{};
 	
 	public static final String patientTable = "patient_records";
+	public static final String patientsTxtFileName = "patient_records.txt";
+	public static final String passwordsTxtFileName = "passwords.txt";
 	public static final String loginTable = "login_information";
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 	protected EmergencyRoom(){	
-		dbManager.open();
-		loadPatients(context,"patient_records");
+		patients = new TreeMap<String, Patient>();
 	}
 	
 	public static EmergencyRoom getInstance(){
@@ -49,6 +50,11 @@ public class EmergencyRoom {
 	 */
 	public void setContext(Context context){
 		this.context = context;
+		//After context is set we can initialize the database
+		dbManager = new DatabaseManager(context);
+		dbManager.open();
+		loadPatients(context,patientsTxtFileName);
+
 	}
 	
 	/**
@@ -58,8 +64,6 @@ public class EmergencyRoom {
 	 * @param fileName
 	 */
 	private void loadPatients(Context context, String fileName) {
-		dbManager = new DatabaseManager(context);
-		patients = new TreeMap<String, Patient>();
 		
 		if(dbManager.tableExists(patientTable)){
 			//Read from database
@@ -82,10 +86,11 @@ public class EmergencyRoom {
 	 * Save all patients data to database for future use
 	 */
 	private void initPatientsDB(){
+		Log.d("init","patients");
 		//Creates patients table
-		String[] patientColumns = {"health_card_number","name",
-								"date_of_birth","seen_by_doctor",
-								"vitals","prescriptions"};
+		String[] patientColumns = {"'health_card_number'","'name'",
+								"'date_of_birth'","'seen_by_doctor'",
+								"'vitals'","'prescriptions'"};
 		String[] patientColumnTypes = {"TEXT","TEXT","TEXT","TEXT","TEXT","TEXT"};
 		dbManager.createTable(patientTable,patientColumns,patientColumnTypes);
 		//Copies patients to database for future use.
@@ -102,19 +107,13 @@ public class EmergencyRoom {
 	 * @return input stream for reading
 	 */
 	private  InputStream getInputStream(String fileName) {
-		InputStream is = null;
 		try {
-			//Tries to read from data/data/Files directory
-			is = context.openFileInput(fileName);
-		} catch (FileNotFoundException e) {
-			//If file not found, get .txt from assets
-			try {
-				return context.getAssets().open(fileName);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			return context.getAssets().open(fileName);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		return is;
+		Log.d("File not found","!");
+		return null;
 	}
 	/**
 	 * Gets the outputstream for writing to a given file
@@ -290,7 +289,7 @@ public class EmergencyRoom {
 		patientValues.put("vitals", patient.getVitals().toString());
 		//patientValues.put("prescriptions", patient.getPrescriptions());
 		
-		if(dbManager.rowExists("patient_records","health_card_number = " + patient.getHealthCardNum())){
+		if(dbManager.rowExists("patient_records","health_card_number = '" + patient.getHealthCardNum() + "'")){
 			//Modify row
 			String whereClause = "health_card_number = " + patient.getHealthCardNum();
 			dbManager.modifyRow(patientTable,patientValues,whereClause);
@@ -309,7 +308,7 @@ public class EmergencyRoom {
 	 */
 	public boolean logIn(String username, String password){
 		if(dbManager.tableExists(loginTable)){
-			String sqlWhere = "username = " + username + " AND password = " + password;
+			String sqlWhere = "username = '" + username + "' AND password = '" + password + "'";
 			if(dbManager.rowExists(loginTable,sqlWhere)){
 				//Login successful
 				setUserType(sqlWhere);
@@ -331,13 +330,13 @@ public class EmergencyRoom {
 	 * and copies to local SQLite database
 	 */
 	private void initLoginInfoDB(){
-		Scanner scanner = new Scanner(getInputStream("passwords.txt"));
+		Scanner scanner = new Scanner(getInputStream(passwordsTxtFileName));
 		ArrayList<String[]> usersLoginInfo = new ArrayList<String[]>();
 		
 		while(scanner.hasNextLine()){
 			usersLoginInfo.add(scanner.nextLine().split(","));
 		}
-		String[] columns = {"username","password","user_type"};
+		String[] columns = {"'username'","'password'","'user_type'"};
 		String[] columnTypes = {"TEXT","TEXT","TEXT"};
 		dbManager.createTable(loginTable,columns,columnTypes);
 		
@@ -361,6 +360,7 @@ public class EmergencyRoom {
 	private void setUserType(String sqlWhere){
 		String[] columns = {"user_type"};
 		Cursor c = dbManager.getRow(loginTable,sqlWhere,columns);
+		c.moveToFirst();
 		String userType = c.getString(0);
 		this.userType = userType;
 		

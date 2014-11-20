@@ -77,7 +77,7 @@ public class Patient implements Serializable{
 	*/
 	public void addVitals(String[] newVitals){
 		this.vitals.add(newVitals);
-		EmergencyRoom.updatePatient(this);
+		EmergencyRoom.getInstance().updatePatient(this);
 		
 	}
 	/**
