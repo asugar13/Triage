@@ -37,20 +37,26 @@ public class DatabaseManager {
 	private SQLiteDatabase mDatabase;
 	/**context of the android application*/
 	private Context context;
-	//
+	
+	
+	/**
+	 * Instantiates the DatabaseManager
+	 * @param context
+	 */
 	public DatabaseManager(Context context){
 		this.context = context;
-		//dbHelper = new DatabaseHelper(context);
-		//open();
 	}
 	
 	/**
 	 * Manages opening creation, and upgrading of SQLite databases
-	 *
+	 * Creates new database if does not exist
 	 */
-	//NOT sure if needed
 	private static class DatabaseHelper extends SQLiteOpenHelper{
-
+		/**
+		 * Constructs a new databaseHelper,
+		 * Creating or opening an existing database of datbaseName
+		 * @param context
+		 */
 		public DatabaseHelper(Context context) {
 			super(context, databaseName, null, 1);
 			// TODO Auto-generated constructor stub
@@ -78,22 +84,43 @@ public class DatabaseManager {
 	}
 	
 	/**
+	 * Return if a specified tableName exists in the database
+	 * @param tableName
+	 * @return
+	 */
+	public boolean tableExists(String tableName){
+		//Solution from: http://stackoverflow.com/questions/3058909/
+		// how-does-one-check-if-a-table-exists-in-an-android-sqlite-database/7863401#7863401
+		Cursor c = mDatabase.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name= '" + tableName + "';",null);
+		if(c != null){
+			if(c.getCount() >0){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * Opens the database for reading/writing
 	 */
 	public void open(){
-		File file = new File(databasePath);
-		
-		if(!file.exists()){
-			//Create new database with specified tables
-			Log.d("HERE","HERE");
-			mDatabase = new DatabaseHelper(context).getWritableDatabase();
-			mDatabase.execSQL("CREATE TABLE IF NOT EXISTS patient_records(health_card_number TEXT,"
-					+ "name TEXT,date_of_birth TEXT,seen_by_doctor TEXT,vitals TEXT);");
+		mDatabase = new DatabaseHelper(context).getWritableDatabase();
 
-		}else{
-			mDatabase = new DatabaseHelper(context).getWritableDatabase();
+	}
+	
+	/**
+	 * Creates table in database with specified columns and column data types
+	 * @param sqlStatement
+	 */
+	public void createTable(String tableName,String[] columns,String[] types){
+		String sqlStatement = "CREATE TABLE IF NOT EXISTS ";
+		sqlStatement = sqlStatement + tableName + "(";
+		for(int i =0;i < columns.length;i++){
+			sqlStatement = sqlStatement + columns[i] + " " + types[i] + ",";
 		}
-
+		sqlStatement = sqlStatement.substring(0,sqlStatement.length() - 1) +  ");";
+		
+		mDatabase.execSQL(sqlStatement);
 	}
 
 	/**
@@ -103,13 +130,22 @@ public class DatabaseManager {
 		dbHelper.close();
 	}
 	
-
+	/**
+	 * Modifies the row specified by whereClause in the given table
+	 * @param table
+	 * @param newValues
+	 * @param whereClause
+	 */
 	public void modifyRow(String table,ContentValues newValues,String whereClause){
 		mDatabase.update(table, newValues, whereClause, null);
 	}
-
-	public boolean addRow(ContentValues newValues,String tableName){
-		return (mDatabase.insert(tableName,null,newValues) != -1);
+	/**
+	 * Adds a row to the specified table
+	 * @param newValues
+	 * @param tableName
+	 */
+	public void addRow(ContentValues newValues,String tableName){
+		 mDatabase.insert(tableName,null,newValues);
 	}
 
 	/**
@@ -125,8 +161,7 @@ public class DatabaseManager {
 		}
 		return false;
 	}
-	
-	
+
 	
 	/**
 	 * Return a cursor object with all data from a given table
@@ -138,6 +173,13 @@ public class DatabaseManager {
 		return c;
 	}
 	
+	/**
+	 * Get the data in a specific row of a table
+	 * @param tableName specifies the name of the table to query
+	 * @param sqlWhere specifies what the row should containg ex. name = "Jim"
+	 * @param columns The columns requested
+	 * @return Cursor mapping to all the data in the specified row
+	 */
 	public Cursor getRow(String tableName,String sqlWhere,String[] columns){
 		return mDatabase.query(tableName, columns,sqlWhere, null,null,null,null);
 	}
