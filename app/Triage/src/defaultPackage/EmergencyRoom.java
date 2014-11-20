@@ -281,6 +281,7 @@ public class EmergencyRoom {
 	 * @param patient
 	 */
 	public void savePatient(Patient patient){
+		updatePatient(patient);
 		ContentValues patientValues = new ContentValues();
 		patientValues.put("health_card_number", patient.getHealthCardNum());
 		patientValues.put("name", patient.getName());
