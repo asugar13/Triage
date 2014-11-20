@@ -30,6 +30,12 @@ public class Patient implements Serializable{
 		this.healthCardNumber = hcn;
 		this.vitals = vitals;
 		this.seenByDoctorStatus = false;
+		
+		if(!vitals.isEmpty){
+			EmergencyRoom.getInstance().calcUrgency(this);
+		}
+		
+		
 	}
 	
 	/**
@@ -77,7 +83,7 @@ public class Patient implements Serializable{
 	*/
 	public void addVitals(String[] newVitals){
 		this.vitals.add(newVitals);
-		//EmergencyRoom.getInstance().updatePatient(this);
+		EmergencyRoom.getInstance().calcUrgency(this);
 		
 	}
 	/**
