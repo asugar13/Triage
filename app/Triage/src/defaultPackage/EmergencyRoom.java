@@ -209,9 +209,9 @@ public class EmergencyRoom {
 	public void calcUrgency(Patient patient){
 		int urgency = 0;
 		String[] birthDate = patient.getBirthDate().split("-");
-		int birthDay = Integer.parseInt(birthDate[0]) + Integer.parseInt(birthDate[1]) * 12 + Integer.parseInt(birthDate[2]) * 365;
+		int birthDay = Integer.parseInt(birthDate[0]) + Integer.parseInt(birthDate[1]) * 30 + Integer.parseInt(birthDate[2]) * 365;
 		String[] currentDate = sdf.format(new Date()).split("-");
-		int currentDay = Integer.parseInt(currentDate[0]) * 365 + Integer.parseInt(currentDate[1]) * 12 + Integer.parseInt(currentDate[2]);
+		int currentDay = Integer.parseInt(currentDate[0]) * 365 + Integer.parseInt(currentDate[1]) * 30 + Integer.parseInt(currentDate[2]);
 		float age = ((float) (currentDay - birthDay)) / 365;
 		Vitals vitals = patient.getVitals();
 		
