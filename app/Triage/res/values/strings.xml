@@ -36,12 +36,14 @@
     <string name="title_activity_add_new_patient">AddNewPatient</string>
     <string name="btnAddPatient">Add Patient</string>
     <string name="btnSavePatient">Save Patient</string>
+    <string name="doctor_visit">Add doctor visit record</string>
+    <string name="date_time_prompt">Pick a date and time</string>
 
-	
-	 <string-array name="list_options">
+    <string-array name="list_options">
         <item>All patients</item>
         <item>Unseen patients by decending urgency</item>
-
     </string-array>
-	
+
+    <string name="title_activity_time_dialog">TimeDialogActivity</string>
+
 </resources>

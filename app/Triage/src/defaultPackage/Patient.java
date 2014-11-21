@@ -32,7 +32,7 @@ public class Patient implements Serializable{
 		this.seenByDoctorStatus = false;
 		
 		if(!vitals.isEmpty){
-			EmergencyRoom.getInstance().calcUrgency(this);
+			//EmergencyRoom.getInstance().calcUrgency(this);
 		}
 		
 		
@@ -42,7 +42,10 @@ public class Patient implements Serializable{
 	 * Sets the time that the patient has been seen by a doctor
 	 */
 	public void setSeenByDoctor(Date timeSeen){
+		this.seenByDoctorStatus = true;
 		this.seenByDoctor = timeSeen;
+		EmergencyRoom.getInstance().updatePatient(this);
+		
 	}
 	
 	/**
@@ -83,6 +86,7 @@ public class Patient implements Serializable{
 	*/
 	public void addVitals(String[] newVitals){
 		this.vitals.add(newVitals);
+		EmergencyRoom.getInstance().updatePatient(this);
 		EmergencyRoom.getInstance().calcUrgency(this);
 		
 	}
@@ -107,14 +111,6 @@ public class Patient implements Serializable{
 	*/
 	public int getUrgency(){
 		return urgency;
-	}
-	
-	/**
-	*Updates this patient's record to having been seen by a doctor
-	*/
-	public void setSeenByDoctor(){
-		this.seenByDoctorStatus = true;
-		this.seenByDoctor = new Date();
 	}
 	
 	public boolean getSeenByDoctorStatus(){
