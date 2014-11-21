@@ -175,9 +175,10 @@ public class EmergencyRoom {
 		}
 		Collections.sort(sortedPatients, new Comparator<Patient>() {
 	        @Override public int compare(Patient p1, Patient p2) {
-	            return p2.getUrgency()- p1.getUrgency();//descending
+	            return p1.getUrgency()- p2.getUrgency();//ascending
 	        }
 		});
+		Collections.reverse(sortedPatients);
 		return sortedPatients;
 	}
 	
