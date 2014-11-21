@@ -179,4 +179,13 @@
         android:layout_alignLeft="@+id/health_num_patient"
         android:text="TextView" />
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="seenByDoctorOnClick"
+        android:layout_above="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:text="@string/doctor_visit" />
+
 </RelativeLayout>
