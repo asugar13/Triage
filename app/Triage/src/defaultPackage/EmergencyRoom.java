@@ -34,11 +34,16 @@ public class EmergencyRoom {
 	public static final String passwordsTxtFileName = "passwords.txt";
 	public static final String loginTable = "login_information";
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	
+	/**
+	 * Signleton, constructor protected
+	 */
 	protected EmergencyRoom(){	
 		patients = new TreeMap<String, Patient>();
 	}
-	
+	/**
+	 * Returns the instance of EmergencyRoom
+	 * @return
+	 */
 	public static EmergencyRoom getInstance(){
 		if(instance == null){
 			instance = new EmergencyRoom();
@@ -302,13 +307,14 @@ public class EmergencyRoom {
 	}
 	
 	/**
-	 * 
+	 * Checks the validity of the given username and password
 	 * @param username
 	 * @param password
-	 * @return
+	 * @return whether the username and password combination is valid
 	 */
 	public boolean logIn(String username, String password){
 		if(dbManager.tableExists(loginTable)){
+			//Check database for row with given username and password
 			String sqlWhere = "username = '" + username + "' AND password = '" + password + "'";
 			if(dbManager.rowExists(loginTable,sqlWhere)){
 				//Login successful
@@ -328,7 +334,7 @@ public class EmergencyRoom {
 	
 	/**
 	 * Loads the passwords,usernames, and usertypes from passwords.txt
-	 * and copies to local SQLite database
+	 * and copies to local SQLite database for future use
 	 */
 	private void initLoginInfoDB(){
 		Scanner scanner = new Scanner(getInputStream(passwordsTxtFileName));
@@ -337,6 +343,7 @@ public class EmergencyRoom {
 		while(scanner.hasNextLine()){
 			usersLoginInfo.add(scanner.nextLine().split(","));
 		}
+		//Create new table
 		String[] columns = {"'username'","'password'","'user_type'"};
 		String[] columnTypes = {"TEXT","TEXT","TEXT"};
 		dbManager.createTable(loginTable,columns,columnTypes);
@@ -352,8 +359,6 @@ public class EmergencyRoom {
 		
 	}
 	
-	
-	
 	/**
 	 * Sets the usertype given a successful login 
 	 * @param sqlWhere
@@ -367,7 +372,7 @@ public class EmergencyRoom {
 		
 	}
 	/**
-	 * Loads the patients from the database 
+	 * Loads the patients from the database to field patients
 	 */
 	private void loadPatientsFromDB(){
 		Cursor c = dbManager.getAllRows(patientTable);
