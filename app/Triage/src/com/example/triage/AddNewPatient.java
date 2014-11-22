@@ -27,18 +27,30 @@ public class AddNewPatient extends Activity {
 		EditText nameText = (EditText) findViewById(R.id.new_name);
 		EditText hcnText = (EditText) findViewById(R.id.new_hcn);
 		EditText birthdateText = (EditText) findViewById(R.id.new_birthdate);
+		EditText temperatureText = (EditText) findViewById(R.id.new_temp);
+		EditText diastolicText = (EditText) findViewById(R.id.new_diastolic);
+		EditText systolicText = (EditText) findViewById(R.id.new_systolic);
+		EditText heart_rateText = (EditText) findViewById(R.id.new_heartRate);
+		EditText symptomsText = (EditText) findViewById(R.id.new_symptoms);
 		
 		String name = nameText.getText().toString();
 		String[] full_name = name.split(" ");
 		String hcn = hcnText.getText().toString();
 		String birthdate = birthdateText.getText().toString();
-		
+		String temperature = temperatureText.getText().toString();
+		String diastolic = diastolicText.getText().toString();
+		String systolic = systolicText.getText().toString();
+		String heart_rate = heart_rateText.getText().toString();
+		String symptoms = symptomsText.getText().toString();
+		String[] vitalInfo = { temperature, diastolic, systolic, heart_rate,
+				symptoms };
+		//
 		Vitals vitals = new Vitals();
+		vitals.add(vitalInfo);
 		Patient patient = new Patient(full_name, birthdate, hcn,vitals);
 		
 		EmergencyRoom.getInstance().savePatient(patient);
 		
-	
 		startActivity(intent);
 	}
 	@Override
