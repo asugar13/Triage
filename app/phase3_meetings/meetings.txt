@@ -21,15 +21,15 @@ Tasks:
 
 Status Meeting 1
 Implemented:
- - SQLite database implemented for patient_records & login_information
- - Storing user type in EmergencyRoom
- - Urgency rating implemented for EmergencyRoom
- - 
+ - SQLite database implemented for patient_records & login_information (Daniel)
+ - Storing user type in EmergencyRoom (Doga)
+ - Urgency rating implemented for EmergencyRoom (Amit)
+ 
 To do:
- - Make loginActivity use EmergencyRoom to sign in user
- - Add addPatientActivity for adding new patients
+ - Make loginActivity use EmergencyRoom to sign in user/
+ - Add addPatientActivity for adding new patients/
  - Make Patients assign urgency to themselves when vitals are updated/users created
- - Add seen by doctor assignment option
+ - Add seen by doctor assignment option/
  - Make EmergencyRoom return patients sorted by not seen by doctor and urgency
  - Add View Patients: All/Not seen by a doctor sorted by urgency pulldown menu to PatientsDisplayActivity
  - Figure out how to store prescription information
@@ -40,6 +40,19 @@ To do:
  - Put processor intensive tasks on separate thread from UI (to improve User experience)
 
 
+Status Meeting2:
+ - Implemented loginActivity and Emergencyroom to sign in user (Daniel)
+ - Implemented addPatientActivity (Asier)
+ - Implemented Patients assigning urgency, still some bugs (Amit)
+ - Bugs with returning patients sorted by not seen by doctor and urgency (Amit)
+ - Implemented dropdown for displaying patients sorted by different (Daniel
+ - Figured out how we are going to store prescription information (Map of dates to strings) (Doga)
 
 
 Planning meeting 2:
+ - Put processor intensive tasks on separate thread from UI (to improve User experience)
+ - Work on CRC and description
+ - Add addPrescription activity
+ - Implement adding prescriptions to patients
+ - Implement loading prescriptions for patients and saving to database
+ 
