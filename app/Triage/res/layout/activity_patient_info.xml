@@ -121,15 +121,6 @@
         android:text="@string/viewRecords" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView11"
-        android:layout_below="@+id/birthdateView"
-        android:layout_marginTop="18dp"
-        android:text="Vitals:" />
-
-    <TextView
         android:id="@+id/diastolic_catch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -209,5 +200,13 @@
         android:layout_alignLeft="@+id/textView12"
         android:layout_below="@+id/urgency_level_field"
         android:text="Symptoms Description:  " />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView11"
+        android:layout_below="@+id/birthdateView"
+        android:text="Vitals:" />
 
 </RelativeLayout>
