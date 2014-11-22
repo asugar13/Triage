@@ -47,6 +47,7 @@ public class PatientInfoActivity extends Activity {
 		TextView heartRate = (TextView) findViewById(R.id.heart_rate_catch);
 		TextView tempPatient = (TextView) findViewById(R.id.temperature_catch);
 		TextView symptoms = (TextView) findViewById(R.id.symptoms_description_catch);
+		TextView urgency = (TextView) findViewById(R.id.urgency_level_field);
 
 		
 		name_patient.setText(name);
@@ -65,6 +66,7 @@ public class PatientInfoActivity extends Activity {
 			systolic.setText(current_vit_symps[2]);
 			heartRate.setText(current_vit_symps[3]);
 			symptoms.setText(current_vit_symps[4]);
+			urgency.setText("" + patient.getUrgency());
 
 			
 		}
@@ -74,6 +76,7 @@ public class PatientInfoActivity extends Activity {
 			systolic.setText("N/A");
 			heartRate.setText("N/A");
 			symptoms.setText("N/A");
+			urgency.setText("N/A");
 		}
 		
 	}
