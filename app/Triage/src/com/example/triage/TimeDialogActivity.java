@@ -22,6 +22,7 @@ public class TimeDialogActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_time_dialog);
+		setTitle("Enter Date and Time of Appointment");
 		timePicker = (TimePicker) findViewById(R.id.timePicker);
 		datePicker = (DatePicker) findViewById(R.id.datePicker);
 		

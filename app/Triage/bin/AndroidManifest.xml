@@ -48,8 +48,13 @@
         </activity>
         <activity
             android:name=".TimeDialogActivity"
-            android:theme="@android:style/Theme.Dialog"
-            android:label="@string/title_activity_time_dialog" >
+            android:label="@string/title_activity_time_dialog"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name=".AddPrescriptionActivity"
+            android:label="@string/title_activity_add_prescription" 
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
     </application>
 

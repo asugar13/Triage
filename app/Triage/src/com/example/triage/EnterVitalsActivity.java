@@ -27,6 +27,7 @@ public class EnterVitalsActivity extends Activity {
 		patient = (Patient) intent.getSerializableExtra("Patient_Tag");
 		TextView name_patient = (TextView) findViewById(R.id.patient_name);
 		name_patient.setText(patient.getName());
+		setTitle("Add Vital Signs and Symptoms");
 	}
 
 	/**
