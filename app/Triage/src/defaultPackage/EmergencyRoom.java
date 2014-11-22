@@ -218,8 +218,9 @@ public class EmergencyRoom {
 		}
 		
 		Vitals vitals = patient.getVitals();
-		if (!vitals.isEmpty){
-			TreeMap <Date, String[]> allVitals = vitals.getAllVitals();
+		TreeMap <Date, String[]> allVitals = vitals.getAllVitals();
+		try{
+			Log.d("Vitals", vitals.toString() + "empty");
 			String[] mostRecentVitals = allVitals.get(allVitals.firstKey());
 			int temp = Integer.parseInt(mostRecentVitals[0]);
 			int diastolic = Integer.parseInt(mostRecentVitals[1]);
@@ -237,6 +238,9 @@ public class EmergencyRoom {
 			if (heartRate >= 100 || heartRate <= 50){
 				urgency++;
 			}
+		}
+		catch (NoSuchElementException e){
+			
 		}
 		patient.addUrgency(urgency);
 	}
@@ -384,7 +388,7 @@ public class EmergencyRoom {
 			do{
 
 				Vitals currentVitals;
-				if(c.getString(4) !=null){
+				if(c.getString(4) != ""){
 					currentVitals = new Vitals(c.getString(4).split("&"));
 				}else{
 					currentVitals = new Vitals();
