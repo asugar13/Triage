@@ -9,16 +9,6 @@
     tools:context="com.example.triage.PatientInfoActivity" >
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:onClick="viewRecordsOnClick"
-        android:text="@string/viewRecords" />
-
-    <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,55 +27,6 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView1"
-        android:layout_alignLeft="@+id/textView11"
-        android:text="Vitals:" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/systolic_catch"
-        android:layout_alignBottom="@+id/systolic_catch"
-        android:layout_alignLeft="@+id/birthdateView"
-        android:text="Systolic: " />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView3"
-        android:layout_alignRight="@+id/birthdateView"
-        android:text="Diastolic: " />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/diastolic_catch"
-        android:layout_alignLeft="@+id/textView3"
-        android:text="Temperature: " />
-
-    <TextView
-        android:id="@+id/diastolic_catch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/systolic_catch"
-        android:layout_alignLeft="@+id/temperature_catch"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/systolic_catch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/heart_rate_catch"
-        android:layout_alignLeft="@+id/diastolic_catch"
-        android:text="TextView" />
-
-    <TextView
         android:id="@+id/heart_rate_catch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,15 +36,6 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignLeft="@+id/textView12"
-        android:layout_marginBottom="76dp"
-        android:text="Symptoms Description:  " />
-
-    <TextView
         android:id="@+id/symptoms_description_catch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,15 +43,6 @@
         android:layout_alignBottom="@+id/textView5"
         android:layout_toRightOf="@+id/textView5"
         android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView5"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_marginBottom="18dp"
-        android:text="Heart rate: " />
 
     <TextView
         android:id="@+id/patient_birthdate"
@@ -187,5 +110,88 @@
         android:layout_above="@+id/button1"
         android:layout_centerHorizontal="true"
         android:text="@string/doctor_visit" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="viewRecordsOnClick"
+        android:text="@string/viewRecords" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView11"
+        android:layout_below="@+id/birthdateView"
+        android:layout_marginTop="18dp"
+        android:text="Vitals:" />
+
+    <TextView
+        android:id="@+id/diastolic_catch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@+id/temperature_catch"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/birthdateView"
+        android:layout_below="@+id/textView2"
+        android:text="Systolic: " />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView1"
+        android:text="Diastolic: " />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView12"
+        android:text="Temperature: " />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView3"
+        android:text="Heart rate: " />
+
+    <TextView
+        android:id="@+id/systolic_catch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/diastolic_catch"
+        android:layout_below="@+id/diastolic_catch"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView12"
+        android:layout_centerVertical="true"
+        android:text="Symptoms Description:  " />
+
+    <Button
+        android:id="@+id/add_prescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button3"
+        android:layout_centerHorizontal="true"
+        android:text="Add Prescription" />
 
 </RelativeLayout>
