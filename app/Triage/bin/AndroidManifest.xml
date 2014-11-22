@@ -46,6 +46,11 @@
             android:name=".AddNewPatient"
             android:label="@string/title_activity_add_new_patient" >
         </activity>
+        <activity
+            android:name=".TimeDialogActivity"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="@string/title_activity_time_dialog" >
+        </activity>
     </application>
 
 </manifest>
