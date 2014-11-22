@@ -38,6 +38,7 @@
     <string name="btnSavePatient">Save Patient</string>
     <string name="doctor_visit">Add doctor visit record</string>
     <string name="date_time_prompt">Pick a date and time</string>
+    <string name="enter_prescription_info">Enter Prescription Information: </string>
 
     <string-array name="list_options">
         <item>All patients</item>
@@ -45,5 +46,6 @@
     </string-array>
 
     <string name="title_activity_time_dialog">TimeDialogActivity</string>
+    <string name="title_activity_add_prescription">AddPrescriptionActivity</string>
 
 </resources>
