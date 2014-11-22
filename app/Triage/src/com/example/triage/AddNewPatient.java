@@ -1,5 +1,8 @@
 package com.example.triage;
 
+import java.util.Date;
+import java.util.TreeMap;
+
 import java.util.Calendar;
 
 import defaultPackage.EmergencyRoom;
@@ -66,7 +69,7 @@ public class AddNewPatient extends Activity {
 			vitals.add(vitalInfo);
 		}
 		String birthdate = year + "-" + month + "-" + day;
-		Patient patient = new Patient(full_name, birthdate , hcn,vitals);
+		Patient patient = new Patient(full_name, birthdate, hcn,vitals,new TreeMap<Date,String>());
 		EmergencyRoom.getInstance().savePatient(patient);
 		startActivity(intent);
 	}
