@@ -40,8 +40,9 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patients_display);
-		Intent intent = getIntent();
-		intent.getSerializableExtra("Patient_Tag");
+		//Not sure about this
+
+		
 		String[] spinnerOptions = getResources().getStringArray(R.array.list_options);
 		allPatientsSelection = spinnerOptions[0];
 		sortedPatientsSelection = spinnerOptions[1];
