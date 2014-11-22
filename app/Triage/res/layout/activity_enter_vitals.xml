@@ -67,7 +67,7 @@
         android:id="@+id/symptoms_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/save_prescription"
         android:layout_alignLeft="@+id/sympDesc"
         android:layout_alignRight="@+id/heart_rate_field"
         android:layout_below="@+id/sympDesc"
@@ -123,7 +123,7 @@
         android:ems="10" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/save_prescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
