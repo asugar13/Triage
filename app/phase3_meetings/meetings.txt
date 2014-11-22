@@ -47,12 +47,20 @@ Status Meeting2:
  - Bugs with returning patients sorted by not seen by doctor and urgency (Amit)
  - Implemented dropdown for displaying patients sorted by different (Daniel
  - Figured out how we are going to store prescription information (Map of dates to strings) (Doga)
+ - Implemented addPrescriptionActivity (Doga)
+ - Implemented adding prescriptions to patients & saving to database (Doga & Daniel)
 
 
 Planning meeting 2:
- - Put processor intensive tasks on separate thread from UI (to improve User experience)
- - Work on CRC and description
- - Add addPrescription activity
- - Implement adding prescriptions to patients
- - Implement loading prescriptions for patients and saving to database
+ - Put processor intensive tasks on separate thread from UI (to improve User experience) (????)
+ - Work on CRC and description (Doga & Asier)
+ - Display Prescription history (Daniel)
+ - Restrict access to functions based on user type (Asier)
+ - Display seenbyDoctor status (Amit)
+ - Fix xml of AddNewPatient (Daniel)
+ - Implement getUserType in EmergencyRoom (Asier) 
+ - javadoc & comments (Amit & Doga)
+ - make “Patient_Tag” a constant (Daniel)
+ - codeReview (Everyone)
+
  
