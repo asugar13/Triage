@@ -2,6 +2,7 @@ package defaultPackage;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.TreeMap;
 
 import android.util.Log;
 
@@ -16,6 +17,7 @@ public class Patient implements Serializable{
 	private boolean seenByDoctorStatus;
 	private Vitals vitals;
 	private int urgency;
+	private TreeMap<Date, String> allPrescriptions;
 	
 	/** Constructor for Patient class.
 	 * 
@@ -30,6 +32,7 @@ public class Patient implements Serializable{
 		this.healthCardNumber = hcn;
 		this.vitals = vitals;
 		this.seenByDoctorStatus = false;
+		
 		
 		if(!vitals.isEmpty){
 			//EmergencyRoom.getInstance().calcUrgency(this);
@@ -115,6 +118,13 @@ public class Patient implements Serializable{
 	
 	public boolean getSeenByDoctorStatus(){
 		return this.seenByDoctorStatus;
+	}
+	
+	public void addPrescription(String scriptInfo) {
+		Date date = new Date();
+		allPrescriptions.put(date, scriptInfo);
+		
+		
 	}
 	
 	/**
