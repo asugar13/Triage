@@ -213,27 +213,30 @@ public class EmergencyRoom {
 		String[] currentDate = sdf.format(new Date()).split("-");
 		int currentDay = Integer.parseInt(currentDate[0]) * 365 + Integer.parseInt(currentDate[1]) * 30 + Integer.parseInt(currentDate[2]);
 		float age = ((float) (currentDay - birthDay)) / 365;
-		Vitals vitals = patient.getVitals();
-		
-		String[] vitSymp = vitals.getAllVitals().get(vitals.getAllVitals().firstKey());
-		int temp = Integer.parseInt(vitSymp[0]);
-		int diastolic = Integer.parseInt(vitSymp[1]);
-		int systolic = Integer.parseInt(vitSymp[2]);
-		int heartRate = Integer.parseInt(vitSymp[3]);
 		if (age < 2){
 			urgency++;
 		}
-		if (temp >= 39){
-			urgency++;
-		}
-		if (systolic >= 140){
-			urgency++;
-		}
-		else if (diastolic >= 90){
-			urgency++;
-		}
-		if (heartRate >= 100 || heartRate <= 50){
-			urgency++;
+		
+		Vitals vitals = patient.getVitals();
+		if (!vitals.isEmpty){
+			TreeMap <Date, String[]> allVitals = vitals.getAllVitals();
+			String[] mostRecentVitals = allVitals.get(allVitals.firstKey());
+			int temp = Integer.parseInt(mostRecentVitals[0]);
+			int diastolic = Integer.parseInt(mostRecentVitals[1]);
+			int systolic = Integer.parseInt(mostRecentVitals[2]);
+			int heartRate = Integer.parseInt(mostRecentVitals[3]);
+			if (temp >= 39){
+				urgency++;
+			}
+			if (systolic >= 140){
+				urgency++;
+			}
+			else if (diastolic >= 90){
+				urgency++;
+			}
+			if (heartRate >= 100 || heartRate <= 50){
+				urgency++;
+			}
 		}
 		patient.addUrgency(urgency);
 	}
