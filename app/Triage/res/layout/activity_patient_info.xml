@@ -178,14 +178,6 @@
         android:layout_below="@+id/diastolic_catch"
         android:text="TextView" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView12"
-        android:layout_centerVertical="true"
-        android:text="Symptoms Description:  " />
-
     <Button
         android:id="@+id/add_prescription"
         android:layout_width="wrap_content"
@@ -193,5 +185,29 @@
         android:layout_above="@+id/button3"
         android:layout_centerHorizontal="true"
         android:text="Add Prescription" />
+
+    <TextView
+        android:id="@+id/urgency_level_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView6"
+        android:layout_alignLeft="@+id/heart_rate_catch"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/textView4"
+        android:text="@string/urgency_rating" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView12"
+        android:layout_below="@+id/urgency_level_field"
+        android:text="Symptoms Description:  " />
 
 </RelativeLayout>
