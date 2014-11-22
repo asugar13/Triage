@@ -166,8 +166,7 @@ public class EmergencyRoom {
 	 */
 	public ArrayList<Patient> getUnseenSortedPatients(){
 		ArrayList<Patient> sortedPatients = new ArrayList<Patient>();
-		ArrayList<Patient> unsortedPatients = new ArrayList<Patient>();
-		unsortedPatients.addAll((Collection<? extends Patient>) patients.entrySet());
+		ArrayList<Patient> unsortedPatients = getPatients();
 		for (Patient p: unsortedPatients){
 			if (p.getSeenByDoctorStatus()){
 				sortedPatients.add(p);
@@ -262,6 +261,7 @@ public class EmergencyRoom {
 				patients.put(hcn, new Patient(name, birthdate, hcn, new Vitals(
 						vitalInfo)));
 			}
+			
 		}
 		scanner.close();
 	}
