@@ -8,20 +8,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.triage.LoginActivity" >
 
-    <EditText
-        android:id="@+id/passwordfield"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/nurseIdtext"
-        android:ems="10"
-        android:inputType="textPassword" />
-
     <Button
         android:id="@+id/loginbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="71dp"
         android:onClick="logInUser"
@@ -31,9 +21,6 @@
         android:id="@+id/userIdfield"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/passwordfield"
-        android:layout_below="@+id/passwordfield"
-        android:layout_marginTop="71dp"
         android:ems="10" >
 
         <requestFocus />
@@ -43,18 +30,25 @@
         android:id="@+id/userID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/passwordfield"
-        android:layout_alignLeft="@+id/passwordtext"
-        android:layout_alignStart="@+id/passwordtext"
+        android:layout_marginTop="76dp"
         android:text="@string/nurseid" />
 
     <TextView
         android:id="@+id/passwordtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/userIdfield"
-        android:layout_toLeftOf="@+id/passwordfield"
+        android:layout_marginRight="25dp"
+        android:layout_toLeftOf="@+id/loginbutton"
         android:layout_toStartOf="@+id/passwordfield"
         android:text="@string/password" />
+
+    <EditText
+        android:id="@+id/passwordfield"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:layout_toRightOf="@+id/passwordtext"
+        android:ems="10"
+        android:inputType="textPassword" />
 
 </RelativeLayout>
