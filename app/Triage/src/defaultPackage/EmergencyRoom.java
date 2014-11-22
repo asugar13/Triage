@@ -168,7 +168,7 @@ public class EmergencyRoom {
 		ArrayList<Patient> sortedPatients = new ArrayList<Patient>();
 		ArrayList<Patient> unsortedPatients = getPatients();
 		for (Patient p: unsortedPatients){
-			if (p.getSeenByDoctorStatus()){
+			if (!p.getSeenByDoctorStatus()){
 				sortedPatients.add(p);
 			}
 		}
