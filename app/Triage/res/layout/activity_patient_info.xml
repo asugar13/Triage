@@ -9,7 +9,7 @@
     tools:context="com.example.triage.PatientInfoActivity" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/save_prescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button2"
@@ -90,7 +90,7 @@
         android:id="@+id/health_num_patient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button1"
+        android:layout_alignRight="@+id/save_prescription"
         android:layout_below="@+id/name_patient"
         android:text="TextView" />
 
@@ -107,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="seenByDoctorOnClick"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/save_prescription"
         android:layout_centerHorizontal="true"
         android:text="@string/doctor_visit" />
 
