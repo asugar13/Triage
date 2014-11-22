@@ -40,6 +40,7 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patients_display);
+		setTitle("Emergency Room");
 		//Not sure about this
 
 		

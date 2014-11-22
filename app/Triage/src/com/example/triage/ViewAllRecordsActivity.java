@@ -35,6 +35,7 @@ public class ViewAllRecordsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_all_records);
+		setTitle("Patient's History");
 		Intent intent = getIntent();
 		patient = (Patient) intent.getSerializableExtra("Patient_Tag");
 		TextView name_patient = (TextView) findViewById(R.id.patient_name);

@@ -30,6 +30,7 @@ public class PatientInfoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patient_info);
+		setTitle("Patient Information");
 		Intent intent = getIntent();
 		patient = (Patient) intent.getSerializableExtra("Patient_Tag");
 		String name = patient.getName();
