@@ -42,15 +42,24 @@ public class AddNewPatient extends Activity {
 		String systolic = systolicText.getText().toString();
 		String heart_rate = heart_rateText.getText().toString();
 		String symptoms = symptomsText.getText().toString();
-		String[] vitalInfo = { temperature, diastolic, systolic, heart_rate,
-				symptoms };
-		//
-		Vitals vitals = new Vitals();
-		vitals.add(vitalInfo);
+		String[] vitalInfo = {temperature, diastolic, systolic, heart_rate,
+				symptoms};
+		
+		boolean allEmpty = true;
+		Vitals vitals = new Vitals(); 
+		for (int i=0; i<vitalInfo.length; i++) {
+			if (vitalInfo[i].equals("")) {
+				vitalInfo[i] = "N/A";
+			}
+			else {
+				allEmpty = false;
+			}
+		}
+		if (!allEmpty){
+			vitals.add(vitalInfo);
+		}
 		Patient patient = new Patient(full_name, birthdate, hcn,vitals);
-		
 		EmergencyRoom.getInstance().savePatient(patient);
-		
 		startActivity(intent);
 	}
 	@Override
