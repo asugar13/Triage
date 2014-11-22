@@ -7,13 +7,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.text.TextUtils;
 import android.util.Log;
 
 /**
@@ -262,11 +265,11 @@ public class EmergencyRoom {
 			String[] name = patient_on_file[1].split(" ");
 			if (patient_on_file.length == 3) {
 				patients.put(hcn, new Patient(name, birthdate, hcn,
-						new Vitals()));
+						new Vitals(),new TreeMap<Date,String>()));
 			} else {
 				String[] vitalInfo = patient_on_file[3].split("&");
 				patients.put(hcn, new Patient(name, birthdate, hcn, new Vitals(
-						vitalInfo)));
+						vitalInfo),new TreeMap<Date,String>()));
 			}
 			
 		}
@@ -301,7 +304,7 @@ public class EmergencyRoom {
 		patientValues.put("seen_by_doctor", "false");
 		patientValues.put("date_of_birth", patient.getBirthDate());
 		patientValues.put("vitals", patient.getVitals().toString());
-		//patientValues.put("prescriptions", patient.getPrescriptions());
+		patientValues.put("prescriptions", patient.getPrescriptionString());
 		
 		if(dbManager.rowExists("patient_records","health_card_number = '" + patient.getHealthCardNum() + "'")){
 			//Modify row
@@ -309,7 +312,6 @@ public class EmergencyRoom {
 			dbManager.modifyRow(patientTable,patientValues,whereClause);
 		}else{
 			//Add patient
-
 			dbManager.addRow(patientValues, patientTable);
 		}
 	}
@@ -393,9 +395,27 @@ public class EmergencyRoom {
 				}else{
 					currentVitals = new Vitals();
 				}
-				Patient currentPatient = new Patient(c.getString(1).split(" "),c.getString(2),c.getString(0),currentVitals);
-				patients.put(c.getString(0), currentPatient);
+				TreeMap<Date, String> allPrescriptions = new TreeMap<Date, String>();
+				if(!TextUtils.isEmpty(c.getString(5))){
+					String[] prescriptionDBString = c.getString(5).split("[\\x7C]");
+					for(String s: prescriptionDBString){
+						Date date = null;
+						String scriptInfo = null;
+						String[] currentScript = s.split(Pattern.quote("*"));
+						try {
+							date = sdf.parse(currentScript[0]);
+							scriptInfo = currentScript[1];
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+						Log.d("scriptInfo",scriptInfo);
+						allPrescriptions.put(date, scriptInfo);
+					}
+
+				}
 				
+				Patient currentPatient = new Patient(c.getString(1).split(" "),c.getString(2),c.getString(0),currentVitals,allPrescriptions);
+				patients.put(c.getString(0), currentPatient);
 				c.moveToNext();
 			}while(!c.isAfterLast());
 		}

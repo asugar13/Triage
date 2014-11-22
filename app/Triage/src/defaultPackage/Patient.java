@@ -1,6 +1,7 @@
 package defaultPackage;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeMap;
 
@@ -26,16 +27,18 @@ public class Patient implements Serializable{
 	 * @param hcn This Patient's health card number.
 	 * @param vitals This patient's vitals (vital signs and symptoms).
 	 */
-	public Patient(String[] name, String birthdate, String hcn, Vitals vitals) {
+	public Patient(String[] name, String birthdate, String hcn, Vitals vitals,TreeMap<Date,String> allPrescriptions) {
 		this.name = name.clone();
 		this.birthDate = birthdate;
 		this.healthCardNumber = hcn;
 		this.vitals = vitals;
 		this.seenByDoctorStatus = false;
+		this.allPrescriptions = allPrescriptions;
 		
 		
 		if(!vitals.isEmpty){
-			//EmergencyRoom.getInstance().calcUrgency(this);
+			//Was causing crashes, not sure if due to user generated vitals???
+			EmergencyRoom.getInstance().calcUrgency(this);
 		}
 		
 		
@@ -47,7 +50,7 @@ public class Patient implements Serializable{
 	public void setSeenByDoctor(Date timeSeen){
 		this.seenByDoctorStatus = true;
 		this.seenByDoctor = timeSeen;
-		EmergencyRoom.getInstance().updatePatient(this);
+		EmergencyRoom.getInstance().savePatient(this);
 		
 	}
 	
@@ -89,7 +92,7 @@ public class Patient implements Serializable{
 	*/
 	public void addVitals(String[] newVitals){
 		this.vitals.add(newVitals);
-		EmergencyRoom.getInstance().updatePatient(this);
+		EmergencyRoom.getInstance().savePatient(this);
 		EmergencyRoom.getInstance().calcUrgency(this);
 		
 	}
@@ -123,9 +126,29 @@ public class Patient implements Serializable{
 	public void addPrescription(String scriptInfo) {
 		Date date = new Date();
 		allPrescriptions.put(date, scriptInfo);
-		
-		
+		EmergencyRoom.getInstance().savePatient(this);	
 	}
+	
+	/**
+	 * Generates a string representation of TreeMap<Date, String> allPrescriptions
+	 * @return String representation of TreeMap<Date, String> allPrescriptions
+	 */
+	public String getPrescriptionString(){
+		String scriptString = "";
+		ArrayList<Date> keys = new ArrayList<Date>(allPrescriptions.keySet());
+		
+		for(int i =0; i< keys.size(); i++){
+			Date this_date = keys.get(i);
+			scriptString = scriptString + EmergencyRoom.sdf.format(this_date) + "*";
+			scriptString = scriptString + allPrescriptions.get(keys.get(i));
+			if(!(i == keys.size() - 1)){
+				//If not the last prescription entry
+				scriptString = scriptString + "|";
+			}
+		}
+		return scriptString;
+	}
+	
 	
 	/**
 	 * Returns the String representation of this Patient object.

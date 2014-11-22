@@ -98,6 +98,13 @@ public class PatientInfoActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	public void addPrescriptionOnClick(View view){
+		Intent intent = new Intent(this,AddPrescriptionActivity.class);
+		intent.putExtra("Patient_Tag", patient);
+		startActivity(intent);
+	}
+	
+	
 	public void seenByDoctorOnClick(View view){
 		Intent intent = new Intent(this, TimeDialogActivity.class);
 		intent.putExtra("Patient_Tag", patient);
