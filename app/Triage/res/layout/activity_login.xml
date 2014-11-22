@@ -9,19 +9,6 @@
     tools:context="com.example.triage.LoginActivity" >
 
     <EditText
-        android:id="@+id/userIdfield"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/passwordfield"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/passwordfield"
-        android:layout_marginTop="128dp"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
         android:id="@+id/passwordfield"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,16 +16,6 @@
         android:layout_below="@+id/nurseIdtext"
         android:ems="10"
         android:inputType="textPassword" />
-
-    <TextView
-        android:id="@+id/userID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/nurseIdtext"
-        android:layout_alignBottom="@+id/nurseIdtext"
-        android:layout_alignLeft="@+id/passwordtext"
-        android:layout_alignStart="@+id/passwordtext"
-        android:text="@string/nurseid" />
 
     <Button
         android:id="@+id/loginbutton"
@@ -50,14 +27,34 @@
         android:onClick="logInUser"
         android:text="@string/btnlogin" />
 
+    <EditText
+        android:id="@+id/userIdfield"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/passwordfield"
+        android:layout_below="@+id/passwordfield"
+        android:layout_marginTop="71dp"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/userID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/passwordfield"
+        android:layout_alignLeft="@+id/passwordtext"
+        android:layout_alignStart="@+id/passwordtext"
+        android:text="@string/nurseid" />
+
     <TextView
         android:id="@+id/passwordtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/passwordfield"
-        android:layout_alignParentLeft="true"
-        android:layout_toStartOf="@+id/passwordfield"
+        android:layout_alignBottom="@+id/userIdfield"
         android:layout_toLeftOf="@+id/passwordfield"
+        android:layout_toStartOf="@+id/passwordfield"
         android:text="@string/password" />
 
 </RelativeLayout>
