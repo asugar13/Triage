@@ -1,5 +1,7 @@
 package com.example.triage;
 
+import java.util.Calendar;
+
 import defaultPackage.EmergencyRoom;
 import defaultPackage.Patient;
 import defaultPackage.Vitals;
@@ -13,21 +15,26 @@ import android.view.View;
 import android.widget.*;
 
 public class AddNewPatient extends Activity {
-
+	
+	private DatePicker birthdatePicker;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_patient);
+		birthdatePicker = (DatePicker) findViewById(R.id.birthdatePicker);
 		setTitle("Add New Patient");
 		
 	}
 	
 	public void saveNewPatient(View view) {
 		Intent intent = new Intent(this, PatientsDisplayActivity.class);
+		String year = String.valueOf(birthdatePicker.getYear());
+		String month = String.valueOf(birthdatePicker.getMonth());
+		String day = String.valueOf(birthdatePicker.getDayOfMonth());
+		
 		EditText nameText = (EditText) findViewById(R.id.new_name);
 		EditText hcnText = (EditText) findViewById(R.id.new_hcn);
-		EditText birthdateText = (EditText) findViewById(R.id.new_birthdate);
 		EditText temperatureText = (EditText) findViewById(R.id.new_temp);
 		EditText diastolicText = (EditText) findViewById(R.id.new_diastolic);
 		EditText systolicText = (EditText) findViewById(R.id.new_systolic);
@@ -37,7 +44,6 @@ public class AddNewPatient extends Activity {
 		String name = nameText.getText().toString();
 		String[] full_name = name.split(" ");
 		String hcn = hcnText.getText().toString();
-		String birthdate = birthdateText.getText().toString();
 		String temperature = temperatureText.getText().toString();
 		String diastolic = diastolicText.getText().toString();
 		String systolic = systolicText.getText().toString();
@@ -59,7 +65,8 @@ public class AddNewPatient extends Activity {
 		if (!allEmpty){
 			vitals.add(vitalInfo);
 		}
-		Patient patient = new Patient(full_name, birthdate, hcn,vitals);
+		String birthdate = year + "-" + month + "-" + day;
+		Patient patient = new Patient(full_name, birthdate , hcn,vitals);
 		EmergencyRoom.getInstance().savePatient(patient);
 		startActivity(intent);
 	}
