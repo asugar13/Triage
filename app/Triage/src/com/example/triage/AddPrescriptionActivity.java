@@ -16,7 +16,7 @@ import android.widget.EditText;
 public class AddPrescriptionActivity extends Activity {
 	private Patient patient;
 	/**
-	 * Creates activity, gets given pateint from intent.
+	 * Creates activity, gets given patient from intent.
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
