@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.*;
 
 /**
- * Activity for nurses to enter and save new vital & symptom information
- * 
+ * Activity for nurses to enter and save new vital & symptom information 
+ * for a given patient.
  */
 public class EnterVitalsActivity extends Activity {
 
@@ -24,15 +24,15 @@ public class EnterVitalsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_enter_vitals);
 		Intent intent = getIntent();
-		patient = (Patient) intent.getSerializableExtra("Patient_Tag");
+		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.patientTag);
 		TextView name_patient = (TextView) findViewById(R.id.patient_name);
 		name_patient.setText(patient.getName());
 		setTitle("Add Vital Signs and Symptoms");
 	}
 
 	/**
+	 * OnClick for save button
 	 * Adds and saves the new vitals written to patient.
-	 * 
 	 * @param view
 	 */
 	public void saveData(View view) {
@@ -63,7 +63,7 @@ public class EnterVitalsActivity extends Activity {
 
 		if (!allEmpty) {
 			patient.addVitals(newVitals);
-			intent.putExtra("Patient_Tag", patient);
+			intent.putExtra(EmergencyRoom.patientTag, patient);
 			startActivity(intent);
 		} else {
 			Toast.makeText(this, "No vitals entered", Toast.LENGTH_SHORT)

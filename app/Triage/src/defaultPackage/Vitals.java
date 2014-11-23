@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 import android.util.Log;
 /**
  * Stores current and previous vitals and symptoms for a patient 
- *
+ * Vitals and symptom descriptions are mapped by time of recording.
  */
 public class Vitals implements Serializable{
 

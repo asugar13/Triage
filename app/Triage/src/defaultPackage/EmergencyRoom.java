@@ -20,12 +20,16 @@ import android.text.TextUtils;
 import android.util.Log;
 
 /**
- * 
- * @author Asier
- * 
+ * This class represents a hospitals emergency room.  
+ * The class manages the loading and saving of patients to internal storage.
+ * It also stores the patients during run time and calculates urgency based on 
+ * patients information. 
+ * The emergency room also authenticates users attempting to log in to the app.
+ *  
  */
 public class EmergencyRoom {
 	private static EmergencyRoom instance = null;
+	public static final String patientTag = "patient_tag";
 	private Map<String, Patient> patients;
 	private DatabaseManager dbManager;
 	private String userType;
@@ -92,6 +96,7 @@ public class EmergencyRoom {
 		}
 	/**
 	 * Save all patients data to database for future use
+	 * Only executed first time the app is run.
 	 */
 	private void initPatientsDB(){
 		Log.d("init","patients");
@@ -109,10 +114,10 @@ public class EmergencyRoom {
 	
 	
 	/**
-	 * Gets the inputstream for a given filename
-	 * @param context
-	 * @param fileName
-	 * @return input stream for reading
+	 * Gets the inputstream for a given filename in assets
+	 * @param context used to access the applications assets
+	 * @param fileName name of file to open
+	 * @return input stream of file for reading
 	 */
 	private  InputStream getInputStream(String fileName) {
 		try {
@@ -124,15 +129,16 @@ public class EmergencyRoom {
 		return null;
 	}
 	/**
+	 * Deprecated - uses SQLite database instead
 	 * Gets the outputstream for writing to a given file
-	 * @param context
-	 * @param fileName
-	 * @return
+	 * @param context used to write to apps internal storage
+	 * @param fileName name of file to be opened for writing
+	 * @return outputstream of given fileName
 	 */
 	private FileOutputStream getOutputStream(String fileName) {
 		try {
 			//Tries to open file from /data/data/Files for reading
-			return context.openFileOutput("patient_records.txt",
+			return context.openFileOutput(fileName,
 					context.MODE_PRIVATE);
 			
 		} catch (FileNotFoundException e) {
@@ -164,7 +170,7 @@ public class EmergencyRoom {
 		return allPatients;
 	}
 	/**
-	 * Returns sorted list of unseen patients sorted by urgency
+	 * Returns sorted list of unseen patients sorted by urgency rating
 	 * @return ArrayList of sorted patients
 	 */
 	public ArrayList<Patient> getUnseenSortedPatients(){
@@ -195,7 +201,7 @@ public class EmergencyRoom {
 	}
 	
 	/**
-	 * Update the patient in emergency room, vitals have been added
+	 * Updates the given patient
 	 * @param patient
 	 */
 	public void updatePatient(Patient patient){
@@ -205,8 +211,7 @@ public class EmergencyRoom {
 	}
 
 	/**
-	*Calculates the urgency rating of the patient and adds to the patient's record
-	*
+	*Calculates the urgency rating of the patient and adds it to the patient
 	*@param patient The patient that is having their urgency calculate.
 	*/
 	public void calcUrgency(Patient patient){
@@ -249,7 +254,7 @@ public class EmergencyRoom {
 	}
 	
 	/**
-	 *  Populates patients Map from text file
+	 * Populates patients Map from text file
 	 * @param patients_stream inputStream from .txt file containing patients info
 	 * @throws FileNotFoundException
 	 */
@@ -275,26 +280,27 @@ public class EmergencyRoom {
 		}
 		scanner.close();
 	}
-//	/**
-//	 * Saves patient information to .txt file
-//	 * @param context
-//	 */
-//	public static void savePatientData(Context context) {
-//		try {
-//			OutputStream outStream = getOutputStream(context,"patient_records.txt");
-//			for (String hc : patients.keySet()) {
-//				Log.d("PATIENTSTOSTRING",patients.get(hc).toString());
-//				outStream.write((patients.get(hc).toString() + "\n")
-//						.getBytes());
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	/**
+	 * Deprecated - Uses SQLiteDatabase instead
+	 * Saves patient information to .txt file
+	 * @param context
+	 */
+	public void savePatientData(Context context) {
+		try {
+			OutputStream outStream = getOutputStream("patient_records.txt");
+			for (String hc : patients.keySet()) {
+				Log.d("PATIENTSTOSTRING",patients.get(hc).toString());
+				outStream.write((patients.get(hc).toString() + "\n")
+						.getBytes());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Saves patient data to SQLite database
-	 * @param patient
+	 * @param patient to be saved
 	 */
 	public void savePatient(Patient patient){
 		updatePatient(patient);
@@ -318,8 +324,11 @@ public class EmergencyRoom {
 	
 	/**
 	 * Checks the validity of the given username and password
-	 * @param username
-	 * @param password
+	 * If the loginTable does not exist in the database, creates the table 
+	 *  and copies the information from passwords.txt to it.
+	 * 
+	 * @param username username to be checked
+	 * @param password password to be checked
 	 * @return whether the username and password combination is valid
 	 */
 	public boolean logIn(String username, String password){
@@ -343,7 +352,7 @@ public class EmergencyRoom {
 	
 	
 	/**
-	 * Loads the passwords,usernames, and usertypes from passwords.txt
+	 * Loads the passwords, usernames, and usertypes from passwords.txt
 	 * and copies to local SQLite database for future use
 	 */
 	private void initLoginInfoDB(){

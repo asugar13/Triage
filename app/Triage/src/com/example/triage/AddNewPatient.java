@@ -16,7 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-
+/**
+ * Activity for adding new patients
+ *
+ */
 public class AddNewPatient extends Activity {
 	
 	private DatePicker birthdatePicker;
@@ -29,7 +32,13 @@ public class AddNewPatient extends Activity {
 		setTitle("Add New Patient");
 		
 	}
-	
+	/**
+	 * OnClick for save button
+	 * Gets all entered data from EditTexts, creates new patient
+	 * saves new patient to EmergencyRoom.
+	 * Starts PatientDisplayActivity to display the new patient
+	 * @param view
+	 */
 	public void saveNewPatient(View view) {
 		Intent intent = new Intent(this, PatientsDisplayActivity.class);
 		String year = String.valueOf(birthdatePicker.getYear());

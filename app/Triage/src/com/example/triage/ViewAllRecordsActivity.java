@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.TreeMap;
 
+import defaultPackage.EmergencyRoom;
 import defaultPackage.Patient;
 import defaultPackage.Vitals;
 import android.app.Activity;
@@ -22,8 +23,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 /**
- * Activity for displaying all vitals and symptom information for a specific patient 
- *
+ * Activity for displaying all vitals, symptom description, 
+ * and prescription information for a given patient
  */
 public class ViewAllRecordsActivity extends Activity {
 	/**The given patient - display there information */
@@ -37,7 +38,7 @@ public class ViewAllRecordsActivity extends Activity {
 		setContentView(R.layout.activity_view_all_records);
 		setTitle("Patient's History");
 		Intent intent = getIntent();
-		patient = (Patient) intent.getSerializableExtra("Patient_Tag");
+		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.patientTag);
 		TextView name_patient = (TextView) findViewById(R.id.patient_name);
 		name_patient.setText(patient.getName());
 		

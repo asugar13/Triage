@@ -24,18 +24,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 /**
- * Activity for displaying all patients, nurses can search by health card number.
- *
+ * Activity for displaying all patients (sorted/unsorted), nurses can search by health card number,
+ * and add patients.
+ * Implements OnItemSelectedListener for handling spinner selections.
  */
 public class PatientsDisplayActivity extends Activity implements OnItemSelectedListener {
 	/**List of all patient objects  */
 	private ArrayList<Patient> patients;
 	private String allPatientsSelection;
 	private String sortedPatientsSelection;
-	
 	@Override
 	/**
-	 * Sets the appropriate layout of this activity based on patient_records.txt and patient_list_row.xml.
+	 * Creates activity, populates drop down menu (spinner),
+	 * sets selection of the spinner to (0) -> View all patients (unsorted)
 	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,26 +56,19 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 		dropDown.setAdapter(adapter);
 		dropDown.setOnItemSelectedListener(this);
 		dropDown.setSelection(0);
-		
-		
-		
-//		EmergencyRoom.loadPatients(getApplicationContext(), "patient_records.txt");
-//		//Get list of patients
-//		patients = (ArrayList<Patient>) EmergencyRoom.getPatients();
-//		
-//		//Get list view, and populate with adapter
-//		ListView patientsList = (ListView) findViewById(R.id.listView1);
-//		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
 
 	}
-	
+	/**
+	 * OnClick for Add Patient button, starts AddNewPatient activity
+	 * @param view
+	 */
 	public void addPatient(View view) {
 		Intent intent = new Intent(this, AddNewPatient.class);
 		startActivity(intent);
 	}
 	/**
-	 * Handles the search by health card number function.
-	 * 
+	 * Handles the search by health card number function. If a valid search, starts
+	 * PatientInfoActivity to display the patients information
 	 * @param view
 	 */
 	public void searchClick(View view){
@@ -91,7 +85,7 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 			if(result!=null){
 				//Valid result -> display patient in patientInfoActivity
 				Intent intent = new Intent(this,PatientInfoActivity.class);
-				intent.putExtra("Patient_Tag",result);
+				intent.putExtra(EmergencyRoom.patientTag,result);
 				startActivity(intent);
 			}
 			else{
@@ -124,13 +118,19 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 		return super.onOptionsItemSelected(item);
 	}
 	/**
-	 * Custom adapter for listview, populates textviews with patient info.
-	 *
+	 * Custom adapter for listview for displaying patients.
+	 * Populates the textViews in each layout with the appropriate patient information.
 	 */
 	private class patientsAdapter extends BaseAdapter{
 		Context context;
 		int layoutId;
 		ArrayList<Patient> patientList;
+		/**
+		 * Initializes the patientsAdapter
+		 * @param context used for inflating layout if layout is null
+		 * @param layoutId refers to the layout for each row
+		 * @param patientList list of patients whos data to display
+		 */
 		public patientsAdapter(Context context,int layoutId,ArrayList<Patient> patientList){
 			this.context = context;
 			this.layoutId = layoutId;
@@ -156,12 +156,12 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 
 		@Override
 		public long getItemId(int position) {
-			//Not sure about this right now
 			return 0;
 		}
 
 		@Override
 		/**
+		 * Populates specific row in the listview (called for every row)
 		 * @param position an int that specifies the position in the listview
 		 * @param convertView a View for the specific row of the listview
 		 * @param parent the parent view (ListView) that the convertView will be attached to
@@ -197,7 +197,7 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 				public void onClick(View v) {
 					//Launch the patientInfo class with the patient from this row
 					Intent intent = new Intent(context,PatientInfoActivity.class);
-					intent.putExtra("Patient_Tag", thisPatient);
+					intent.putExtra(EmergencyRoom.patientTag, thisPatient);
 					startActivity(intent);
 				}
 			});
@@ -206,6 +206,14 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 		}
 		
 	}
+	/**
+	 * Handles selections of spinner, populating the listview of patients depending
+	 * on the selection.
+	 * @param parent the parent that the selected view (row) is in (The spinner)
+	 * @param view
+	 * @param position of selection in the spinner options
+	 * @param id
+	 */
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
