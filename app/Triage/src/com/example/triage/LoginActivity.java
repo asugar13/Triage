@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 
 /**
+ * LAUNCHER activity
  * Activity to manage logging in into the application
- * 
  */
 public class LoginActivity extends Activity {
 
