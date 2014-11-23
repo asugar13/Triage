@@ -21,8 +21,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 /**
- * Manages reading,writing, and copying of hospital database 
- *
+ * Manages creating, reading, and writing to EmergencyRoomDatabase.db
+ * 
  */
 public class DatabaseManager {
 	//SingleTON???
@@ -55,24 +55,31 @@ public class DatabaseManager {
 		/**
 		 * Constructs a new databaseHelper,
 		 * Creating or opening an existing database of datbaseName
-		 * @param context
+		 * @param context used to open or create the database
 		 */
 		public DatabaseHelper(Context context) {
 			super(context, databaseName, null, 1);
 			// TODO Auto-generated constructor stub
 		}
-
+		
 		@Override
+		/**
+		 * Not implemented Creation handled by SQLiteOpenHelper constructor
+		 */
 		public void onCreate(SQLiteDatabase db) {
-			//Not necessary for this app
+			// TODO Auto-generated method stub
 			
 		}
-
+		/**
+		 * Not implemented no upgrading of database necessary at this time.
+		 */
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			//not necessary for this app
+			// TODO Auto-generated method stub
 			
 		}
+
+		
 	}
 	/**
 	 * Checks if the SQLite database exists
@@ -183,10 +190,4 @@ public class DatabaseManager {
 	public Cursor getRow(String tableName,String sqlWhere,String[] columns){
 		return mDatabase.query(tableName, columns,sqlWhere, null,null,null,null);
 	}
-	
-	
-	
-	
-	
-
 }

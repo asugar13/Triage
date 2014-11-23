@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 
+import defaultPackage.EmergencyRoom;
 import defaultPackage.Patient;
 import defaultPackage.Vitals;
 import android.app.Activity;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 /**
  * Activity that displays patient specific information.
  * Option to view previous records, or add new data
@@ -32,7 +34,7 @@ public class PatientInfoActivity extends Activity {
 		setContentView(R.layout.activity_patient_info);
 		setTitle("Patient Information");
 		Intent intent = getIntent();
-		patient = (Patient) intent.getSerializableExtra("Patient_Tag");
+		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.patientTag);
 		String name = patient.getName();
 		String healthNum = patient.getHealthCardNum();
 		String birthDate = patient.getBirthDate();
@@ -85,7 +87,7 @@ public class PatientInfoActivity extends Activity {
 	 */
 	public void editRecordsOnClick(View view) {
 		Intent intent = new Intent(this, EnterVitalsActivity.class);
-		intent.putExtra("Patient_Tag", patient);
+		intent.putExtra(EmergencyRoom.patientTag, patient);
 		startActivity(intent);
 	}
 	/**
@@ -94,20 +96,39 @@ public class PatientInfoActivity extends Activity {
 	 */
 	public void viewRecordsOnClick(View view) {
 		Intent intent = new Intent (this, ViewAllRecordsActivity.class);
-		intent.putExtra("Patient_Tag", patient);
+		intent.putExtra(EmergencyRoom.patientTag, patient);
 		startActivity(intent);
 	}
-	
+	/**
+	 * OnClick for Add Prescription button, only works for physicians
+	 * Launches AddPrescriptionActivity
+	 * @param view
+	 */
 	public void addPrescriptionOnClick(View view){
+//		if(EmergencyRoom.getInstance().getUserType() == "Nurse"){
+//			Toast.makeText(this, "NO NURSE", Toast.LENGTH_LONG).show();
+//		}else{
+
+//		}
+		
 		Intent intent = new Intent(this,AddPrescriptionActivity.class);
-		intent.putExtra("Patient_Tag", patient);
-		startActivity(intent);
+		intent.putExtra(EmergencyRoom.patientTag, patient);
+		startActivity(intent);	
+		
+
 	}
 	
-	
+	/**
+	 * OnClick for seen by doctor button. Launches TimeDialogActivity
+	 * for entering time of visit.
+	 * ???
+	 * ONLY WORKS FOR NURSES?????
+	 * ???
+	 * @param view
+	 */
 	public void seenByDoctorOnClick(View view){
 		Intent intent = new Intent(this, TimeDialogActivity.class);
-		intent.putExtra("Patient_Tag", patient);
+		intent.putExtra(EmergencyRoom.patientTag, patient);
 		startActivity(intent);
 	}
 

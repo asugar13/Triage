@@ -6,7 +6,11 @@ import java.util.Date;
 import java.util.TreeMap;
 
 import android.util.Log;
-
+/**
+ * This class represents patients in a Hospital emergency Room.
+ * The class stores patients personal information, as well as vital information,
+ * and prescription information.
+ */
 public class Patient implements Serializable{
 	
 	
@@ -35,17 +39,15 @@ public class Patient implements Serializable{
 		this.seenByDoctorStatus = false;
 		this.allPrescriptions = allPrescriptions;
 		
-		
 		if(!vitals.isEmpty){
 			//Was causing crashes, not sure if due to user generated vitals???
 			EmergencyRoom.getInstance().calcUrgency(this);
-		}
-		
-		
+		}	
 	}
 	
 	/**
 	 * Sets the time that the patient has been seen by a doctor
+	 * @param timeSeen date object of the time patient was seen by a doctor
 	 */
 	public void setSeenByDoctor(Date timeSeen){
 		this.seenByDoctorStatus = true;
@@ -55,9 +57,7 @@ public class Patient implements Serializable{
 	}
 	
 	/**
-	*Returns this patient's name.
-	*
-	*@return This patient's name
+	*@return the patients name as a string
 	*/
 	public String getName(){
 		String nameString = "";
@@ -68,9 +68,7 @@ public class Patient implements Serializable{
 	}
 	
 	/**
-	*Returns this patient's birth date.
-	*
-	*@return This patient's birth date.
+	*@return This patient's birth date formatted as a string.
 	*/
 	public String getBirthDate(){
 		return birthDate;
@@ -78,7 +76,6 @@ public class Patient implements Serializable{
 	
 	/**
 	 * Returns this patient's health card number.
-	 * 
 	 * @return This patient's health card number.
 	 */
 	public String getHealthCardNum(){
@@ -87,7 +84,6 @@ public class Patient implements Serializable{
 	
 	/**
 	* Adds new vitals (vital signs and symptoms) to this Patient and updates the Emergency Room.
-	* 
 	* @param newVitals New vitals to be added to this patient.
 	*/
 	public void addVitals(String[] newVitals){
@@ -97,16 +93,14 @@ public class Patient implements Serializable{
 		
 	}
 	/**
-	*Returns the vitals of this patient.
-	*
-	*@return vitals The vitals of this patient
+	*@return vitals object that belongs to this patient
 	*/
 	public Vitals getVitals(){
 		return vitals;
 	}
 	
 	/**
-	*Adds an urgency rating to this patient
+	* @param urgency rating to be assigned to patient
 	*/
 	public void addUrgency(int urgency){
 		this.urgency = urgency;
@@ -118,11 +112,16 @@ public class Patient implements Serializable{
 	public int getUrgency(){
 		return urgency;
 	}
-	
+	/**
+	 * @return boolean if patient has been seen by a doctor
+	 */
 	public boolean getSeenByDoctorStatus(){
 		return this.seenByDoctorStatus;
 	}
-	
+	/**
+	 * Adds prescription information to the patient
+	 * @param scriptInfo String representing the prescription
+	 */
 	public void addPrescription(String scriptInfo) {
 		Date date = new Date();
 		allPrescriptions.put(date, scriptInfo);
@@ -152,7 +151,6 @@ public class Patient implements Serializable{
 	
 	/**
 	 * Returns the String representation of this Patient object.
-	 * 
 	 * @return The string representation of this Patient object
 	 */
 	@Override
