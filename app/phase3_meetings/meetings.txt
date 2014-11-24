@@ -52,15 +52,34 @@ Status Meeting2:
 
 
 Planning meeting 2:
- - Put processor intensive tasks on separate thread from UI (to improve User experience) (????)
+ - Put processor intensive tasks on separate thread from UI (to improve User experience) (????) (EXTRA)
  - Work on CRC and description (Doga & Asier)
  - Display Prescription history (Daniel)
  - Restrict access to functions based on user type (Asier)
  - Display seenbyDoctor status (Amit)
- - Fix xml of AddNewPatient (Daniel)
+ - Fix xml of AddNewPatient (Daniel)/
  - Implement getUserType in EmergencyRoom (Asier) 
  - javadoc & comments (Amit & Doga)
- - make “Patient_Tag” a constant (Daniel)
+ - make “Patient_Tag” a constant (Daniel)/
  - codeReview (Everyone)
+ - Restrict values entered in vitals EditTexts to be ints (Asier)
+
+
+Status Meeting3:
+ - Made “Patient_Tag” constant (Daniel)
+ - Fixed xml of AddNewPatient (Daniel)
+ - Implemented restriction of access to activities based on user type (Asier)
+ - Implemented getUserType in EmergencyRoom (Asier)
+ 
+ To do:
+ - Display prescription history for patients (Daniel)
+ - work on CRC and description (Doga & Asier)
+ - Display seenbyDoctor status (Amit)
+ - javadoc & comments (Everyone)
+ - Restrict values entered in vitals editTexts to be digits (Asier)
+ - Review code (Everyone)
+	- variable names
+	- method declarations (names, argument names, appropriate private/static/public etc.)
+
 
  
