@@ -20,7 +20,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 /**
- * This class represents a hospitals emergency room.  
+ * This class represents the hospital's emergency room.  
  * The class manages the loading and saving of patients to internal storage.
  * It also stores the patients during run time and calculates urgency based on 
  * patients information. 
@@ -42,7 +42,7 @@ public class EmergencyRoom {
 	public static final String loginTable = "login_information";
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	/**
-	 * Signleton, constructor protected
+	 * Singleton, constructor protected
 	 */
 	protected EmergencyRoom(){	
 		patients = new TreeMap<String, Patient>();
@@ -389,6 +389,10 @@ public class EmergencyRoom {
 		String userType = c.getString(0);
 		this.userType = userType;
 		
+	}
+	
+	public String getUserType() {
+		return this.userType;
 	}
 	/**
 	 * Loads the patients from the database to field patients

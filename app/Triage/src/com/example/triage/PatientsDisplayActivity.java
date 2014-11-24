@@ -63,8 +63,14 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 	 * @param view
 	 */
 	public void addPatient(View view) {
-		Intent intent = new Intent(this, AddNewPatient.class);
-		startActivity(intent);
+		if (EmergencyRoom.getInstance().getUserType() == "nurse") {
+			Intent intent = new Intent(this, AddNewPatient.class);
+			startActivity(intent);
+		}
+		else {
+			Toast.makeText(this, "Only nurses can add new patients", Toast.LENGTH_SHORT).show();
+		}
+		
 	}
 	/**
 	 * Handles the search by health card number function. If a valid search, starts

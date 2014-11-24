@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Triage</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Triage</string>
     <string name="hello_world">Hello World!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_patient_info">PatientInfoActivity</string>
@@ -36,7 +36,7 @@
     <string name="title_activity_add_new_patient">AddNewPatient</string>
     <string name="btnAddPatient">Add Patient</string>
     <string name="btnSavePatient">Save Patient</string>
-    <string name="doctor_visit">Add doctor visit record</string>
+    <string name="doctor_visit">Add Doctor Visit Record</string>
     <string name="date_time_prompt">Pick a date and time</string>
     <string name="urgency_rating"> Urgency: </string>
     <string name="enter_prescription_info">Enter Prescription Information: </string>
@@ -44,7 +44,7 @@
 
     <string-array name="list_options">
         <item>All patients</item>
-        <item>Unseen patients by decending urgency</item>
+        <item>Unseen patients ordered by descending urgency level</item>
     </string-array>
 
     <string name="title_activity_time_dialog">TimeDialogActivity</string>

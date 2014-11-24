@@ -105,15 +105,15 @@ public class PatientInfoActivity extends Activity {
 	 * @param view
 	 */
 	public void addPrescriptionOnClick(View view){
-//		if(EmergencyRoom.getInstance().getUserType() == "Nurse"){
-//			Toast.makeText(this, "NO NURSE", Toast.LENGTH_LONG).show();
-//		}else{
-
-//		}
+		if (EmergencyRoom.getInstance().getUserType() == "physician") {
+			Intent intent = new Intent(this,AddPrescriptionActivity.class);
+			intent.putExtra(EmergencyRoom.patientTag, patient);
+			startActivity(intent);	
+		}
+		else {
+			Toast.makeText(this, "Only physicians can add prescriptions", Toast.LENGTH_SHORT).show();
+		}
 		
-		Intent intent = new Intent(this,AddPrescriptionActivity.class);
-		intent.putExtra(EmergencyRoom.patientTag, patient);
-		startActivity(intent);	
 		
 
 	}
@@ -127,9 +127,16 @@ public class PatientInfoActivity extends Activity {
 	 * @param view
 	 */
 	public void seenByDoctorOnClick(View view){
-		Intent intent = new Intent(this, TimeDialogActivity.class);
-		intent.putExtra(EmergencyRoom.patientTag, patient);
-		startActivity(intent);
+		if (EmergencyRoom.getInstance().getUserType() == "nurse") {
+			Intent intent = new Intent(this, TimeDialogActivity.class);
+			intent.putExtra(EmergencyRoom.patientTag, patient);
+			startActivity(intent);
+		}
+		else {
+			Toast.makeText(this, "Only nurses can record the date and time when a patient has been seen by a doctor",
+					Toast.LENGTH_SHORT).show();
+		}
+		
 	}
 
 
