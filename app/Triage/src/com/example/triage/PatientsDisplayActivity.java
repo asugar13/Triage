@@ -63,7 +63,7 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 	 * @param view
 	 */
 	public void addPatient(View view) {
-		if (EmergencyRoom.getInstance().getUserType() == "nurse") {
+		if (EmergencyRoom.getInstance().getUserType().equals("nurse")) {
 			Intent intent = new Intent(this, AddNewPatient.class);
 			startActivity(intent);
 		}
