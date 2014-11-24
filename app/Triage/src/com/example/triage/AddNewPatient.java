@@ -40,6 +40,9 @@ public class AddNewPatient extends Activity {
 	 * @param view
 	 */
 	public void saveNewPatient(View view) {
+		
+		
+		
 		Intent intent = new Intent(this, PatientsDisplayActivity.class);
 		String year = String.valueOf(birthdatePicker.getYear());
 		String month = String.valueOf(birthdatePicker.getMonth());
