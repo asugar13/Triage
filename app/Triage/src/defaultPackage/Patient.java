@@ -47,6 +47,7 @@ public class Patient implements Serializable{
 	
 	/**
 	 * Sets the time that the patient has been seen by a doctor
+	 * 
 	 * @param timeSeen date object of the time patient was seen by a doctor
 	 */
 	public void setSeenByDoctor(Date timeSeen){
@@ -57,8 +58,10 @@ public class Patient implements Serializable{
 	}
 	
 	/**
-	*@return the patients name as a string
-	*/
+	 * Gets the patient's name
+	 * 
+	 *@return the patients name as a string
+	 */
 	public String getName(){
 		String nameString = "";
 		for(String n: name){
@@ -68,14 +71,17 @@ public class Patient implements Serializable{
 	}
 	
 	/**
-	*@return This patient's birth date formatted as a string.
-	*/
+	 * Gets this patient's birthdate
+	 * 
+	 *@return This patient's birth date formatted as a string.
+	 */
 	public String getBirthDate(){
 		return birthDate;
 	}
 	
 	/**
 	 * Returns this patient's health card number.
+	 * 
 	 * @return This patient's health card number.
 	 */
 	public String getHealthCardNum(){
@@ -84,6 +90,7 @@ public class Patient implements Serializable{
 	
 	/**
 	* Adds new vitals (vital signs and symptoms) to this Patient and updates the Emergency Room.
+	* 
 	* @param newVitals New vitals to be added to this patient.
 	*/
 	public void addVitals(String[] newVitals){
@@ -93,26 +100,35 @@ public class Patient implements Serializable{
 		
 	}
 	/**
-	*@return vitals object that belongs to this patient
-	*/
+	 *Gets this pateint's vitals and symptoms 
+	 * 
+	 *@return vitals object that belongs to this patient
+	 */
 	public Vitals getVitals(){
 		return vitals;
 	}
 	
 	/**
-	* @param urgency rating to be assigned to patient
-	*/
+	 * Adds and urgency rating to this patient
+	 * 
+	 * @param urgency rating to be assigned to patient
+	 */
 	public void addUrgency(int urgency){
 		this.urgency = urgency;
 	}
 	
 	/**
 	*Gets this patient's urgency
+	*
+	*@return urgency The urgency rating of this patient.
 	*/
 	public int getUrgency(){
 		return urgency;
 	}
+	
 	/**
+	 * Gets the status of whether this patient has been seen by a doctor.
+	 * 
 	 * @return boolean if patient has been seen by a doctor
 	 */
 	public boolean getSeenByDoctorStatus(){
@@ -120,13 +136,16 @@ public class Patient implements Serializable{
 	}
 	
 	/**
-	 * @return Date that patient has been seen by a doctor
+	 * Returns the time of when the patient had been seen by a doctor.
+	 * 
+	 * @return Date that patient has been seen by a doctor.
 	 */
 	public Date getSeenByDoctor(){
 		return this.seenByDoctor;
 	}
 	/**
-	 * Adds prescription information to the patient
+	 * Adds prescription information to the patient.
+	 * 
 	 * @param scriptInfo String representing the prescription
 	 */
 	public void addPrescription(String scriptInfo) {
@@ -137,6 +156,7 @@ public class Patient implements Serializable{
 	
 	/**
 	 * Generates a string representation of TreeMap<Date, String> allPrescriptions
+	 * 
 	 * @return String representation of TreeMap<Date, String> allPrescriptions
 	 */
 	public String getPrescriptionString(){
@@ -158,6 +178,7 @@ public class Patient implements Serializable{
 	
 	/**
 	 * Returns the String representation of this Patient object.
+	 * 
 	 * @return The string representation of this Patient object
 	 */
 	@Override
