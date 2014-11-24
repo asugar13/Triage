@@ -44,6 +44,7 @@
         </activity>
         <activity
             android:name=".AddNewPatient"
+            android:theme="@android:style/Theme.Dialog"
             android:label="@string/title_activity_add_new_patient" >
         </activity>
         <activity
