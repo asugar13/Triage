@@ -118,6 +118,13 @@ public class Patient implements Serializable{
 	public boolean getSeenByDoctorStatus(){
 		return this.seenByDoctorStatus;
 	}
+	
+	/**
+	 * @return Date that patient has been seen by a doctor
+	 */
+	public Date getSeenByDoctor(){
+		return this.seenByDoctor;
+	}
 	/**
 	 * Adds prescription information to the patient
 	 * @param scriptInfo String representing the prescription
