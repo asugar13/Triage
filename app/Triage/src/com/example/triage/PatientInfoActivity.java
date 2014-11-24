@@ -112,7 +112,7 @@ public class PatientInfoActivity extends Activity {
 	 * @param view
 	 */
 	public void addPrescriptionOnClick(View view){
-		if (EmergencyRoom.getInstance().getUserType() == "physician") {
+		if (EmergencyRoom.getInstance().getUserType().equals("physician")) {
 			Intent intent = new Intent(this,AddPrescriptionActivity.class);
 			intent.putExtra(EmergencyRoom.patientTag, patient);
 			startActivity(intent);	
@@ -134,7 +134,7 @@ public class PatientInfoActivity extends Activity {
 	 * @param view
 	 */
 	public void seenByDoctorOnClick(View view){
-		if (EmergencyRoom.getInstance().getUserType() == "nurse") {
+		if (EmergencyRoom.getInstance().getUserType().equals("nurse")) {
 			Intent intent = new Intent(this, TimeDialogActivity.class);
 			intent.putExtra(EmergencyRoom.patientTag, patient);
 			startActivity(intent);
