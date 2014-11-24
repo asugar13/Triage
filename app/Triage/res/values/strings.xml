@@ -40,6 +40,7 @@
     <string name="date_time_prompt">Pick a date and time</string>
     <string name="urgency_rating"> Urgency: </string>
     <string name="enter_prescription_info">Enter Prescription Information: </string>
+    <string name="seen_by_doctor"> Seen By Doctor: </string>
 
 
     <string-array name="list_options">
