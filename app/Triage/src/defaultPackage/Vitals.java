@@ -24,7 +24,6 @@ public class Vitals implements Serializable{
 	private TreeMap<Date, String[]> vitSymps;
 	public boolean isEmpty = true;
 	
-	
 	/**
 	 * Constructs a Vitals object with no vital signs or symptoms yet recorded. 
 	 */
@@ -90,11 +89,17 @@ public class Vitals implements Serializable{
 	
 	/**
 	 * Returns a Map of the history of a patient's vitals arranged by time.
+	 * 
+	 * @return vitSymps The vitals signs and symptoms of this patient mapped by Date.
 	 */
 	public Map<Date, String[]> getVitSymps(){
 		return this.vitSymps;
 	}
 	/**
+	 * Returns a string representation of the vitals
+	 * For storing the vitals in a text file, not for outputting a meaningful
+	 * Representation of the vitals.
+	 * 
 	 * @return String representation of vitals for writing to internal storage
 	 */
 	@Override
@@ -102,7 +107,7 @@ public class Vitals implements Serializable{
 		String vitSympString = "";
 		ArrayList<Date> keys = new ArrayList<Date>(vitSymps.keySet());
 		
-		for(int i = 0;i < keys.size(); i ++ ){
+		for(int i = 0;i < keys.size(); i ++){
 			Date this_date = keys.get(i);
 			vitSympString = vitSympString + sdf.format(this_date) + "*";
 			
