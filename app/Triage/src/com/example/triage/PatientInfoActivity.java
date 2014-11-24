@@ -50,6 +50,7 @@ public class PatientInfoActivity extends Activity {
 		TextView tempPatient = (TextView) findViewById(R.id.temperature_catch);
 		TextView symptoms = (TextView) findViewById(R.id.symptoms_description_catch);
 		TextView urgency = (TextView) findViewById(R.id.urgency_level_field);
+		TextView seenByDoctor = (TextView) findViewById(R.id.seen_by_doctor_catch);
 
 		
 		name_patient.setText(name);
@@ -69,6 +70,7 @@ public class PatientInfoActivity extends Activity {
 			heartRate.setText(current_vit_symps[3]);
 			symptoms.setText(current_vit_symps[4]);
 			urgency.setText("" + patient.getUrgency());
+			
 
 			
 		}
@@ -80,7 +82,12 @@ public class PatientInfoActivity extends Activity {
 			symptoms.setText("N/A");
 			urgency.setText("N/A");
 		}
-		
+		if (patient.getSeenByDoctorStatus()){
+			seenByDoctor.setText(patient.getSeenByDoctor().toString());
+		}
+		else{
+			seenByDoctor.setText("No");
+		}
 	}
 	/**
 	 * Launches EditVitalsActivity for adding new vital and symptom information.
