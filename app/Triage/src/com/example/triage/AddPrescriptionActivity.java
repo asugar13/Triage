@@ -27,6 +27,7 @@ public class AddPrescriptionActivity extends Activity {
 		
 	}
 
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -57,6 +58,7 @@ public class AddPrescriptionActivity extends Activity {
 		Intent intent = new Intent(this, PatientInfoActivity.class);
 		intent.putExtra(EmergencyRoom.patientTag, patient);
 		startActivity(intent);
+		
 		
 	}
 	

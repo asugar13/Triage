@@ -1,48 +1,86 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical" 
     android:layout_height="match_parent"
+    android:weightSum="2"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="com.example.triage.ViewAllRecordsActivity" >
 
-    <TextView
-        android:id="@+id/noPatientVitals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="14dp"/>
-    
-   <TextView
-        android:id="@+id/noPatientScript"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="14dp"/>
-
-    <TextView
-        android:id="@+id/patient_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/patient_records" />
+        
+    
+     <TextView
+        android:id="@+id/patient_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-    <ListView
+    <LinearLayout
+        android:orientation="vertical" 
+        android:id="@+id/vitalsList"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_width="fill_parent"
+        android:layout_below="@+id/textView3">
+        
+       <TextView
+      	  android:id="@+id/noPatientVitals"
+      	  android:layout_width="217dp"
+      	  android:layout_height="wrap_content"
+        	android:layout_marginRight="14dp" /> 
+        
+      <TextView
+        android:id="@+id/patientVitals"
+        android:text="@string/patient_vitals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="14dp"/> 
+        
+   	 <ListView
         android:id="@+id/patientHistoryList"
-        android:layout_weight="0.7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+        android:layout_height="fill_parent"
+        android:layout_width="match_parent"> 
+     </ListView> 
+     
+    </LinearLayout>
+    
 
-    <ListView
-        android:id="@+id/patientScriptList"
-        android:layout_weight="0.3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+	<LinearLayout
+		android:paddingTop="10dp"
+	    android:layout_below="@+id/vitalsList"
+	    android:orientation="vertical" 
+	    android:layout_height="0dp"
+	    android:layout_weight="1"
+	    android:layout_width="fill_parent">
+   	 
+	  
+	   <TextView
+        android:id="@+id/patientScript"
+        android:text="@string/patient_script"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="14dp"/>
+	    
+   	   <ListView
+      	  android:id="@+id/patientScriptList"
+      	  android:layout_height="fill_parent"
+      	  android:layout_width="fill_parent">
+  	    </ListView>
+  	  
+   	   <TextView
+        android:id="@+id/noPatientScript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="14dp"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>
