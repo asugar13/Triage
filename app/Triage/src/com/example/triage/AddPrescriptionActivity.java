@@ -56,6 +56,7 @@ public class AddPrescriptionActivity extends Activity {
 		patient.addPrescription(prescriptionString);
 		Intent intent = new Intent(this, PatientInfoActivity.class);
 		intent.putExtra(EmergencyRoom.patientTag, patient);
+		startActivity(intent);
 		
 	}
 	
