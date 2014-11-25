@@ -248,25 +248,25 @@ public class EmergencyRoom {
 		try{
 			Log.d("Vitals", vitals.toString() + "empty");
 			String[] mostRecentVitals = allVitals.get(allVitals.firstKey());
-			if (mostRecentVitals[0] != null){
+			if (mostRecentVitals[0] != "N/A"){
 				int temp = Integer.parseInt(mostRecentVitals[0]);
 				if (temp >= 39){
 					urgency++;
 				}
 			}
-			if (mostRecentVitals[1] != null){
+			if (mostRecentVitals[1] != "N/A"){
 				int diastolic = Integer.parseInt(mostRecentVitals[1]);
 				if (diastolic >= 90){
 					urgency++;
 				}
-				else if (mostRecentVitals[2] != null){
+				else if (mostRecentVitals[2] != "N/A"){
 					int systolic = Integer.parseInt(mostRecentVitals[2]);
 					if (systolic >= 140){
 						urgency++;
 					}
 				}
 			}
-			if (mostRecentVitals[3] != null){
+			if (mostRecentVitals[3] != "N/A"){
 				int heartRate = Integer.parseInt(mostRecentVitals[3]);
 				if (heartRate >= 100 || heartRate <= 50){
 					urgency++;
