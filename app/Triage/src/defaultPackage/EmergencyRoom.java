@@ -40,7 +40,9 @@ public class EmergencyRoom {
 	public static final String patientsTxtFileName = "patient_records.txt";
 	public static final String passwordsTxtFileName = "passwords.txt";
 	public static final String loginTable = "login_information";
-	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	public static final SimpleDateFormat sdfNoTime = new SimpleDateFormat("dd-MM-yyyy");
+	public static final SimpleDateFormat sdfTime = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+
 	
 	/**
 	 * Singleton, constructor protected
@@ -234,7 +236,7 @@ public class EmergencyRoom {
 		int urgency = 0;
 		String[] birthDate = patient.getBirthDate().split("-");
 		int birthDay = Integer.parseInt(birthDate[0]) + Integer.parseInt(birthDate[1]) * 30 + Integer.parseInt(birthDate[2]) * 365;
-		String[] currentDate = sdf.format(new Date()).split("-");
+		String[] currentDate = sdfNoTime.format(new Date()).split("-");
 		int currentDay = Integer.parseInt(currentDate[0]) * 365 + Integer.parseInt(currentDate[1]) * 30 + Integer.parseInt(currentDate[2]);
 		float age = ((float) (currentDay - birthDay)) / 365;
 		if (age < 2){
@@ -421,28 +423,31 @@ public class EmergencyRoom {
 		Cursor c = dbManager.getAllRows(patientTable);
 		if (c.moveToFirst()){
 			do{
-
 				Vitals currentVitals;
+				//Create vitals from string representation
 				if(c.getString(4) != ""){
 					currentVitals = new Vitals(c.getString(4).split("&"));
 				}else{
 					currentVitals = new Vitals();
 				}
+				
 				TreeMap<Date, String> allPrescriptions = new TreeMap<Date, String>();
+				
+				//Parse prescription record string
 				if(!TextUtils.isEmpty(c.getString(5))){
 					String[] prescriptionDBString = c.getString(5).split("[\\x7C]");
 					for(String s: prescriptionDBString){
 						Date date = null;
-						String scriptInfo = null;
+						String scriptInfo = "";
 						String[] currentScript = s.split(Pattern.quote("*"));
 						try {
-							date = sdf.parse(currentScript[0]);
+							date = sdfNoTime.parse(currentScript[0]);
 							scriptInfo = currentScript[1];
+							Log.d("scriptInfo",scriptInfo + "Empty");
+							allPrescriptions.put(date, scriptInfo);
 						} catch (ParseException e) {
 							e.printStackTrace();
 						}
-						Log.d("scriptInfo",scriptInfo);
-						allPrescriptions.put(date, scriptInfo);
 					}
 
 				}

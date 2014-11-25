@@ -165,7 +165,7 @@ public class Patient implements Serializable{
 		
 		for(int i =0; i< keys.size(); i++){
 			Date this_date = keys.get(i);
-			scriptString = scriptString + EmergencyRoom.sdf.format(this_date) + "*";
+			scriptString = scriptString + EmergencyRoom.sdfTime.format(this_date) + "*";
 			scriptString = scriptString + allPrescriptions.get(keys.get(i));
 			if(!(i == keys.size() - 1)){
 				//If not the last prescription entry
@@ -173,6 +173,28 @@ public class Patient implements Serializable{
 			}
 		}
 		return scriptString;
+	}
+	
+	/**
+	 * Returns list of all prescriptions returned in the format:
+	 * 25-04-2014 + \n  + Medication Name and Info
+	 */
+	public String[] getPrescriptions(){
+		String[] allScripts = new String[allPrescriptions.size()];
+		ArrayList<Date> keys = new ArrayList<Date>(allPrescriptions.keySet());
+		for(int i = 0; i< allPrescriptions.size();i++){
+			allScripts[i] = EmergencyRoom.sdfTime.format(keys.get(i)) + "\n" +
+						allPrescriptions.get(keys.get(i));
+		}
+		
+		return allScripts;
+	}
+	/**
+	 * Returns most recent prescription returned in format:
+	 * 25-04-2014 + \n  + Medication Name and Info
+	 */
+	public String getMostRecentPrescription(){
+		return EmergencyRoom.sdfNoTime.format(allPrescriptions.firstKey()) + "\n" +  allPrescriptions.firstEntry(); 
 	}
 	
 	

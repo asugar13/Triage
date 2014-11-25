@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,15 +43,26 @@ public class ViewAllRecordsActivity extends Activity {
 		TextView name_patient = (TextView) findViewById(R.id.patient_name);
 		name_patient.setText(patient.getName());
 		
+		//Populate listView for vitals history
 		if(!patient.getVitals().isEmpty){
 			ListView recordsList = (ListView) findViewById(R.id.patientHistoryList);
 			recordsList.setAdapter(new patientHistoryAdapter(this,R.layout.vital_history_row,patient.getVitals()));
 			
 		}else{
-			TextView noVitals = (TextView) findViewById(R.id.noPatientData);
-			noVitals.setText("No Patient data found.");
-		}	
+			TextView noVitals = (TextView) findViewById(R.id.noPatientVitals);
+			noVitals.setText("No vitals recorded");
+		}
 		
+		//Populate listview for prescription history
+		Log.d("PatientScript",patient.getPrescriptions() + "EMPTY?");
+		if(!(patient.getPrescriptions().length == 0)){
+			ListView scriptList = (ListView) findViewById(R.id.patientScriptList);
+			scriptList.setAdapter(new ArrayAdapter(this,R.layout.prescription_list_row,patient.getPrescriptions()));
+			
+		}else{
+			TextView noScript = (TextView) findViewById(R.id.noPatientScript);
+			noScript.setText("No prescriptions recorded");
+		}
 	}
 
 	@Override
