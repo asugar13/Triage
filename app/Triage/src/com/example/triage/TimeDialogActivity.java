@@ -57,7 +57,10 @@ public class TimeDialogActivity extends Activity{
 		Date date = cal.getTime();
 		patient.setSeenByDoctor(date);
 		Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
-		finish();
+
+		Intent intent = new Intent(this, PatientInfoActivity.class);
+		intent.putExtra(EmergencyRoom.patientTag, patient);
+		startActivity(intent);
 	}
 
 	@Override
