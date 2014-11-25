@@ -248,25 +248,32 @@ public class EmergencyRoom {
 		try{
 			Log.d("Vitals", vitals.toString() + "empty");
 			String[] mostRecentVitals = allVitals.get(allVitals.firstKey());
-			int temp = Integer.parseInt(mostRecentVitals[0]);
-			int diastolic = Integer.parseInt(mostRecentVitals[1]);
-			int systolic = Integer.parseInt(mostRecentVitals[2]);
-			int heartRate = Integer.parseInt(mostRecentVitals[3]);
-			if (temp >= 39){
-				urgency++;
+			if (mostRecentVitals[0] != null){
+				int temp = Integer.parseInt(mostRecentVitals[0]);
+				if (temp >= 39){
+					urgency++;
+				}
 			}
-			if (systolic >= 140){
-				urgency++;
+			if (mostRecentVitals[1] != null){
+				int diastolic = Integer.parseInt(mostRecentVitals[1]);
+				if (diastolic >= 90){
+					urgency++;
+				}
+				else if (mostRecentVitals[2] != null){
+					int systolic = Integer.parseInt(mostRecentVitals[2]);
+					if (systolic >= 140){
+						urgency++;
+					}
+				}
 			}
-			else if (diastolic >= 90){
-				urgency++;
-			}
-			if (heartRate >= 100 || heartRate <= 50){
-				urgency++;
+			if (mostRecentVitals[3] != null){
+				int heartRate = Integer.parseInt(mostRecentVitals[3]);
+				if (heartRate >= 100 || heartRate <= 50){
+					urgency++;
+				}
 			}
 		}
-		catch (NoSuchElementException e){
-			
+		catch (NoSuchElementException e){	
 		}
 		patient.addUrgency(urgency);
 	}
