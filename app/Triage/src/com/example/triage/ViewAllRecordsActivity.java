@@ -163,7 +163,7 @@ public class ViewAllRecordsActivity extends Activity {
 			TextView tempTView = (TextView) row.findViewById(R.id.patientTempText);
 			
 			//Assign values to the text views
-			dateTView.setText(sortedDates.get(position).toString());
+			dateTView.setText(EmergencyRoom.sdfTime.format(sortedDates.get(position)));
 			bpdTView.setText(vitalsData[1]);
 			bpsTView.setText(vitalsData[2]);
 			hrTView.setText(vitalsData[3]);
