@@ -54,7 +54,8 @@ public class AddPrescriptionActivity extends Activity {
 	public void savePrescriptionOnClick(View view){
 		String prescriptionString = ((EditText) findViewById(R.id.prescription_text)).getText().toString();
 		patient.addPrescription(prescriptionString);
-		finish();
+		Intent intent = new Intent(this, PatientInfoActivity.class);
+		intent.putExtra(EmergencyRoom.patientTag, patient);
 		
 	}
 	
