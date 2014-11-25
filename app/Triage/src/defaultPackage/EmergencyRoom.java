@@ -41,9 +41,7 @@ public class EmergencyRoom {
 	public static final String passwordsTxtFileName = "passwords.txt";
 	public static final String loginTable = "login_information";
 	public static final SimpleDateFormat sdfNoTime = new SimpleDateFormat("dd-MM-yyyy");
-	public static final SimpleDateFormat sdfTime = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-
-	
+	public static final SimpleDateFormat sdfTime = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
 	/**
 	 * Singleton, constructor protected
 	 */

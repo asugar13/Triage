@@ -19,7 +19,7 @@ public class Vitals implements Serializable{
 
 	private static final long serialVersionUID = 2939547818890631643L;
 	/**Simple date format, specifies string format of dates */
-	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 	/**Stores patient's vitals based on the time that they are written. */
 	private TreeMap<Date, String[]> vitSymps;
 	public boolean isEmpty = true;

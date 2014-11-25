@@ -34,6 +34,7 @@ public class ViewAllRecordsActivity extends Activity {
 	/**
 	 * Sets the appropriate layout of this activity based on patient_records.txt and vital_history_row.xml.
 	 */
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_all_records);
