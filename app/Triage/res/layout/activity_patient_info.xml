@@ -45,15 +45,6 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_marginTop="20dp"
-        android:text="Personal Data:" />
-
-    <TextView
         android:id="@+id/heartRateView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,15 +92,6 @@
         android:layout_above="@+id/save_prescription"
         android:layout_centerHorizontal="true"
         android:text="@string/doctor_visit" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="viewRecordsOnClick"
-        android:text="@string/viewRecords" />
 
     <TextView
         android:id="@+id/diastolic_catch"
@@ -186,14 +168,6 @@
         android:text="@string/urgency_rating" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView11"
-        android:layout_below="@+id/birthdateView"
-        android:text="Vitals:" />
-
-    <TextView
         android:id="@+id/seen_by_doctor_catch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -225,5 +199,40 @@
         android:layout_above="@+id/add_prescription"
         android:layout_alignLeft="@+id/textView12"
         android:text="Symptoms Description:  " />
+
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:onClick="backToEmergencyRoom"
+        android:text="@string/btn_back" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="viewRecordsOnClick"
+        android:text="@string/viewRecords" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView6"
+        android:layout_below="@+id/button1"
+        android:text="Personal Data:" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView11"
+        android:layout_below="@+id/birthdateView"
+        android:text="Vitals:" />
 
 </RelativeLayout>

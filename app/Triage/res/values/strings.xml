@@ -42,8 +42,8 @@
     <string name="enter_prescription_info">Enter Prescription Information: </string>
     <string name="seen_by_doctor"> Seen By Doctor: </string>
     <string name="patient_script">Prescription Records</string>
-        <string name="patient_vitals">Vital Records</string>
-    
+    <string name="patient_vitals">Vital Records</string>
+    <string name="btn_back">Back To Emergency Room</string>
     
 
 

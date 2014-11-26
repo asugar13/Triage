@@ -44,7 +44,7 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patients_display);
 		setTitle("Emergency Room");
-		
+		getIntent();
 		//Get spinner options
 		String[] spinnerOptions = getResources().getStringArray(R.array.list_options);
 		allPatientsSelection = spinnerOptions[0];
