@@ -43,7 +43,7 @@
             android:label="@string/title_activity_enter_vitals" >
         </activity>
         <activity
-            android:name=".AddNewPatient"
+            android:name=".AddNewPatientActivity"
             android:theme="@android:style/Theme.Dialog"
             android:label="@string/title_activity_add_new_patient" >
         </activity>

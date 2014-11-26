@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="1dp"
-    tools:context="com.example.triage.AddNewPatient" >
+    tools:context="com.example.triage.AddNewPatientActivity" >
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
