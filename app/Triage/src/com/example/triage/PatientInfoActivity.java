@@ -84,6 +84,12 @@ public class PatientInfoActivity extends Activity {
 			seenByDoctor.setText("No");
 		}
 }
+	public void backToEmergencyRoom(View view) {
+		Intent intent = new Intent(this, PatientsDisplayActivity.class);
+//		intent.putExtra(EmergencyRoom.PATIENT_TAG, patient);
+		startActivity(intent);
+	}
+	
 	/**
 	 * Launches EditVitalsActivity for adding new vital and symptom information.
 	 * @param view View object of clicked button.
