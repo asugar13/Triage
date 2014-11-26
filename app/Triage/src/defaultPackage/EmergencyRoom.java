@@ -70,9 +70,7 @@ public class EmergencyRoom {
 		dbManager = new DatabaseManager(context);
 		dbManager.open();
 		loadPatients(context,patientsTxtFileName);
-
 	}
-	
 	/**
 	 * Loads patients from database
 	 * If database doesn't exist loads from .txt file, and copies to new database for future use
@@ -81,7 +79,6 @@ public class EmergencyRoom {
 	 * @param fileName name of file to open
 	 */
 	private void loadPatients(Context context, String fileName) {
-		
 		if(dbManager.tableExists(patientTable)){
 			//Read from database
 			loadPatientsFromDB();
@@ -245,25 +242,26 @@ public class EmergencyRoom {
 		TreeMap <Date, String[]> allVitals = vitals.getAllVitals();
 		try{
 			String[] mostRecentVitals = allVitals.get(allVitals.lastKey());
-			if (mostRecentVitals[0] != null && mostRecentVitals[0] != "N/A"){
+			Log.d("MOSTRECENTVITALS",Arrays.toString(mostRecentVitals));
+			if (mostRecentVitals[0] != null && !mostRecentVitals[0].equals("N/A")){
 				int temp = Integer.parseInt(mostRecentVitals[0]);
 				if (temp >= 39){
 					urgency++;
 				}
 			}
-			if (mostRecentVitals[1] != null && mostRecentVitals[1] != "N/A"){
+			if (mostRecentVitals[1] != null && !mostRecentVitals[1].equals("N/A")){
 				int diastolic = Integer.parseInt(mostRecentVitals[1]);
 				if (diastolic >= 90){
 					urgency++;
 				}
-				else if (mostRecentVitals[2] != null && mostRecentVitals[2] != "N/A"){
+				else if (mostRecentVitals[2] != null && !mostRecentVitals[2].equals("N/A")){
 					int systolic = Integer.parseInt(mostRecentVitals[2]);
 					if (systolic >= 140){
 						urgency++;
 					}
 				}
 			}
-			if (mostRecentVitals[3] != null && mostRecentVitals[3] != "N/A"){
+			if (mostRecentVitals[3] != null && !mostRecentVitals[3].equals("N/A")){
 				int heartRate = Integer.parseInt(mostRecentVitals[3]);
 				if (heartRate >= 100 || heartRate <= 50){
 					urgency++;
