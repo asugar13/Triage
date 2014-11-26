@@ -48,8 +48,8 @@
 
 
     <string-array name="list_options">
-        <item>All patients</item>
-        <item>Unseen patients ordered by descending urgency level</item>
+        <item>View all patients</item>
+        <item>View patients not seen by a doctor by descending urgency</item>
     </string-array>
 
     <string name="title_activity_time_dialog">TimeDialogActivity</string>
