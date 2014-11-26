@@ -29,9 +29,11 @@ import android.widget.Toast;
  * Implements OnItemSelectedListener for handling spinner selections.
  */
 public class PatientsDisplayActivity extends Activity implements OnItemSelectedListener {
-	/**List of all patient objects  */
+	/**List of all patient objects.*/
 	private ArrayList<Patient> patients;
+	/**String representing allPatientsselection, used to validate selection of dropdown.*/
 	private String allPatientsSelection;
+	/**String representing sortedPatientsselection, used to validate selection of dropdown.*/
 	private String sortedPatientsSelection;
 	@Override
 	/**
@@ -42,25 +44,28 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_patients_display);
 		setTitle("Emergency Room");
-		//Not sure about this
-
 		
+		//Get spinner options
 		String[] spinnerOptions = getResources().getStringArray(R.array.list_options);
 		allPatientsSelection = spinnerOptions[0];
 		sortedPatientsSelection = spinnerOptions[1];
 		
+		//Populate spinners listview
 		Spinner dropDown = (Spinner) findViewById(R.id.list_sort);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
 		        R.array.list_options, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		dropDown.setAdapter(adapter);
+		//Set the onItemSelectedListener for the spinner
 		dropDown.setOnItemSelectedListener(this);
+		//Set the spinner to first option
 		dropDown.setSelection(0);
-
 	}
+	
 	/**
-	 * OnClick for Add Patient button, starts AddNewPatient activity
-	 * @param view
+	 * OnClick for Add Patient button, starts AddNewPatient activity.
+	 * Only works for nurses.
+	 * @param view View of the clicked button.
 	 */
 	public void addPatient(View view) {
 		if (EmergencyRoom.getInstance().getUserType().equals("nurse")) {
@@ -70,20 +75,18 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 		else {
 			Toast.makeText(this, "Only nurses can add new patients", Toast.LENGTH_SHORT).show();
 		}
-		
 	}
+	
 	/**
 	 * Handles the search by health card number function. If a valid search, starts
-	 * PatientInfoActivity to display the patients information
-	 * @param view
+	 * PatientInfoActivity to display the patients information.
+	 * @param view View of the button clicked.
 	 */
 	public void searchClick(View view){
 		Patient result = null;
 		String hCardNumber = "";
-
 		EditText healthCardText = (EditText) this.findViewById(R.id.searchHCtext);
 		hCardNumber = healthCardText.getText().toString();
-		
 		
 		if(!(hCardNumber == "")){
 			result = EmergencyRoom.getInstance().getPatientByHCNum(hCardNumber);
@@ -102,10 +105,14 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 			//Edit text was empty
 			Toast.makeText(this, "Enter a health card number", Toast.LENGTH_SHORT).show();
 		}
-
 	}
 	
 	@Override
+	/**
+	 * Creates the menu, inflating the given menu.
+	 * @param The menu to inflate.
+	 * @return return if the menu was successfully created.
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.patients_display, menu);
@@ -113,6 +120,11 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 	}
 
 	@Override
+	/**
+	 * Handles selection of menu item.
+	 * @param the selected menu item.
+	 * @return if the selection was successfully handled.
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -123,19 +135,58 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	/**
+	 * Handles selections of spinner, populating the listview of patients depending
+	 * on the selection.
+	 * @param parent the parent that the selected view (row) is in (The spinner).
+	 * @param view View of the selected item.
+	 * @param position of selection in the spinner options.
+	 */
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int position,
+			long id) {
+		//Get list of patients
+		String selection = (String) parent.getItemAtPosition(position);
+		Log.d("SELECTION",selection);
+		
+		if(selection.equals(allPatientsSelection)){
+			patients = (ArrayList<Patient>) EmergencyRoom.getInstance().getPatients();
+		}
+		if(selection.equals(sortedPatientsSelection)){
+			patients = (ArrayList<Patient>) EmergencyRoom.getInstance().getUnseenSortedPatients();
+		}
+		
+		//Get list view, and populate with adapter
+		ListView patientsList = (ListView) findViewById(R.id.listView1);
+		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
+	}
+	
+	@Override
+	/**
+	 * If nothing selected for the spinner.
+	 */
+	public void onNothingSelected(AdapterView<?> parent) {
+		// TODO Auto-generated method stub	
+	}
+	
 	/**
 	 * Custom adapter for listview for displaying patients.
 	 * Populates the textViews in each layout with the appropriate patient information.
 	 */
 	private class patientsAdapter extends BaseAdapter{
-		Context context;
-		int layoutId;
-		ArrayList<Patient> patientList;
+		/** Context of application for starting new activities.*/
+		private Context context;
+		/** Layout id for each row.*/
+		private int layoutId;
+		/** List of patients to display.*/
+		private ArrayList<Patient> patientList;
+		
 		/**
-		 * Initializes the patientsAdapter
-		 * @param context used for inflating layout if layout is null
-		 * @param layoutId refers to the layout for each row
-		 * @param patientList list of patients whos data to display
+		 * Initializes the patientsAdapter.
+		 * @param context used for inflating layout if layout is null.
+		 * @param layoutId refers to the layout for each row.
+		 * @param patientList list of patients whos data to display.
 		 */
 		public patientsAdapter(Context context,int layoutId,ArrayList<Patient> patientList){
 			this.context = context;
@@ -145,7 +196,8 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 		
 		@Override
 		/**
-		 * @return int size of list to make
+		 * Return the size of the list.
+		 * @return int size of list to make.
 		 */
 		public int getCount() {
 			return patientList.size();
@@ -153,8 +205,9 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 
 		@Override
 		/**
-		 * @param position in the list
-		 * @return Patient object appropriate for that position
+		 * Get the item for a specific position in the list.
+		 * @param position in the list.
+		 * @return Patient object appropriate for that position.
 		 */
 		public Object getItem(int position) {
 			return patientList.get(position);
@@ -167,11 +220,11 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 
 		@Override
 		/**
-		 * Populates specific row in the listview (called for every row)
-		 * @param position an int that specifies the position in the listview
-		 * @param convertView a View for the specific row of the listview
-		 * @param parent the parent view (ListView) that the convertView will be attached to
-		 * @return row a view populated with the patient info
+		 * Populates specific row in the listview (called for every row).
+		 * @param position an int that specifies the position in the listview.
+		 * @param convertView a View for the specific row of the listview.
+		 * @param parent the parent view (ListView) that the convertView will be attached to.
+		 * @return row a view populated with the patient info.
 		 */
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
@@ -198,7 +251,8 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 				
 				@Override
 				/**
-				 * Handles click events of listview rows. Displays patient info in PatientInfoActivity
+				 * Handles click events of listview rows, Displays clicked patient 
+				 * info in PatientInfoActivity.
 				 */
 				public void onClick(View v) {
 					//Launch the patientInfo class with the patient from this row
@@ -207,44 +261,7 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 					startActivity(intent);
 				}
 			});
-			
 			return row;
-		}
-		
+		}	
 	}
-	/**
-	 * Handles selections of spinner, populating the listview of patients depending
-	 * on the selection.
-	 * @param parent the parent that the selected view (row) is in (The spinner)
-	 * @param view
-	 * @param position of selection in the spinner options
-	 * @param id
-	 */
-	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int position,
-			long id) {
-		//Get list of patients
-		String selection = (String) parent.getItemAtPosition(position);
-		Log.d("SELECTION",selection);
-		
-		if(selection.equals(allPatientsSelection)){
-			patients = (ArrayList<Patient>) EmergencyRoom.getInstance().getPatients();
-		}
-		if(selection.equals(sortedPatientsSelection)){
-			patients = (ArrayList<Patient>) EmergencyRoom.getInstance().getUnseenSortedPatients();
-		}
-		
-		//Get list view, and populate with adapter
-		ListView patientsList = (ListView) findViewById(R.id.listView1);
-		patientsList.setAdapter(new patientsAdapter(this,R.layout.patient_list_row,patients));
-		
-		
-	}
-	@Override
-	public void onNothingSelected(AdapterView<?> parent) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 }

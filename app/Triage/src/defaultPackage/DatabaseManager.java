@@ -21,41 +21,37 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 /**
- * Manages creating, reading, and writing to EmergencyRoomDatabase.db
- * 
+ * Manages creating, reading, and writing to EmergencyRoomDatabase.db.
  */
 public class DatabaseManager {
-	//SingleTON???
-	private static DatabaseManager instance = null;
-	/** Name of the database file*/
+	/** Name of the database file.*/
 	private static final String databaseName = "EmergencyRoomDatabase.db";
-	/** File path to the databasefile*/
+	/** File path to the databasefile.*/
 	private static final String databasePath = "/data/data/com.example.triage/databases/";
-	/** DatabaseHelper for this datbase than manages the opening of SQLite files*/
+	/** DatabaseHelper for this datbase than manages the opening of SQLite files.*/
 	private DatabaseHelper dbHelper;
-	/**SQLitedatabase which will be read from and modified */
+	/**SQLitedatabase which will be read from and modified.*/
 	private SQLiteDatabase mDatabase;
-	/**context of the android application*/
+	/**context of the android application.*/
 	private Context context;
 	
-	
 	/**
-	 * Instantiates the DatabaseManager
-	 * @param context
+	 * Instantiates the DatabaseManager.
+	 * @param context of the application.
 	 */
 	public DatabaseManager(Context context){
 		this.context = context;
 	}
 	
 	/**
-	 * Manages opening creation, and upgrading of SQLite databases
-	 * Creates new database if does not exist
+	 * Manages opening creation, and upgrading of SQLite databases.
+	 * Creates a new database if does not exist.
 	 */
 	private static class DatabaseHelper extends SQLiteOpenHelper{
 		/**
 		 * Constructs a new databaseHelper,
-		 * Creating or opening an existing database of datbaseName
-		 * @param context used to open or create the database
+		 * creating or opening an existing database of databaseName.
+		 * @param context used to open or create the database.
 		 */
 		public DatabaseHelper(Context context) {
 			super(context, databaseName, null, 1);
@@ -64,7 +60,7 @@ public class DatabaseManager {
 		
 		@Override
 		/**
-		 * Not implemented Creation handled by SQLiteOpenHelper constructor
+		 * Not implemented Creation handled by SQLiteOpenHelper constructor.
 		 */
 		public void onCreate(SQLiteDatabase db) {
 			// TODO Auto-generated method stub
@@ -78,12 +74,11 @@ public class DatabaseManager {
 			// TODO Auto-generated method stub
 			
 		}
-
-		
+	
 	}
 	/**
-	 * Checks if the SQLite database exists
-	 * @return whether the SQLite database exists
+	 * Checks if the SQLite database exists.
+	 * @return whether the SQLite database exists.
 	 */
 	public boolean databaseExists(){
 		File file = new File(databasePath);
@@ -91,9 +86,9 @@ public class DatabaseManager {
 	}
 	
 	/**
-	 * Return if a specified tableName exists in the database
-	 * @param tableName
-	 * @return
+	 * Return if a specified tableName exists in the database.
+	 * @param tableName name of the table to check for.
+	 * @return whether the specified tableName exists.
 	 */
 	public boolean tableExists(String tableName){
 		//Solution from: http://stackoverflow.com/questions/3058909/
@@ -108,7 +103,7 @@ public class DatabaseManager {
 	}
 	
 	/**
-	 * Opens the database for reading/writing
+	 * Opens the database for reading/writing.
 	 */
 	public void open(){
 		mDatabase = new DatabaseHelper(context).getWritableDatabase();
@@ -116,8 +111,10 @@ public class DatabaseManager {
 	}
 	
 	/**
-	 * Creates table in database with specified columns and column data types
-	 * @param sqlStatement
+	 * Creates table in database with specified columns and column data types.
+	 * @param tableName name of table to create.
+	 * @param columns list of columns for the table.
+	 * @param types types of data for the columns in the table.
 	 */
 	public void createTable(String tableName,String[] columns,String[] types){
 		String sqlStatement = "CREATE TABLE IF NOT EXISTS ";
@@ -131,35 +128,35 @@ public class DatabaseManager {
 	}
 
 	/**
-	 * Close the SQLiteDatabase
+	 * Close the SQLiteDatabase.
 	 */
 	public void close(){
 		dbHelper.close();
 	}
 	
 	/**
-	 * Modifies the row specified by whereClause in the given table
-	 * @param table
-	 * @param newValues
-	 * @param whereClause
+	 * Modifies the row specified by whereClause in the given table.
+	 * @param table table to modify.
+	 * @param newValues ContentValues new values to put in row.
+	 * @param whereClause specifies which row to replace.
 	 */
 	public void modifyRow(String table,ContentValues newValues,String whereClause){
 		mDatabase.update(table, newValues, whereClause, null);
 	}
 	/**
-	 * Adds a row to the specified table
-	 * @param newValues
-	 * @param tableName
+	 * Adds a row to the specified table.
+	 * @param newValues ContentValues new values to add to table.
+	 * @param tableName table to add values to.
 	 */
 	public void addRow(ContentValues newValues,String tableName){
 		 mDatabase.insert(tableName,null,newValues);
 	}
 
 	/**
-	 * Return if a row specified by a sql Where statement exists
-	 * @param tableName
-	 * @param sqlWhere
-	 * @return
+	 * Return if a specified row exists in a given table.
+	 * @param tableName table to check.
+	 * @param sqlWhere sqlwhere statement to check for the row.
+	 * @return  boolean Whether the specified row exists.
 	 */
 	public boolean rowExists(String tableName,String sqlWhere){
 		Cursor c = mDatabase.query(tableName,null,sqlWhere,null,null,null,null);
@@ -171,9 +168,9 @@ public class DatabaseManager {
 
 	
 	/**
-	 * Return a cursor object with all data from a given table
-	 * @param tableName
-	 * @return
+	 * Return a cursor object with all data from a given table.
+	 * @param tableName the name of the table to query.
+	 * @return c a cursor with all table information.
 	 */
 	public Cursor getAllRows(String tableName){
 		Cursor c = mDatabase.query(tableName,  null, null,null,null,null,null);
@@ -181,11 +178,11 @@ public class DatabaseManager {
 	}
 	
 	/**
-	 * Get the data in a specific row of a table
-	 * @param tableName specifies the name of the table to query
-	 * @param sqlWhere specifies what the row should containg ex. name = "Jim"
-	 * @param columns The columns requested
-	 * @return Cursor mapping to all the data in the specified row
+	 * Gets the data in a specific row of a table.
+	 * @param tableName specifies the name of the table to query.
+	 * @param sqlWhere specifies what the row should be returned.
+	 * @param columns The columns requested.
+	 * @return Cursor mapping to all the data in the specified row.
 	 */
 	public Cursor getRow(String tableName,String sqlWhere,String[] columns){
 		return mDatabase.query(tableName, columns,sqlWhere, null,null,null,null);

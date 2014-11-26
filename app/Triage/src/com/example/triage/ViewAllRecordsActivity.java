@@ -25,16 +25,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 /**
  * Activity for displaying all vitals, symptom description, 
- * and prescription information for a given patient
+ * and prescription information for a given patient.
  */
 public class ViewAllRecordsActivity extends Activity {
-	/**The given patient - display there information */
+	/**The given patient - display there information.*/
 	private Patient patient;
+	
 	@Override
 	/**
 	 * Sets the appropriate layout of this activity based on patient_records.txt and vital_history_row.xml.
+	 * Populates the listviews with given patients information.
 	 */
-	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_all_records);
@@ -67,6 +68,11 @@ public class ViewAllRecordsActivity extends Activity {
 	}
 
 	@Override
+	/**
+	 * Creates the menu, inflating the given menu.
+	 * @param The menu to inflate.
+	 * @return return if the menu was successfully created.
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.view_all_records, menu);
@@ -74,6 +80,11 @@ public class ViewAllRecordsActivity extends Activity {
 	}
 
 	@Override
+	/**
+	 * Handles selection of menu item.
+	 * @param the selected menu item.
+	 * @return if the selection was successfully handled.
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -87,21 +98,23 @@ public class ViewAllRecordsActivity extends Activity {
 	
 	
 	/**
-	 * Custom adapter for listview, populates textviews all patient vitals info
-	 * 
+	 * Custom adapter for previous vitals listview, populates textviews all patient vitals info.
 	 */
 	private class patientHistoryAdapter extends BaseAdapter{
-		Context context;
-		int layoutId;
-		TreeMap<Date, String[]> vitals;
-		ArrayList<Date> sortedDates = new ArrayList<Date>();
+		/**Context of the application used for getting layout inflator.*/
+		private Context context;
+		/**Layout id for row layouts*/
+		private int layoutId;
+		/**All of the patients previous and current vitals.*/
+		private TreeMap<Date, String[]> vitals;
+		/**List of sorted dates, used to display vitals with most recent first.*/
+		private ArrayList<Date> sortedDates = new ArrayList<Date>();
 		
 		/**
-		 * Instantiates PatientHistoryAdapter
-		 * 
-		 * @param context - context that adapter is used in
-		 * @param layoutId layout for rows in listview
-		 * @param vitals data to display
+		 * Instantiates PatientHistoryAdapter.
+		 * @param context - context that adapter is used in.
+		 * @param layoutId layout for rows in listview.
+		 * @param vitals data to display.
 		 */
 		public patientHistoryAdapter(Context context,int layoutId,Vitals vitals){
 			this.context = context;
@@ -114,7 +127,8 @@ public class ViewAllRecordsActivity extends Activity {
 		
 		@Override
 		/**
-		 * @return size (int) of list to fill Listview
+		 * Gets the size of the list.
+		 * @return size (int) of list to fill Listview.
 		 */
 		public int getCount() {
 			return sortedDates.size();
@@ -122,13 +136,17 @@ public class ViewAllRecordsActivity extends Activity {
 
 		@Override
 		/**
-		 * @return vital information for each row
+		 * Gets an item (vitals to display) for a given position in the list.
+		 * @return vital information for each row.
 		 */
 		public String[] getItem(int position) {
 			return vitals.get(sortedDates.get(position));
 		}
 
 		@Override
+		/**
+		 * Gets the item id for a given row. Not used.
+		 */
 		public long getItemId(int position) {
 			//Not sure about this right now
 			return 0;
@@ -136,10 +154,11 @@ public class ViewAllRecordsActivity extends Activity {
 
 		@Override
 		/**
-		 * @param position an int that specifies the position in the listview
-		 * @param convertView a View for the specific row of the listview
-		 * @param parent the parent view (ListView) that the convertView will be attached to
-		 * @return row a view populated with the vitals info
+		 * Populates a row with appropriate patient information.
+		 * @param position an int that specifies the position in the listview.
+		 * @param convertView a View for the specific row of the listview.
+		 * @param parent the parent view (ListView) that the convertView will be attached to.
+		 * @return row a view populated with the vitals info.
 		 */
 		public View getView(int position, View convertView, ViewGroup parent) {
 			
@@ -171,12 +190,6 @@ public class ViewAllRecordsActivity extends Activity {
 			tempTView.setText(vitalsData[0]);
 			
 			return row;
-		}
-		
+		}	
 	}
-	
-	
-	
-	
-	
 }

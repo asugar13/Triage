@@ -16,10 +16,13 @@ import android.widget.*;
  * for a given patient.
  */
 public class EnterVitalsActivity extends Activity {
-
+	/**The  patient to add the new vitals to.*/
 	private Patient patient;
 
 	@Override
+	/**
+	 * Create the activity, getting the provided patient from the intent.
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_enter_vitals);
@@ -31,9 +34,8 @@ public class EnterVitalsActivity extends Activity {
 	}
 
 	/**
-	 * OnClick for save button
-	 * Adds and saves the new vitals written to patient.
-	 * @param view
+	 * OnClick for save button, adds and saves the new vitals written to patient.
+	 * @param view the view of the clicked button.
 	 */
 	public void saveData(View view) {
 		boolean allEmpty = true;
@@ -89,7 +91,11 @@ public class EnterVitalsActivity extends Activity {
 		}
 
 	}
-	
+	/**
+	 * Checks if the given string is all digits.
+	 * @param st String to be checked for validity.
+	 * @return boolean if the given string is all digits.
+	 */
 	private boolean isDigits(String st){
 		for (int i = 0 ; i < st.length(); i++) {
 			char ch = st.charAt(i);
@@ -97,11 +103,15 @@ public class EnterVitalsActivity extends Activity {
 				return false;
 			}
 		}
-		return true;
-				
+		return true;	
 	}
 
 	@Override
+	/**
+	 * Creates the menu, inflating the given menu.
+	 * @param The menu to inflate.
+	 * @return return if the menu was successfully created.
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.enter_vitals, menu);
@@ -109,6 +119,11 @@ public class EnterVitalsActivity extends Activity {
 	}
 
 	@Override
+	/**
+	 * Handles selection of menu item.
+	 * @param the selected menu item.
+	 * @return if the selection was successfully handled.
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long

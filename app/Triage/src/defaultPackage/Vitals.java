@@ -16,12 +16,13 @@ import android.util.Log;
  * Vitals and symptom descriptions are mapped by time of recording.
  */
 public class Vitals implements Serializable{
-
+	/** Serializable ID used for passing vitals through intents*/
 	private static final long serialVersionUID = 2939547818890631643L;
 	/**Simple date format, specifies string format of dates */
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 	/**Stores patient's vitals based on the time that they are written. */
 	private TreeMap<Date, String[]> vitSymps;
+	/**If the vitals object contains no records, record here.*/
 	public boolean isEmpty = true;
 	
 	/**
@@ -33,7 +34,6 @@ public class Vitals implements Serializable{
 	
 	/**
 	 * Constructs a Vitals object with vital signs and symptoms sorted by time.
-	 * 
 	 * @param inputVital Contains all the vital signs and symptoms to be instantiated.
 	 */
 	public Vitals(String[] inputVital){
@@ -59,13 +59,11 @@ public class Vitals implements Serializable{
 			}else{
 				//Do nothing
 			}
-	
 		}
 	}
 	
 	/**
 	 * Adds new vital signs and symptoms to the Vitals object.
-	 * 
 	 * @param newVitSympt The new vital signs and symptoms that are being recorded.
 	 */
 	public void add(String[] newVitSymp){
@@ -74,33 +72,29 @@ public class Vitals implements Serializable{
 		Log.d("Before",vitSymps.toString());
 		vitSymps.put(date, newVitSymp);
 		Log.d("After",vitSymps.toString());
-
 	}
+	
 	/**
 	 * Returns all vitals mapped by date.
-	 * 
-	 * @return TreeMap mapping dates to vitals
+	 * @return TreeMap mapping dates to vitals.
 	 */
 	public TreeMap<Date, String[]> getAllVitals(){
 		return vitSymps;
 	}
 	
-	
-	
 	/**
 	 * Returns a Map of the history of a patient's vitals arranged by time.
-	 * 
 	 * @return vitSymps The vitals signs and symptoms of this patient mapped by Date.
 	 */
 	public Map<Date, String[]> getVitSymps(){
 		return this.vitSymps;
 	}
+	
 	/**
 	 * Returns a string representation of the vitals
-	 * For storing the vitals in a text file, not for outputting a meaningful
-	 * Representation of the vitals.
-	 * 
-	 * @return String representation of vitals for writing to internal storage
+	 * for storing the vitals in a text file, not for outputting a meaningful
+	 * representation of the vitals.
+	 * @return String representation of vitals for writing to internal storage.
 	 */
 	@Override
 	public String toString(){
@@ -121,8 +115,5 @@ public class Vitals implements Serializable{
 			}	
 		}
 		return vitSympString;
-	}
-	
-	
-}
-	
+	}	
+}	
