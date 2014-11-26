@@ -28,20 +28,20 @@
         android:layout_weight="1"
         android:layout_height="0dp"
         android:layout_width="fill_parent"
-        android:layout_below="@+id/textView3">
-        
-       <TextView
-      	  android:id="@+id/noPatientVitals"
-      	  android:layout_width="217dp"
-      	  android:layout_height="wrap_content"
-        	android:layout_marginRight="14dp" /> 
+        android:layout_below="@+id/textView3"> 
         
       <TextView
         android:id="@+id/patientVitals"
         android:text="@string/patient_vitals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="14dp"/> 
+        android:layout_marginRight="14dp"/>
+
+      <TextView
+          android:id="@+id/noPatientVitals"
+          android:layout_width="217dp"
+          android:layout_height="wrap_content"
+          android:layout_marginRight="14dp" />
         
    	 <ListView
         android:id="@+id/patientHistoryList"
@@ -67,18 +67,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="14dp"/>
+
+	   <TextView
+	       android:id="@+id/noPatientScript"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_marginRight="14dp" />
 	    
    	   <ListView
       	  android:id="@+id/patientScriptList"
       	  android:layout_height="fill_parent"
       	  android:layout_width="fill_parent">
   	    </ListView>
-  	  
-   	   <TextView
-        android:id="@+id/noPatientScript"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="14dp"/>
 
     </LinearLayout>
 

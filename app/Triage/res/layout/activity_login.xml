@@ -53,6 +53,9 @@
         android:layout_alignBaseline="@+id/userID"
         android:layout_alignBottom="@+id/userID"
         android:layout_alignLeft="@+id/passwordfield"
-        android:ems="10" />
+        android:ems="10">
+                   <requestFocus/>   
+    </EditText>
+        
 
 </RelativeLayout>
