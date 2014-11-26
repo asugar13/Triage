@@ -19,7 +19,7 @@ public class Vitals implements Serializable{
 	/** Serializable ID used for passing vitals through intents*/
 	private static final long serialVersionUID = 2939547818890631643L;
 	/**Simple date format, specifies string format of dates */
-	public static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+	public static final SimpleDateFormat SDF_TIME_SECONDS = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 	/**Stores patient's vitals based on the time that they are written. */
 	private TreeMap<Date, String[]> vitSymps;
 	/**If the vitals object contains no records, record here.*/
@@ -47,7 +47,7 @@ public class Vitals implements Serializable{
 				Log.d("dateVital",Arrays.toString(dateVitalSplit));
 
 				try {
-					Date date = sdf.parse(dateVitalSplit[0]);
+					Date date = SDF_TIME_SECONDS.parse(dateVitalSplit[0]);
 					String[] vitalReadings = dateVitalSplit[1].split("[\\x7C]");
 					Log.d("vitalReadings",Arrays.toString(vitalReadings));
 
@@ -103,7 +103,7 @@ public class Vitals implements Serializable{
 		
 		for(int i = 0;i < keys.size(); i ++){
 			Date this_date = keys.get(i);
-			vitSympString = vitSympString + sdf.format(this_date) + "*";
+			vitSympString = vitSympString + SDF_TIME_SECONDS.format(this_date) + "*";
 			
 			for(int j = 0 ; j < vitSymps.get(this_date).length; j ++){
 				if(j == vitSymps.get(this_date).length - 1){

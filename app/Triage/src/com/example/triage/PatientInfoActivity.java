@@ -35,7 +35,7 @@ public class PatientInfoActivity extends Activity {
 		setContentView(R.layout.activity_patient_info);
 		setTitle("Patient Information");
 		Intent intent = getIntent();
-		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.patientTag);
+		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.PATIENT_TAG);
 		String name = patient.getName();
 		String healthNum = patient.getHealthCardNum();
 		String birthDate = patient.getBirthDate();
@@ -90,7 +90,7 @@ public class PatientInfoActivity extends Activity {
 	 */
 	public void editRecordsOnClick(View view) {
 		Intent intent = new Intent(this, EnterVitalsActivity.class);
-		intent.putExtra(EmergencyRoom.patientTag, patient);
+		intent.putExtra(EmergencyRoom.PATIENT_TAG, patient);
 		startActivity(intent);
 	}
 	/**
@@ -99,7 +99,7 @@ public class PatientInfoActivity extends Activity {
 	 */
 	public void viewRecordsOnClick(View view) {
 		Intent intent = new Intent (this, ViewAllRecordsActivity.class);
-		intent.putExtra(EmergencyRoom.patientTag, patient);
+		intent.putExtra(EmergencyRoom.PATIENT_TAG, patient);
 		startActivity(intent);
 	}
 	/**
@@ -110,7 +110,7 @@ public class PatientInfoActivity extends Activity {
 	public void addPrescriptionOnClick(View view){
 		if (EmergencyRoom.getInstance().getUserType().equals("physician")) {
 			Intent intent = new Intent(this,AddPrescriptionActivity.class);
-			intent.putExtra(EmergencyRoom.patientTag, patient);
+			intent.putExtra(EmergencyRoom.PATIENT_TAG, patient);
 			startActivity(intent);	
 		}
 		else {
@@ -126,7 +126,7 @@ public class PatientInfoActivity extends Activity {
 	public void seenByDoctorOnClick(View view){
 		if (EmergencyRoom.getInstance().getUserType().equals("nurse")) {
 			Intent intent = new Intent(this, TimeDialogActivity.class);
-			intent.putExtra(EmergencyRoom.patientTag, patient);
+			intent.putExtra(EmergencyRoom.PATIENT_TAG, patient);
 			startActivity(intent);
 		}
 		else {

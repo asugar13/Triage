@@ -25,9 +25,9 @@ import android.util.Log;
  */
 public class DatabaseManager {
 	/** Name of the database file.*/
-	private static final String databaseName = "EmergencyRoomDatabase.db";
+	private static final String DATABASE_NAME = "EmergencyRoomDatabase.db";
 	/** File path to the databasefile.*/
-	private static final String databasePath = "/data/data/com.example.triage/databases/";
+	private static final String DATABASE_PATH = "/data/data/com.example.triage/databases/";
 	/** DatabaseHelper for this datbase than manages the opening of SQLite files.*/
 	private DatabaseHelper dbHelper;
 	/**SQLitedatabase which will be read from and modified.*/
@@ -54,7 +54,7 @@ public class DatabaseManager {
 		 * @param context used to open or create the database.
 		 */
 		public DatabaseHelper(Context context) {
-			super(context, databaseName, null, 1);
+			super(context, DATABASE_NAME, null, 1);
 			// TODO Auto-generated constructor stub
 		}
 		
@@ -81,7 +81,7 @@ public class DatabaseManager {
 	 * @return whether the SQLite database exists.
 	 */
 	public boolean databaseExists(){
-		File file = new File(databasePath);
+		File file = new File(DATABASE_PATH);
 		return file.exists();
 	}
 	
