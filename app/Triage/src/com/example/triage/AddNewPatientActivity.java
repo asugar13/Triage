@@ -20,7 +20,7 @@ import android.widget.*;
  * Activity for adding new patients
  *
  */
-public class AddNewPatient extends Activity {
+public class AddNewPatientActivity extends Activity {
 	
 	private DatePicker birthdatePicker;
 	

@@ -64,7 +64,7 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 	 */
 	public void addPatient(View view) {
 		if (EmergencyRoom.getInstance().getUserType().equals("nurse")) {
-			Intent intent = new Intent(this, AddNewPatient.class);
+			Intent intent = new Intent(this, AddNewPatientActivity.class);
 			startActivity(intent);
 		}
 		else {
