@@ -2,7 +2,6 @@ package com.example.triage;
 
 import java.util.Date;
 import java.util.TreeMap;
-
 import java.util.Calendar;
 
 import defaultPackage.EmergencyRoom;
@@ -80,10 +79,34 @@ public class AddNewPatientActivity extends Activity {
 			vitals.add(vitalInfo);
 		}
 		String birthdate = year + "-" + month + "-" + day;
-		Patient patient = new Patient(full_name, birthdate, hcn,vitals,new TreeMap<Date,String>());
-		EmergencyRoom.getInstance().savePatient(patient);
-		startActivity(intent);
+		if ((!(full_name.length >= 2)) || hcn.equals("") || !isDigits(hcn)) {
+			Toast.makeText(this, "Plase make sure to enter a full name and a health card number", Toast.LENGTH_SHORT)
+			.show();
+		}
+		else {
+			Patient patient = new Patient(full_name, birthdate, hcn,vitals,new TreeMap<Date,String>());
+			EmergencyRoom.getInstance().savePatient(patient);
+			startActivity(intent);
+		}
 	}
+	
+
+	/**
+	 * Checks if the given string is all digits.
+	 * @param st String to be checked for validity.
+	 * @return boolean if the given string is all digits.
+	 */
+	private boolean isDigits(String st){
+		for (int i = 0 ; i < st.length(); i++) {
+			char ch = st.charAt(i);
+			if (!Character.isDigit(ch)) {
+				return false;
+			}
+		}
+		return true;	
+	}
+
+	
 	@Override
 	/**
 	 * Creates menu, inflating the specific xml.
