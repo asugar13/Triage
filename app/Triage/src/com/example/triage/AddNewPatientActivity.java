@@ -17,14 +17,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 /**
- * Activity for adding new patients
- *
+ * Activity for adding new patients, personal information and 
+ * first vital reading must be entered.
  */
 public class AddNewPatientActivity extends Activity {
-	
+	/**DatePicker object for entering birth date.*/
 	private DatePicker birthdatePicker;
 	
 	@Override
+	/**
+	 * Create the activity, set the layout to the appropriate layout.
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_patient);
@@ -33,16 +36,12 @@ public class AddNewPatientActivity extends Activity {
 		
 	}
 	/**
-	 * OnClick for save button
-	 * Gets all entered data from EditTexts, creates new patient
-	 * saves new patient to EmergencyRoom.
-	 * Starts PatientDisplayActivity to display the new patient
-	 * @param view
+	 * OnClick for save button,gets all entered data from EditTexts and creates new patient.
+	 * The new patient is saved to the database and emergencyRoom.
+	 * Starts PatientDisplayActivity to display the new patient.
+	 * @param view View of the clicked button.
 	 */
 	public void saveNewPatient(View view) {
-		
-		
-		
 		Intent intent = new Intent(this, PatientsDisplayActivity.class);
 		String year = String.valueOf(birthdatePicker.getYear());
 		String month = String.valueOf(birthdatePicker.getMonth());
@@ -86,6 +85,10 @@ public class AddNewPatientActivity extends Activity {
 		startActivity(intent);
 	}
 	@Override
+	/**
+	 * Creates menu, inflating the specific xml.
+	 * @return if inflating was successful.
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.add_new_patient, menu);
@@ -93,6 +96,10 @@ public class AddNewPatientActivity extends Activity {
 	}
 
 	@Override
+	/**
+	 * Handles selections of menu items.
+	 * @param item The selected menu item.
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long

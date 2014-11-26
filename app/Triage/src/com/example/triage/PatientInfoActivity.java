@@ -19,15 +19,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 /**
  * Activity that displays patient specific information.
- * Option to view previous records, or add new data
+ * Option to view previous records, or add new data.
  */
 public class PatientInfoActivity extends Activity {
-
+	/** The given patient who's information to display.*/
 	private Patient patient;
 	
 	@Override
 	/**
 	 * Sets the appropriate layout of this activity based on the attributes of this Patient object.
+	 * Populates the Textviews with patients information.
 	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,7 +44,6 @@ public class PatientInfoActivity extends Activity {
 		TextView name_patient = (TextView) findViewById(R.id.name_patient);
 		TextView patient_birthdate = (TextView) findViewById(R.id.patient_birthdate);
 		TextView health_num_patient = (TextView) findViewById(R.id.health_num_patient);
-		
 		TextView diastolic = (TextView) findViewById(R.id.diastolic_catch);
 		TextView systolic = (TextView) findViewById(R.id.systolic_catch);
 		TextView heartRate = (TextView) findViewById(R.id.heart_rate_catch);
@@ -52,14 +52,11 @@ public class PatientInfoActivity extends Activity {
 		TextView urgency = (TextView) findViewById(R.id.urgency_level_field);
 		TextView seenByDoctor = (TextView) findViewById(R.id.seen_by_doctor_catch);
 
-		
 		name_patient.setText(name);
 		patient_birthdate.setText(birthDate);
 		health_num_patient.setText(healthNum);
-		Log.d("here", "all good");
 		ArrayList<Date> keys = new ArrayList<Date>(patientVitals.getVitSymps().keySet());
-		//TreeMap<Date, String[]> vit_symps_map = new TreeMap<Date, String[]>(patient_vitals.getVitSymps());
-		Log.d("here", "maybe not");
+		
 		if (!(keys.isEmpty())) {
 			Date current_date = keys.get(keys.size() - 1);
 			String[] current_vit_symps = patientVitals.getVitSymps().get(current_date);
@@ -70,9 +67,6 @@ public class PatientInfoActivity extends Activity {
 			heartRate.setText(current_vit_symps[3]);
 			symptoms.setText(current_vit_symps[4]);
 			urgency.setText(String.valueOf(patient.getUrgency()));
-			
-
-			
 		}
 		else {
 			tempPatient.setText("N/A");
@@ -82,6 +76,7 @@ public class PatientInfoActivity extends Activity {
 			symptoms.setText("N/A");
 			urgency.setText("N/A");
 		}
+		
 		if (patient.getSeenByDoctorStatus()){
 			seenByDoctor.setText(patient.getSeenByDoctor().toString());
 		}
@@ -91,6 +86,7 @@ public class PatientInfoActivity extends Activity {
 }
 	/**
 	 * Launches EditVitalsActivity for adding new vital and symptom information.
+	 * @param view View object of clicked button.
 	 */
 	public void editRecordsOnClick(View view) {
 		Intent intent = new Intent(this, EnterVitalsActivity.class);
@@ -98,8 +94,8 @@ public class PatientInfoActivity extends Activity {
 		startActivity(intent);
 	}
 	/**
-	 * Launches ViewAllRecordsActivity for viewing old vital and symptom information
-	 * @param view
+	 * Launches ViewAllRecordsActivity for viewing old vital and symptom information.
+	 * @param view View of the button clicked.
 	 */
 	public void viewRecordsOnClick(View view) {
 		Intent intent = new Intent (this, ViewAllRecordsActivity.class);
@@ -107,9 +103,9 @@ public class PatientInfoActivity extends Activity {
 		startActivity(intent);
 	}
 	/**
-	 * OnClick for Add Prescription button, only works for physicians
-	 * Launches AddPrescriptionActivity
-	 * @param view
+	 * OnClick for Add Prescription button, only works for physicians, launches
+	 * AddPrescriptionActivity.
+	 * @param view the View of the clicked button.
 	 */
 	public void addPrescriptionOnClick(View view){
 		if (EmergencyRoom.getInstance().getUserType().equals("physician")) {
@@ -120,18 +116,12 @@ public class PatientInfoActivity extends Activity {
 		else {
 			Toast.makeText(this, "Only physicians can add prescriptions", Toast.LENGTH_SHORT).show();
 		}
-		
-		
-
 	}
 	
 	/**
-	 * OnClick for seen by doctor button. Launches TimeDialogActivity
-	 * for entering time of visit.
-	 * ???
-	 * ONLY WORKS FOR NURSES?????
-	 * ???
-	 * @param view
+	 * OnClick for seen by doctor button. 
+	 * Launches TimeDialogActivity, for entering time of visit, only works for nurses.
+	 * @param view View of the button clicked.
 	 */
 	public void seenByDoctorOnClick(View view){
 		if (EmergencyRoom.getInstance().getUserType().equals("nurse")) {
@@ -142,12 +132,15 @@ public class PatientInfoActivity extends Activity {
 		else {
 			Toast.makeText(this, "Only nurses can record the date and time when a patient has been seen by a doctor",
 					Toast.LENGTH_SHORT).show();
-		}
-		
+		}	
 	}
 
-
 	@Override
+	/**
+	 * Creates the menu, inflating the given menu.
+	 * @param The menu to inflate.
+	 * @return return if the menu was successfully created.
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.patient_info, menu);
@@ -155,6 +148,11 @@ public class PatientInfoActivity extends Activity {
 	}
 
 	@Override
+	/**
+	 * Handles selection of menu item.
+	 * @param the selected menu item.
+	 * @return if the selection was successfully handled.
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long

@@ -25,33 +25,42 @@ import android.util.Log;
  * It also stores the patients during run time and calculates urgency based on 
  * patients information. 
  * The emergency room also authenticates users attempting to log in to the app.
- *  
  */
 public class EmergencyRoom {
+	/**Singleton storage of instance.*/
 	private static EmergencyRoom instance = null;
+	/**Constant used for passing patients by intents.*/
 	public static final String patientTag = "patient_tag";
+	/**Map of all patients mapped by health card number.*/
 	private Map<String, Patient> patients;
+	/**Instance of DatabaseManager used to read/write to SQLiteDatabase.*/
 	private DatabaseManager dbManager;
+	/**UserType specified by a log in.*/
 	private String userType;
+	/**Context of the application used for reading from assets.*/
 	private Context context;
-	private class InvalidTypeException extends Exception{};
-	
+	/**Constant, name of patient table in database.*/
 	public static final String patientTable = "patient_records";
+	/**Constant, name of patient records .txt file.*/
 	public static final String patientsTxtFileName = "patient_records.txt";
+	/**Constant name of passwords .txt file.*/
 	public static final String passwordsTxtFileName = "passwords.txt";
+	/**Constant name of the login table (stores usernames,passwords,usertype) in the database.*/
 	public static final String loginTable = "login_information";
+	/**Constant a SimpleDateFormat object for the format "25-02-2014".*/
 	public static final SimpleDateFormat sdfNoTime = new SimpleDateFormat("dd-MM-yyyy");
+	/**Constant a SimpleDateFormat object for the format "25-02-2014 12:30 AM".*/
 	public static final SimpleDateFormat sdfTime = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+	
 	/**
-	 * Singleton, constructor protected
+	 * Singleton, constructor protected.
 	 */
 	protected EmergencyRoom(){	
 		patients = new TreeMap<String, Patient>();
 	}
 	/**
-	 * Returns the instance of EmergencyRoom
-	 * 
-	 * @return this instance of the Emergency Room
+	 * Returns the instance of EmergencyRoom, instantiates it if doesn't exist.
+	 * @return this instance of the Emergency Room.
 	 */
 	public static EmergencyRoom getInstance(){
 		if(instance == null){
@@ -61,8 +70,7 @@ public class EmergencyRoom {
 	}
 	/**
 	 * Pass emergencyRoom application context for reading files from assets.
-	 * 
-	 * @param context used to access the application's assets
+	 * @param context used to access the application's assets.
 	 */
 	public void setContext(Context context){
 		this.context = context;
@@ -72,11 +80,10 @@ public class EmergencyRoom {
 		loadPatients(context,patientsTxtFileName);
 	}
 	/**
-	 * Loads patients from database
-	 * If database doesn't exist loads from .txt file, and copies to new database for future use
-	 * 
-	 * @param context used to access the applications assets
-	 * @param fileName name of file to open
+	 * Loads patients from database. If database doesn't exist loads from .txt file,
+	 *  and copies to new database for future use.
+	 * @param context used to access the applications assets.
+	 * @param fileName name of file to open.
 	 */
 	private void loadPatients(Context context, String fileName) {
 		if(dbManager.tableExists(patientTable)){
@@ -98,8 +105,8 @@ public class EmergencyRoom {
 		}
 	
 	/**
-	 * Save all patients data to database for future use
-	 * Only executed first time the app is run.
+	 * Save all patients data to database for future use, 
+	 * only executed first time the app is run.
 	 */
 	private void initPatientsDB(){
 		Log.d("init","patients");
@@ -117,11 +124,10 @@ public class EmergencyRoom {
 	
 	
 	/**
-	 * Gets the inputstream for a given filename in assets
-	 * 
-	 * @param context used to access the applications assets
-	 * @param fileName name of file to open
-	 * @return input stream of file for reading
+	 * Gets the inputstream for a given filename in assets.
+	 * @param context used to access the applications assets.
+	 * @param fileName name of file to open.
+	 * @return input stream of file for reading.
 	 */
 	private  InputStream getInputStream(String fileName) {
 		try {
@@ -134,12 +140,12 @@ public class EmergencyRoom {
 	}
 	
 	/**
-	 * Deprecated - uses SQLite database instead
-	 * Gets the outputstream for writing to a given file
+	 * Deprecated - uses SQLite database instead.
+	 * Gets the outputstream for writing to a given file.
 	 * 
-	 * @param context used to write to apps internal storage
-	 * @param fileName name of file to be opened for writing
-	 * @return outputstream of given fileName
+	 * @param context used to write to apps internal storage.
+	 * @param fileName name of file to be opened for writing.
+	 * @return outputstream of given fileName.
 	 */
 	private FileOutputStream getOutputStream(String fileName) {
 		try {
@@ -164,9 +170,8 @@ public class EmergencyRoom {
 	}
 
 	/**
-	 * Returns a list of all of the patients
-	 * 
-	 * @return ArrayList of all patients
+	 * Returns a list of all of the patients.
+	 * @return ArrayList of all patients.
 	 */
 	public ArrayList<Patient> getPatients() {
 		ArrayList<Patient> allPatients = new ArrayList<Patient>();
@@ -178,9 +183,8 @@ public class EmergencyRoom {
 	}
 	
 	/**
-	 * Returns sorted list of unseen patients sorted by urgency rating
-	 * 
-	 * @return ArrayList of sorted patients
+	 * Returns sorted list of unseen patients sorted by urgency rating.
+	 * @return ArrayList of sorted patients.
 	 */
 	public ArrayList<Patient> getUnseenSortedPatients(){
 		ArrayList<Patient> sortedPatients = new ArrayList<Patient>();
@@ -201,20 +205,18 @@ public class EmergencyRoom {
 	
 
 	/**
-	 * Find a patient by healthcardNumber
-	 * 
-	 * @param hCardNum the health card number used to access a patient
-	 * @return Patient object, or null if no patient
+	 * Find a patient by healthcardNumber.
+	 * @param hCardNum the health card number used to access a patient.
+	 * @return Patient object, or null if no patient.
 	 */
 	public Patient getPatientByHCNum(String hCardNum) {
 		return patients.get(hCardNum);
 	}
 	
 	/**
-	 * Updates the given patient
-	 * Necessary because .putExtra() passes a copy of Patient not reference
-	 * 
-	 * @param patient the patient being updated
+	 * Updates the given patient.
+	 * Necessary because .putExtra() passes a copy of Patient not reference.
+	 * @param patient the patient being updated.
 	 */
 	public void updatePatient(Patient patient){
 		//
@@ -223,8 +225,7 @@ public class EmergencyRoom {
 	}
 
 	/**
-	*Calculates the urgency rating of the patient and adds it to the patient
-	*
+	*Calculates the urgency rating of the patient and adds it to the patient.
 	*@param patient The patient that is having their urgency calculate.
 	*/
 	public void calcUrgency(Patient patient){
@@ -277,10 +278,9 @@ public class EmergencyRoom {
 	}
 	
 	/**
-	 * Populates patients Map from text file
-	 * 
-	 * @param patients_stream inputStream from .txt file containing patients info
-	 * @throws FileNotFoundException
+	 * Populates patients Map from text file.
+	 * @param patients_stream inputStream from .txt file containing patients info.
+	 * @throws FileNotFoundException.
 	 */
 	private void populate(InputStream patients_stream)
 			throws FileNotFoundException {
@@ -305,10 +305,9 @@ public class EmergencyRoom {
 		scanner.close();
 	}
 	/**
-	 * Deprecated - Uses SQLiteDatabase instead
-	 * Saves patient information to .txt file
-	 * 
-	 * @param context needed to save patients.text in the assets folder
+	 * Deprecated - Uses SQLiteDatabase instead.
+	 * Saves patient information to .txt file.
+	 * @param context needed to save patients.text in the assets folder.
 	 */
 	public void savePatientData(Context context) {
 		try {
@@ -324,9 +323,8 @@ public class EmergencyRoom {
 	}
 	
 	/**
-	 * Saves patient data to SQLite database
-	 * 
-	 * @param patient to be saved
+	 * Saves patient data to SQLite database.
+	 * @param patient to be saved.
 	 */
 	public void savePatient(Patient patient){
 		updatePatient(patient);
@@ -353,9 +351,9 @@ public class EmergencyRoom {
 	 * If the loginTable does not exist in the database, creates the table 
 	 *  and copies the information from passwords.txt to it.
 	 * 
-	 * @param username username to be checked
-	 * @param password password to be checked
-	 * @return whether the username and password combination is valid
+	 * @param username username to be checked.
+	 * @param password password to be checked.
+	 * @return whether the username and password combination is valid.
 	 */
 	public boolean logIn(String username, String password){
 		if(dbManager.tableExists(loginTable)){
@@ -379,7 +377,7 @@ public class EmergencyRoom {
 	
 	/**
 	 * Loads the passwords, usernames, and usertypes from passwords.txt
-	 * and copies to local SQLite database for future use
+	 * and copies to local SQLite database for future use.
 	 */
 	private void initLoginInfoDB(){
 		Scanner scanner = new Scanner(getInputStream(passwordsTxtFileName));
@@ -405,8 +403,8 @@ public class EmergencyRoom {
 	}
 	
 	/**
-	 * Sets the usertype given a successful login 
-	 * @param sqlWhere
+	 * Sets the usertype given a successful login .
+	 * @param sqlWhere which row to get userType from.
 	 */
 	private void setUserType(String sqlWhere){
 		String[] columns = {"user_type"};
@@ -416,13 +414,16 @@ public class EmergencyRoom {
 		this.userType = userType;
 		
 	}
-	
+	/**
+	 * Gets the specified userType.
+	 * @return String usertype of logged in user.
+	 */
 	public String getUserType() {
 		return this.userType;
 	}
 	
 	/**
-	 * Loads the patients from the database to field patients
+	 * Loads the patients from the database to field patients.
 	 */
 	private void loadPatientsFromDB(){
 		Cursor c = dbManager.getAllRows(patientTable);

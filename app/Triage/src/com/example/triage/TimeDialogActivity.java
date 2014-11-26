@@ -19,12 +19,16 @@ import android.widget.Toast;
  *
  */
 public class TimeDialogActivity extends Activity{
+	/**TimePicker object for entering times.*/
 	private TimePicker timePicker;
+	/**DatePicker object for entering dates.*/
 	private DatePicker datePicker;
+	/**The patient to add the visit record to.*/
 	private Patient patient;
+	
 	@Override
 	/**
-	 * Creates activity, initializing time picker,date picker, and patient objects
+	 * Creates activity, initializing time picker,date picker, and patient objects.
 	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,14 +42,19 @@ public class TimeDialogActivity extends Activity{
 	}
 
 	@Override
+	/**
+	 * Creates the menu, inflating the given menu.
+	 * @param The menu to inflate.
+	 * @return return if the menu was successfully created.
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.time_dialog, menu);
 		return true;
 	}
 	/**
-	 * Saves the selected date and time to the patient
-	 * @param view 
+	 * Saves the selected date and time to the patient.
+	 * @param view View of the clicked button.
 	 */
 	public void saveDateTimeOnClick(View view){
 		Calendar cal = Calendar.getInstance();
@@ -64,6 +73,11 @@ public class TimeDialogActivity extends Activity{
 	}
 
 	@Override
+	/**
+	 * Handles selection of menu item.
+	 * @param the selected menu item.
+	 * @return if the selection was successfully handled.
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long

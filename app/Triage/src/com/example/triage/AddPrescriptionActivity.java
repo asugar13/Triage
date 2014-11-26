@@ -10,8 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 /**
- * Activity for adding prescriptions to patients
- * Only available for physicians
+ * Activity for adding prescriptions to patients. This activity is only available for physicians.
  */
 public class AddPrescriptionActivity extends Activity {
 	private Patient patient;
@@ -23,12 +22,14 @@ public class AddPrescriptionActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_prescription);
 		Intent intent  = getIntent();
-		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.patientTag);
-		
+		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.patientTag);	
 	}
-
 	
 	@Override
+	/**
+	 * Creates the menu, inflating the appropriate layout.
+	 * @param The menu to inflate to.
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.add_prescription, menu);
@@ -36,6 +37,11 @@ public class AddPrescriptionActivity extends Activity {
 	}
 
 	@Override
+	/**
+	 * Handles selections of menu items.
+	 * @param the selected menu item.
+	 * @return false to allow normal menu processing
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -48,9 +54,9 @@ public class AddPrescriptionActivity extends Activity {
 	}
 	
 	/**
-	 * OnClick for "Save" button.
-	 * Saves the prescription information to the patient
-	 * and ends activity, going back to PatientInfoActivity.
+	 * OnClick for "Save" button, saves the prescription information to the patient.
+	 * Ends this activity, starting PatientInfoActivity with the update patient.
+	 * @param The view of the selected button.
 	 */
 	public void savePrescriptionOnClick(View view){
 		String prescriptionString = ((EditText) findViewById(R.id.prescription_text)).getText().toString();
@@ -60,11 +66,6 @@ public class AddPrescriptionActivity extends Activity {
 		patient.addPrescription(prescriptionString);
 		Intent intent = new Intent(this, PatientInfoActivity.class);
 		intent.putExtra(EmergencyRoom.patientTag, patient);
-		startActivity(intent);
-		
-		
+		startActivity(intent);	
 	}
-	
-	
-	
 }

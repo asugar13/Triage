@@ -15,11 +15,15 @@ import android.widget.Toast;
 
 /**
  * LAUNCHER activity
- * Activity to manage logging in into the application
+ * Activity to manage logging in into the application.
  */
 public class LoginActivity extends Activity {
 
 	@Override
+	/**
+	 * Creates the activity, inflating the appropriate layout.
+	 * Passes context to EmergencyRoom for reading from assets.
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
@@ -29,8 +33,9 @@ public class LoginActivity extends Activity {
 
 
 	/**
-	 * The user logs in to the system from the login activity and goes to the
-	 * patients display activity
+	 * Attempts to validate a users credentials. If successful launches PatientsDisplayActivity.
+	 * If unsuccessful displays a Toast informing the user.
+	 * @param view the view of the clicked button.
 	 */
 	public void logInUser(View view) {
 		String username = ((EditText) this.findViewById(R.id.userIdfield)).getText().toString();
@@ -48,6 +53,11 @@ public class LoginActivity extends Activity {
 	}
 
 	@Override
+	/**
+	 * Creates the menu, inflating the given menu.
+	 * @param The menu to inflate.
+	 * @return return if the menu was successfully created.
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login, menu);
@@ -55,6 +65,11 @@ public class LoginActivity extends Activity {
 	}
 
 	@Override
+	/**
+	 * Handles selection of menu item.
+	 * @param the selected menu item.
+	 * @return if the selection was successfully handled.
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
