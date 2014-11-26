@@ -95,8 +95,10 @@ public class Patient implements Serializable{
 	*/
 	public void addVitals(String[] newVitals){
 		this.vitals.add(newVitals);
-		EmergencyRoom.getInstance().savePatient(this);
 		EmergencyRoom.getInstance().calcUrgency(this);
+		EmergencyRoom.getInstance().savePatient(this);
+		
+
 		
 	}
 	/**
