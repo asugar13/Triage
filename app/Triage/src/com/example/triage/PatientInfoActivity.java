@@ -69,7 +69,7 @@ public class PatientInfoActivity extends Activity {
 			systolic.setText(current_vit_symps[2]);
 			heartRate.setText(current_vit_symps[3]);
 			symptoms.setText(current_vit_symps[4]);
-			urgency.setText("" + patient.getUrgency());
+			urgency.setText(String.valueOf(patient.getUrgency()));
 			
 
 			
@@ -88,7 +88,7 @@ public class PatientInfoActivity extends Activity {
 		else{
 			seenByDoctor.setText("No");
 		}
-	}
+}
 	/**
 	 * Launches EditVitalsActivity for adding new vital and symptom information.
 	 */

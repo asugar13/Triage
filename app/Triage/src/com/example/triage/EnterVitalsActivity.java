@@ -37,6 +37,7 @@ public class EnterVitalsActivity extends Activity {
 	 */
 	public void saveData(View view) {
 		boolean allEmpty = true;
+		boolean correctTypes = true;
 		Intent intent = new Intent(this, PatientInfoActivity.class);
 		EditText temperatureText = (EditText) findViewById(R.id.temperature_field);
 		EditText diastolicText = (EditText) findViewById(R.id.diastolic_field);
@@ -44,6 +45,7 @@ public class EnterVitalsActivity extends Activity {
 		EditText heart_rateText = (EditText) findViewById(R.id.heart_rate_field);
 		EditText symptomsText = (EditText) findViewById(R.id.symptoms_field);
 
+		
 		String temperature = temperatureText.getText().toString();
 		String diastolic = diastolicText.getText().toString();
 		String systolic = systolicText.getText().toString();
@@ -52,24 +54,51 @@ public class EnterVitalsActivity extends Activity {
 
 		String[] newVitals = { temperature, diastolic, systolic, heartRate,
 				symptoms };
-
-		for (int i = 0; i < newVitals.length; i++) {
+		
+		if (symptoms.equals("")) {
+			newVitals[newVitals.length -1] = "N/A";
+		}
+		else {
+			allEmpty = false;
+		}
+		
+		for (int i = 0; i < newVitals.length - 1; i++) {
 			if (newVitals[i].equals("")) {
 				newVitals[i] = "N/A";
-			} else {
+			} 
+			else if (!isDigits(newVitals[i])) {
+				correctTypes = false;
+			}
+			else {
 				allEmpty = false;
 			}
 		}
 
-		if (!allEmpty) {
+		if ((!allEmpty) && correctTypes) {
 			patient.addVitals(newVitals);
 			intent.putExtra(EmergencyRoom.patientTag, patient);
 			startActivity(intent);
-		} else {
+		} 
+		else if (!correctTypes) {
+			Toast.makeText(this, "Please make sure to enter valid records", Toast.LENGTH_SHORT)
+			.show();
+		}
+		else {
 			Toast.makeText(this, "No vitals entered", Toast.LENGTH_SHORT)
 					.show();
 		}
 
+	}
+	
+	private boolean isDigits(String st){
+		for (int i = 0 ; i < st.length(); i++) {
+			char ch = st.charAt(i);
+			if (!Character.isDigit(ch)) {
+				return false;
+			}
+		}
+		return true;
+				
 	}
 
 	@Override
