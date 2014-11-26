@@ -22,7 +22,7 @@ public class AddPrescriptionActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_prescription);
 		Intent intent  = getIntent();
-		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.patientTag);	
+		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.PATIENT_TAG);	
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public class AddPrescriptionActivity extends Activity {
 		}
 		patient.addPrescription(prescriptionString);
 		Intent intent = new Intent(this, PatientInfoActivity.class);
-		intent.putExtra(EmergencyRoom.patientTag, patient);
+		intent.putExtra(EmergencyRoom.PATIENT_TAG, patient);
 		startActivity(intent);	
 	}
 }

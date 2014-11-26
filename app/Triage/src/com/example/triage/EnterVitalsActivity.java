@@ -27,7 +27,7 @@ public class EnterVitalsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_enter_vitals);
 		Intent intent = getIntent();
-		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.patientTag);
+		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.PATIENT_TAG);
 		TextView name_patient = (TextView) findViewById(R.id.patient_name);
 		name_patient.setText(patient.getName());
 		setTitle("Add Vital Signs and Symptoms");
@@ -78,7 +78,7 @@ public class EnterVitalsActivity extends Activity {
 
 		if ((!allEmpty) && correctTypes) {
 			patient.addVitals(newVitals);
-			intent.putExtra(EmergencyRoom.patientTag, patient);
+			intent.putExtra(EmergencyRoom.PATIENT_TAG, patient);
 			startActivity(intent);
 		} 
 		else if (!correctTypes) {

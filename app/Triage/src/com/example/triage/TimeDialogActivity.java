@@ -38,7 +38,7 @@ public class TimeDialogActivity extends Activity{
 		datePicker = (DatePicker) findViewById(R.id.datePicker);
 		
 		Intent intent = getIntent();
-		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.patientTag);
+		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.PATIENT_TAG);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class TimeDialogActivity extends Activity{
 		Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
 
 		Intent intent = new Intent(this, PatientInfoActivity.class);
-		intent.putExtra(EmergencyRoom.patientTag, patient);
+		intent.putExtra(EmergencyRoom.PATIENT_TAG, patient);
 		startActivity(intent);
 	}
 

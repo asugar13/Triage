@@ -94,7 +94,7 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 			if(result!=null){
 				//Valid result -> display patient in patientInfoActivity
 				Intent intent = new Intent(this,PatientInfoActivity.class);
-				intent.putExtra(EmergencyRoom.patientTag,result);
+				intent.putExtra(EmergencyRoom.PATIENT_TAG,result);
 				startActivity(intent);
 			}
 			else{
@@ -257,7 +257,7 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 				public void onClick(View v) {
 					//Launch the patientInfo class with the patient from this row
 					Intent intent = new Intent(context,PatientInfoActivity.class);
-					intent.putExtra(EmergencyRoom.patientTag, thisPatient);
+					intent.putExtra(EmergencyRoom.PATIENT_TAG, thisPatient);
 					startActivity(intent);
 				}
 			});

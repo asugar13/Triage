@@ -30,7 +30,7 @@ public class EmergencyRoom {
 	/**Singleton storage of instance.*/
 	private static EmergencyRoom instance = null;
 	/**Constant used for passing patients by intents.*/
-	public static final String patientTag = "patient_tag";
+	public static final String PATIENT_TAG = "patient_tag";
 	/**Map of all patients mapped by health card number.*/
 	private Map<String, Patient> patients;
 	/**Instance of DatabaseManager used to read/write to SQLiteDatabase.*/
@@ -40,17 +40,17 @@ public class EmergencyRoom {
 	/**Context of the application used for reading from assets.*/
 	private Context context;
 	/**Constant, name of patient table in database.*/
-	public static final String patientTable = "patient_records";
+	public static final String PATIENT_TABLE = "patient_records";
 	/**Constant, name of patient records .txt file.*/
-	public static final String patientsTxtFileName = "patient_records.txt";
+	public static final String PATIENT_TXT_FILE_NAME = "patient_records.txt";
 	/**Constant name of passwords .txt file.*/
-	public static final String passwordsTxtFileName = "passwords.txt";
+	public static final String PASSWORDS_TXT_FILE_NAME = "passwords.txt";
 	/**Constant name of the login table (stores usernames,passwords,usertype) in the database.*/
-	public static final String loginTable = "login_information";
+	public static final String LOGIN_TABLE = "login_information";
 	/**Constant a SimpleDateFormat object for the format "25-02-2014".*/
-	public static final SimpleDateFormat sdfNoTime = new SimpleDateFormat("dd-MM-yyyy");
+	public static final SimpleDateFormat SDF_NOTIME = new SimpleDateFormat("dd-MM-yyyy");
 	/**Constant a SimpleDateFormat object for the format "25-02-2014 12:30 AM".*/
-	public static final SimpleDateFormat sdfTime = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+	public static final SimpleDateFormat SDF_TIME = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
 	
 	/**
 	 * Singleton, constructor protected.
@@ -77,7 +77,7 @@ public class EmergencyRoom {
 		//After context is set we can initialize the database
 		dbManager = new DatabaseManager(context);
 		dbManager.open();
-		loadPatients(context,patientsTxtFileName);
+		loadPatients(context,PATIENT_TXT_FILE_NAME);
 	}
 	/**
 	 * Loads patients from database. If database doesn't exist loads from .txt file,
@@ -86,7 +86,7 @@ public class EmergencyRoom {
 	 * @param fileName name of file to open.
 	 */
 	private void loadPatients(Context context, String fileName) {
-		if(dbManager.tableExists(patientTable)){
+		if(dbManager.tableExists(PATIENT_TABLE)){
 			//Read from database
 			loadPatientsFromDB();
 			Log.d("Patients TABLE","EXISTS");
@@ -115,7 +115,7 @@ public class EmergencyRoom {
 								"'date_of_birth'","'seen_by_doctor'",
 								"'vitals'","'prescriptions'"};
 		String[] patientColumnTypes = {"TEXT","TEXT","TEXT","TEXT","TEXT","TEXT"};
-		dbManager.createTable(patientTable,patientColumns,patientColumnTypes);
+		dbManager.createTable(PATIENT_TABLE,patientColumns,patientColumnTypes);
 		//Copies patients to database for future use.
 		for(Patient p: getPatients()){
 			savePatient(p);
@@ -232,7 +232,7 @@ public class EmergencyRoom {
 		int urgency = 0;
 		String[] birthDate = patient.getBirthDate().split("-");
 		int birthDay = Integer.parseInt(birthDate[0]) + Integer.parseInt(birthDate[1]) * 30 + Integer.parseInt(birthDate[2]) * 365;
-		String[] currentDate = sdfNoTime.format(new Date()).split("-");
+		String[] currentDate = SDF_NOTIME.format(new Date()).split("-");
 		int currentDay = Integer.parseInt(currentDate[0]) * 365 + Integer.parseInt(currentDate[1]) * 30 + Integer.parseInt(currentDate[2]);
 		float age = ((float) (currentDay - birthDay)) / 365;
 		if (age < 2){
@@ -339,10 +339,10 @@ public class EmergencyRoom {
 		if(dbManager.rowExists("patient_records","health_card_number = '" + patient.getHealthCardNum() + "'")){
 			//Modify row
 			String whereClause = "health_card_number = " + patient.getHealthCardNum();
-			dbManager.modifyRow(patientTable,patientValues,whereClause);
+			dbManager.modifyRow(PATIENT_TABLE,patientValues,whereClause);
 		}else{
 			//Add patient
-			dbManager.addRow(patientValues, patientTable);
+			dbManager.addRow(patientValues, PATIENT_TABLE);
 		}
 	}
 	
@@ -356,10 +356,10 @@ public class EmergencyRoom {
 	 * @return whether the username and password combination is valid.
 	 */
 	public boolean logIn(String username, String password){
-		if(dbManager.tableExists(loginTable)){
+		if(dbManager.tableExists(LOGIN_TABLE)){
 			//Check database for row with given username and password
 			String sqlWhere = "username = '" + username + "' AND password = '" + password + "'";
-			if(dbManager.rowExists(loginTable,sqlWhere)){
+			if(dbManager.rowExists(LOGIN_TABLE,sqlWhere)){
 				//Login successful
 				setUserType(sqlWhere);
 				return true;
@@ -380,7 +380,7 @@ public class EmergencyRoom {
 	 * and copies to local SQLite database for future use.
 	 */
 	private void initLoginInfoDB(){
-		Scanner scanner = new Scanner(getInputStream(passwordsTxtFileName));
+		Scanner scanner = new Scanner(getInputStream(PASSWORDS_TXT_FILE_NAME));
 		ArrayList<String[]> usersLoginInfo = new ArrayList<String[]>();
 		
 		while(scanner.hasNextLine()){
@@ -389,7 +389,7 @@ public class EmergencyRoom {
 		//Create new table
 		String[] columns = {"'username'","'password'","'user_type'"};
 		String[] columnTypes = {"TEXT","TEXT","TEXT"};
-		dbManager.createTable(loginTable,columns,columnTypes);
+		dbManager.createTable(LOGIN_TABLE,columns,columnTypes);
 		
 		//Stores login information in database for future use
 		for(String[] userInfo: usersLoginInfo){
@@ -397,7 +397,7 @@ public class EmergencyRoom {
 			cv.put("username", userInfo[0]);
 			cv.put("password", userInfo[1]);
 			cv.put("user_type",userInfo[2]);
-			dbManager.addRow(cv, loginTable);
+			dbManager.addRow(cv, LOGIN_TABLE);
 		}
 		
 	}
@@ -408,7 +408,7 @@ public class EmergencyRoom {
 	 */
 	private void setUserType(String sqlWhere){
 		String[] columns = {"user_type"};
-		Cursor c = dbManager.getRow(loginTable,sqlWhere,columns);
+		Cursor c = dbManager.getRow(LOGIN_TABLE,sqlWhere,columns);
 		c.moveToFirst();
 		String userType = c.getString(0);
 		this.userType = userType;
@@ -426,7 +426,7 @@ public class EmergencyRoom {
 	 * Loads the patients from the database to field patients.
 	 */
 	private void loadPatientsFromDB(){
-		Cursor c = dbManager.getAllRows(patientTable);
+		Cursor c = dbManager.getAllRows(PATIENT_TABLE);
 		if (c.moveToFirst()){
 			do{
 				Vitals currentVitals;
@@ -451,7 +451,7 @@ public class EmergencyRoom {
 
 						Log.d("CURRENTSCTIPT",Arrays.toString(currentScript));
 						try {
-							date = sdfNoTime.parse(currentScript[0]);
+							date = SDF_NOTIME.parse(currentScript[0]);
 							scriptInfo = currentScript[1];
 							Log.d("scriptInfo",scriptInfo + "Empty");
 							allPrescriptions.put(date, scriptInfo);

@@ -41,7 +41,7 @@ public class ViewAllRecordsActivity extends Activity {
 		setContentView(R.layout.activity_view_all_records);
 		setTitle("Patient's History");
 		Intent intent = getIntent();
-		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.patientTag);
+		patient = (Patient) intent.getSerializableExtra(EmergencyRoom.PATIENT_TAG);
 		TextView name_patient = (TextView) findViewById(R.id.patient_name);
 		name_patient.setText(patient.getName());
 		
@@ -182,7 +182,7 @@ public class ViewAllRecordsActivity extends Activity {
 			TextView tempTView = (TextView) row.findViewById(R.id.patientTempText);
 			
 			//Assign values to the text views
-			dateTView.setText(EmergencyRoom.sdfTime.format(sortedDates.get(position)));
+			dateTView.setText(EmergencyRoom.SDF_TIME.format(sortedDates.get(position)));
 			bpdTView.setText(vitalsData[1]);
 			bpsTView.setText(vitalsData[2]);
 			hrTView.setText(vitalsData[3]);
