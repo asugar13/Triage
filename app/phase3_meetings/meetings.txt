@@ -1,7 +1,8 @@
 Planning meeting 1:
 Current state of project:
 End of Phase 2
-Tasks:
+
+All Tasks for phase 3:
  - Implement sign in functionality to LoginActivity
    - Access password/username/usertype information from passwords.txt or mySQLite database/
    - Restrict functionality of certain features based on user type
@@ -26,18 +27,18 @@ Implemented:
  - Urgency rating implemented for EmergencyRoom (Amit)
  
 To do:
- - Make loginActivity use EmergencyRoom to sign in user/
- - Add addPatientActivity for adding new patients/
- - Make Patients assign urgency to themselves when vitals are updated/users created
- - Add seen by doctor assignment option/
- - Make EmergencyRoom return patients sorted by not seen by doctor and urgency
- - Add View Patients: All/Not seen by a doctor sorted by urgency pulldown menu to PatientsDisplayActivity
- - Figure out how to store prescription information
- - Add Button to Add prescription information to PatientInfoActivity
- - Add PerscriptionInfoActivity???
+ - Make loginActivity use EmergencyRoom to sign in user (Daniel)
+ - Add addPatientActivity for adding new patients (Asier)
+ - Make Patients assign urgency to themselves when vitals are updated/users created (Amit)
+ - Add seen by doctor assignment option (Daniel)
+ - Make EmergencyRoom return patients sorted by not seen by doctor and urgency (Amit)
+ - Add View Patients: All/Not seen by a doctor sorted by urgency pulldown menu to PatientsDisplayActivity (Daniel)
+ - Figure out how to store prescription information (Doga)
+ - Add Button to Add prescription information to PatientInfoActivity (Doga)
+ - Add PerscriptionInfoActivity??? (Dog)
 	- Displays prescription information
         - Options to add new prescriptions
- - Put processor intensive tasks on separate thread from UI (to improve User experience)
+ - Put processor intensive tasks on separate thread from UI (to improve User experience) (EXTRA)
 
 
 Status Meeting2:
@@ -75,11 +76,28 @@ Status Meeting3:
  - Display prescription history for patients (Daniel)
  - work on CRC and description (Doga & Asier)
  - Display seenbyDoctor status (Amit)
- - javadoc & comments (Everyone)
+ - javadoc & comments review & fix(Everyone)
  - Restrict values entered in vitals editTexts to be digits (Asier)
  - Review code (Everyone)
+	- jave conventions
 	- variable names
 	- method declarations (names, argument names, appropriate private/static/public etc.)
+
+Status Meeting4:
+- Implemented display of prescription history (Daniel)
+- Implemented displaying seenbyDoctor status (Amit)
+- Restricting values Implemented (Asier)
+- CRC and description completed (Doga & Asier)
+- javadoc & comments reviewed and fixed(Everyone)
+- Code Reviewed (Everyone)
+
+
+Current State of project end of Phase 3:
+- All features implemented
+	- SQLiteDatabase implemented
+
+
+
 
 
  
