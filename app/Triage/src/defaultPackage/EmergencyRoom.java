@@ -244,8 +244,7 @@ public class EmergencyRoom {
 		Vitals vitals = patient.getVitals();
 		TreeMap <Date, String[]> allVitals = vitals.getAllVitals();
 		try{
-			Log.d("Vitals", vitals.toString() + "empty");
-			String[] mostRecentVitals = allVitals.get(allVitals.firstKey());
+			String[] mostRecentVitals = allVitals.get(allVitals.lastKey());
 			if (mostRecentVitals[0] != null && mostRecentVitals[0] != "N/A"){
 				int temp = Integer.parseInt(mostRecentVitals[0]);
 				if (temp >= 39){
@@ -273,6 +272,8 @@ public class EmergencyRoom {
 		}
 		catch (NoSuchElementException e){	
 		}
+		
+		Log.d("URGENCY CALCULATED",Integer.toString(urgency));
 		patient.addUrgency(urgency);
 		//do we want to save here?
 	}
@@ -442,10 +443,14 @@ public class EmergencyRoom {
 				//Parse prescription record string
 				if(!TextUtils.isEmpty(c.getString(5))){
 					String[] prescriptionDBString = c.getString(5).split("[\\x7C]");
+					Log.d("ScriptInfo",Arrays.toString(prescriptionDBString));
+
 					for(String s: prescriptionDBString){
 						Date date = null;
 						String scriptInfo = "";
 						String[] currentScript = s.split(Pattern.quote("*"));
+
+						Log.d("CURRENTSCTIPT",Arrays.toString(currentScript));
 						try {
 							date = sdfNoTime.parse(currentScript[0]);
 							scriptInfo = currentScript[1];
