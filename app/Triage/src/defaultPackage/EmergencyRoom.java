@@ -241,8 +241,6 @@ public class EmergencyRoom {
 		String systolic = mostRecentVital(allVitals, 2);
 		String heartRate = mostRecentVital(allVitals, 3);
 		try{
-			String[] mostRecentVitals = allVitals.get(allVitals.lastKey());
-			Log.d("MOSTRECENTVITALS",Arrays.toString(mostRecentVitals));
 			if (!temp.equals("N/A")){
 				if (Integer.parseInt(temp) >= 39){
 					urgency++;
@@ -284,7 +282,7 @@ public class EmergencyRoom {
 	 * in the past day.
 	 */
 	public String mostRecentVital(TreeMap<Date, String[]> allVitals, int pos){
-		for (Date key: allVitals.descendingKeySet().descendingSet()){
+		for (Date key: allVitals.descendingKeySet()){
 			if (!past24Hours(key, allVitals.lastKey())){
 				break;
 			}
