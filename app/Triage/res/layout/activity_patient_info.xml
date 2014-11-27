@@ -17,6 +17,7 @@
         android:layout_alignLeft="@+id/health_num_patient"
         android:text="TextView" />
 
+
     <TextView
         android:id="@+id/heart_rate_catch"
         android:layout_width="wrap_content"
@@ -30,26 +31,10 @@
         android:id="@+id/patient_birthdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/birthdateView"
         android:layout_alignBottom="@+id/birthdateView"
         android:layout_alignLeft="@+id/name_patient"
+        android:layout_alignRight="@+id/health_num_patient"
         android:text="TextView" />
-
-    <TextView
-        android:id="@+id/heartRateView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/healthNumView"
-        android:layout_below="@+id/textView11"
-        android:text="@string/name_field" />
-
-    <TextView
-        android:id="@+id/healthNumView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_below="@+id/heartRateView"
-        android:text="@string/health_num_field" />
 
     <TextView
         android:id="@+id/birthdateView"
@@ -67,30 +52,6 @@
         android:layout_alignBottom="@+id/textView2"
         android:layout_alignLeft="@+id/temperature_catch"
         android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/birthdateView"
-        android:layout_below="@+id/textView2"
-        android:text="Systolic: " />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_below="@+id/textView1"
-        android:text="Diastolic: " />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView12"
-        android:text="Temperature: " />
 
     <TextView
         android:id="@+id/textView4"
@@ -141,52 +102,6 @@
         android:text="@string/seen_by_doctor" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView11"
-        android:layout_below="@+id/birthdateView"
-        android:text="Vitals:" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/add_prescription"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/save_prescription"
-        android:onClick="viewRecordsOnClick"
-        android:text="@string/viewRecords" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/save_prescription"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignRight="@+id/save_prescription"
-        android:onClick="seenByDoctorOnClick"
-        android:text="@string/doctor_visit" />
-
-    <Button
-        android:id="@+id/save_prescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
-        android:layout_alignParentRight="true"
-        android:onClick="editRecordsOnClick"
-        android:text="@string/editRecords" />
-
-    <Button
-        android:id="@+id/add_prescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button3"
-        android:layout_toLeftOf="@+id/save_prescription"
-        android:onClick="addPrescriptionOnClick"
-        android:text="Add Prescription" />
-
-    <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -195,46 +110,144 @@
         android:text="Symptoms Description:  " />
 
     <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:text="Personal Data:" />
+
+    <TextView
         android:id="@+id/name_patient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/healthNumView"
-        android:layout_toLeftOf="@+id/save_prescription"
+        android:layout_above="@+id/health_num_patient"
+        android:layout_alignRight="@+id/button3"
+        android:layout_alignTop="@+id/heartRateView"
+        android:layout_toRightOf="@+id/textView12"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/health_num_patient"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/patient_birthdate"
-        android:layout_toLeftOf="@+id/save_prescription"
-        android:text="TextView" />
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:text="Diastolic: " />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/systolic_catch"
+        android:layout_alignBottom="@+id/systolic_catch"
+        android:layout_alignLeft="@+id/textView2"
+        android:text="Systolic: " />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/patient_birthdate"
+        android:layout_centerHorizontal="true"
+        android:text="Vitals:" />
+
+    <TextView
+        android:id="@+id/healthNumView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/heartRateView"
+        android:layout_below="@+id/heartRateView"
+        android:text="@string/health_num_field" />
 
     <Button
         android:id="@+id/button1"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView5"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/save_prescription"
+        android:gravity="center_horizontal|center_vertical"
         android:onClick="backToEmergencyRoom"
         android:text="@string/btn_back" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/health_num_patient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:text="Personal Data:" />
+        android:layout_alignBaseline="@+id/healthNumView"
+        android:layout_alignBottom="@+id/healthNumView"
+        android:layout_alignLeft="@+id/name_patient"
+        android:layout_alignParentRight="true"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/save_prescription"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="seenByDoctorOnClick"
+        android:text="@string/doctor_visit" />
+
+    <Button
+        android:id="@+id/add_prescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/save_prescription"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/middleView"
+        android:layout_below="@+id/button3"
+        android:onClick="addPrescriptionOnClick"
+        android:text="Add Prescription" />
+
+    <Button
+        android:id="@+id/save_prescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/add_prescription"
+        android:onClick="editRecordsOnClick"
+        android:text="@string/editRecords" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="viewRecordsOnClick"
+        android:text="@string/viewRecords" />
+
+    <TextView
+        android:id="@+id/heartRateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView11"
+        android:layout_marginRight="14dp"
+        android:layout_toLeftOf="@+id/textView11"
+        android:text="@string/name_field" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/birthdateView"
+        android:layout_below="@+id/textView12"
+        android:text="Temperature: " />
 
     <TextView
         android:id="@+id/symptoms_description_catch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView8"
-        android:layout_below="@+id/textView5"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignRight="@+id/button3"
+        android:layout_toRightOf="@+id/textView5"
         android:text="TextView" />
 
 </RelativeLayout>

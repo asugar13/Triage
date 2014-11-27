@@ -95,7 +95,12 @@ public class PatientInfoActivity extends Activity {
 			systolic.setText("N/A");
 			heartRate.setText("N/A");
 			symptoms.setText("N/A");
-			urgency.setText("N/A");
+			if(patient.getUrgency() != -1){
+				urgency.setText(Integer.toString(patient.getUrgency()));
+			}else{
+				urgency.setText("N/A");
+
+			}
 		}
 		
 		if (patient.getSeenByDoctorStatus()){
