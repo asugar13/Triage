@@ -17,16 +17,6 @@
 
     </ListView>
 
-    <EditText
-        android:id="@+id/searchHCtext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/searchTitle"
-        android:layout_below="@+id/searchTitle"
-        android:layout_toLeftOf="@+id/searchHC"
-        android:ems="10"
-        android:hint="@string/searchHint" />
-
     <Button
         android:id="@+id/searchHC"
         android:layout_width="32dp"
@@ -55,13 +45,36 @@
         android:onClick="addPatient"
          />
 
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:onClick="logOutOnClick"
+        android:text="@string/btn_logOut" />
+
+    <EditText
+        android:id="@+id/searchHCtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/list_sort"
+        android:layout_below="@+id/save_prescription"
+        android:layout_marginTop="18dp"
+        android:layout_toLeftOf="@+id/searchHC"
+        android:ems="10"
+        android:hint="@string/searchHint" >
+
+        <requestFocus />
+    </EditText>
+
     <TextView
         android:id="@+id/searchTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/save_prescription"
-        android:layout_alignBottom="@+id/save_prescription"
-        android:layout_alignLeft="@+id/list_sort"
+        android:layout_above="@+id/searchHC"
+        android:layout_alignLeft="@+id/searchHCtext"
         android:text="@string/enter_hc" />
 
 </RelativeLayout>

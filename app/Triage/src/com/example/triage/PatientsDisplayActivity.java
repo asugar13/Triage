@@ -77,6 +77,11 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 		}
 	}
 	
+	public void logOutOnClick(View view) {
+		Intent intent = new Intent(this, LoginActivity.class);
+		startActivity(intent);
+	}
+	
 	/**
 	 * Handles the search by health card number function. If a valid search, starts
 	 * PatientInfoActivity to display the patients information.
