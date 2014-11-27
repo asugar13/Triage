@@ -27,7 +27,7 @@ public class Patient implements Serializable{
 	/**Patients vitals, stores all readings.*/
 	private Vitals vitals;
 	/**Patients assigned urgency.*/
-	private int urgency;
+	private int urgency = -1;
 	/**All of patients prescriptions past and present.*/
 	private TreeMap<Date, String> allPrescriptions;
 	
