@@ -66,7 +66,28 @@ public class PatientInfoActivity extends Activity {
 			systolic.setText(current_vit_symps[2]);
 			heartRate.setText(current_vit_symps[3]);
 			symptoms.setText(current_vit_symps[4]);
-			urgency.setText(String.valueOf(patient.getUrgency()));
+			
+			int urgencyValue = patient.getUrgency();
+			String urgencyText;
+			switch(urgencyValue){
+				case 1:
+					urgencyText = "Non Urgent";
+					break;
+				case 2:
+					urgencyText = "Less Urgent";
+					break;
+				case 3:
+					urgencyText = "Urgent";
+					break;
+				case 4:
+					urgencyText = "Urgent";
+					break;
+				default: 
+					urgencyText = "N/A";
+					break;
+			
+			}
+			urgency.setText(urgencyText);
 		}
 		else {
 			tempPatient.setText("N/A");
