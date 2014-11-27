@@ -41,7 +41,7 @@ public class AddNewPatientActivity extends Activity {
 	 * @param view View of the clicked button.
 	 */
 	public void saveNewPatient(View view) {
-		Intent intent = new Intent(this, PatientsDisplayActivity.class);
+		Intent intent = new Intent(this, PatientInfoActivity.class);
 		String year = String.valueOf(birthdatePicker.getYear());
 		String month = String.valueOf(birthdatePicker.getMonth());
 		String day = String.valueOf(birthdatePicker.getDayOfMonth());
@@ -87,6 +87,7 @@ public class AddNewPatientActivity extends Activity {
 		else {
 			Patient patient = new Patient(full_name, birthdate, hcn,vitals,new TreeMap<Date,String>());
 			EmergencyRoom.getInstance().savePatient(patient);
+			intent.putExtra(EmergencyRoom.PATIENT_TAG, patient);
 			startActivity(intent);
 		}
 	}
