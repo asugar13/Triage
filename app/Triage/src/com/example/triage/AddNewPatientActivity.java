@@ -79,10 +79,11 @@ public class AddNewPatientActivity extends Activity {
 			vitals.add(vitalInfo);
 		}
 		String birthdate = year + "-" + month + "-" + day;
-		if ((!(full_name.length >= 2)) || hcn.equals("") || !isDigits(hcn)) {
-			Toast.makeText(this, "Plase make sure to enter a full name and a health card number", Toast.LENGTH_SHORT)
+		if ((!(full_name.length >= 2)) || hcn.equals("") || !isDigits(hcn) || EmergencyRoom.getInstance().healthCardExists(hcn)) {
+			Toast.makeText(this, "Plase make sure to enter a full name and a new valid health card number", Toast.LENGTH_SHORT)
 			.show();
 		}
+		
 		else {
 			Patient patient = new Patient(full_name, birthdate, hcn,vitals,new TreeMap<Date,String>());
 			EmergencyRoom.getInstance().savePatient(patient);
