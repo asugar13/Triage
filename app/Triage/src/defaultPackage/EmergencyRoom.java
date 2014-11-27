@@ -252,6 +252,7 @@ public class EmergencyRoom {
 					urgency++;
 					added = true;
 				}
+			}
 			if (!added){
 				if (!systolic.equals("N/A")){
 					if (Integer.parseInt(systolic) >= 140){
@@ -260,7 +261,6 @@ public class EmergencyRoom {
 				}
 			}
 			
-			}
 			if (!heartRate.equals("N/A")){
 				int HR = Integer.parseInt(heartRate);
 				if (HR >= 100 || HR <= 50){
