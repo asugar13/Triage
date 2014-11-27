@@ -63,7 +63,7 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 	}
 	
 	/**
-	 * OnClick for Add Patient button, starts AddNewPatient activity.
+	 * OnClick for Add Patient button, starts AddNewPatientActivity.
 	 * Only works for nurses.
 	 * @param view View of the clicked button.
 	 */
@@ -77,6 +77,11 @@ public class PatientsDisplayActivity extends Activity implements OnItemSelectedL
 		}
 	}
 	
+	/**
+	 * OnClick for Log Out button, starts LogInActivity.
+	 * Only works for nurses.
+	 * @param view View of the clicked button.
+	 */
 	public void logOutOnClick(View view) {
 		Intent intent = new Intent(this, LoginActivity.class);
 		startActivity(intent);
