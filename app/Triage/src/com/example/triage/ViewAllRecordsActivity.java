@@ -56,7 +56,6 @@ public class ViewAllRecordsActivity extends Activity {
 		}
 		
 		//Populate listview for prescription history
-		Log.d("PatientScript",patient.getPrescriptions() + "EMPTY?");
 		if(!(patient.getPrescriptions().length == 0)){
 			ListView scriptList = (ListView) findViewById(R.id.patientScriptList);
 			scriptList.setAdapter(new ArrayAdapter(this,R.layout.prescription_list_row,patient.getPrescriptions()));

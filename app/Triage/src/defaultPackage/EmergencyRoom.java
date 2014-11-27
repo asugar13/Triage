@@ -51,6 +51,8 @@ public class EmergencyRoom {
 	public static final SimpleDateFormat SDF_NOTIME = new SimpleDateFormat("dd-MM-yyyy");
 	/**Constant a SimpleDateFormat object for the format "25-02-2014 12:30 AM".*/
 	public static final SimpleDateFormat SDF_TIME = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+	/** Constant a SimpleDateFormat object for the format "25-02-2014 12:30:18 AM" */
+	public static final SimpleDateFormat SDF_TIME_SEC = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
 	
 	/**
 	 * Singleton, constructor protected.
@@ -509,7 +511,7 @@ public class EmergencyRoom {
 
 						Log.d("CURRENTSCTIPT",Arrays.toString(currentScript));
 						try {
-							date = SDF_NOTIME.parse(currentScript[0]);
+							date = EmergencyRoom.SDF_TIME_SEC.parse(currentScript[0]);
 							scriptInfo = currentScript[1];
 							Log.d("scriptInfo",scriptInfo + "Empty");
 							allPrescriptions.put(date, scriptInfo);
