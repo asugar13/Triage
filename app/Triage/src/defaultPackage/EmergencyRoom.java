@@ -241,30 +241,31 @@ public class EmergencyRoom {
 		
 		Vitals vitals = patient.getVitals();
 		TreeMap <Date, String[]> allVitals = vitals.getAllVitals();
+		String temp = mostRecentVital(allVitals, 0);
+		String diastolic = mostRecentVital(allVitals, 1);
+		String systolic = mostRecentVital(allVitals, 2);
+		String heartRate = mostRecentVital(allVitals, 3);
 		try{
 			String[] mostRecentVitals = allVitals.get(allVitals.lastKey());
 			Log.d("MOSTRECENTVITALS",Arrays.toString(mostRecentVitals));
-			if (mostRecentVitals[0] != null && !mostRecentVitals[0].equals("N/A")){
-				int temp = Integer.parseInt(mostRecentVitals[0]);
-				if (temp >= 39){
+			if (!temp.equals("N/A")){
+				if (Integer.parseInt(temp) >= 39){
 					urgency++;
 				}
 			}
-			if (mostRecentVitals[1] != null && !mostRecentVitals[1].equals("N/A")){
-				int diastolic = Integer.parseInt(mostRecentVitals[1]);
-				if (diastolic >= 90){
+			if (!diastolic.equals("N/A")){
+				if (Integer.parseInt(diastolic) >= 90){
 					urgency++;
 				}
-				else if (mostRecentVitals[2] != null && !mostRecentVitals[2].equals("N/A")){
-					int systolic = Integer.parseInt(mostRecentVitals[2]);
-					if (systolic >= 140){
+				else if (!systolic.equals("N/A")){
+					if (Integer.parseInt(systolic) >= 140){
 						urgency++;
 					}
 				}
 			}
-			if (mostRecentVitals[3] != null && !mostRecentVitals[3].equals("N/A")){
-				int heartRate = Integer.parseInt(mostRecentVitals[3]);
-				if (heartRate >= 100 || heartRate <= 50){
+			if (!heartRate.equals("N/A")){
+				int HR = Integer.parseInt(heartRate);
+				if (HR >= 100 || HR <= 50){
 					urgency++;
 				}
 			}
@@ -277,6 +278,49 @@ public class EmergencyRoom {
 		//do we want to save here?
 	}
 	
+	/**
+	 * Returns the most recently recorded specified vital
+	 * 
+	 * @param pos The specified vital by position
+	 * @param allVitals A TreeMap of all of the Vitals recorded for a patient
+	 * arranged by date
+	 * @return currentVital The most recently recorded specified vital
+	 * @return "N/A" Returns if there has been no recording of the specified vital
+	 * in the past day.
+	 */
+	public String mostRecentVital(TreeMap<Date, String[]> allVitals, int pos){
+		for (Date key: allVitals.descendingKeySet().descendingSet()){
+			if (!past24Hours(key, allVitals.lastKey())){
+				break;
+			}
+			String currentVital = allVitals.get(key)[pos];
+			if (!currentVital.equals("N/A") && (currentVital != null)){
+				return currentVital;
+			}
+		}
+		return "N/A";
+	}
+	
+	public boolean past24Hours(Date d1, Date d2){
+		String[] dateString1 = SDF_TIME.format(d1).split(" ");
+		String[] dateString2 = SDF_TIME.format(d2).split(" ");
+		String [] dateSplit1 = dateString1[0].split("-");
+		String [] dateSplit2 = dateString2[0].split("-");
+		int day1 = Integer.parseInt(dateSplit1[0]) + 30 * Integer.parseInt(dateSplit1[1]);
+		int day2 = Integer.parseInt(dateSplit2[0]) + 30 * Integer.parseInt(dateSplit2[1]);
+		String[] time1 = dateString1[1].split(":");
+		String[] time2 = dateString2[1].split(":");
+		int date1 = day1*24*60 + Integer.parseInt(time1[0])*60 + Integer.parseInt(time1[1]);
+		int date2 = day2*24*60 + Integer.parseInt(time2[0])*60 + Integer.parseInt(time2[1]);
+		System.out.println(date1);
+		System.out.println(date2);
+		if (Math.abs(date1 - date2) <= 24*60){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	/**
 	 * Populates patients Map from text file.
 	 * @param patients_stream inputStream from .txt file containing patients info.
