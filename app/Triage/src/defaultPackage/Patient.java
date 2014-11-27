@@ -94,7 +94,7 @@ public class Patient implements Serializable{
 		String[] birthDateSplit = birthDate.split("-");
 		int birthDay = Integer.parseInt(birthDateSplit[0]) + Integer.parseInt(birthDateSplit[1]) * 30 + Integer.parseInt(birthDateSplit[2]) * 365;
 		String[] currentDate = EmergencyRoom.SDF_NOTIME.format(new Date()).split("-");
-		int currentDay = Integer.parseInt(currentDate[0]) * 365 + Integer.parseInt(currentDate[1]) * 30 + Integer.parseInt(currentDate[2]);
+		int currentDay = Integer.parseInt(currentDate[0])  + Integer.parseInt(currentDate[1]) * 30 + Integer.parseInt(currentDate[2]) * 365;
 		int age = ((currentDay - birthDay)) / 365;
 		return age;
 	}
