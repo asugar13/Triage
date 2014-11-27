@@ -60,13 +60,14 @@ public class PatientInfoActivity extends Activity {
 		ArrayList<Date> keys = new ArrayList<Date>(patientVitals.getVitSymps().keySet());
 		
 		if (!(keys.isEmpty())) {
+			EmergencyRoom ER = EmergencyRoom.getInstance();
 			Date current_date = keys.get(keys.size() - 1);
 			String[] current_vit_symps = patientVitals.getVitSymps().get(current_date);
 			
-			tempPatient.setText(current_vit_symps[0]);
-			diastolic.setText(current_vit_symps[1]);
-			systolic.setText(current_vit_symps[2]);
-			heartRate.setText(current_vit_symps[3]);
+			tempPatient.setText(ER.mostRecentVital(patientVitals.getAllVitals(), 0));
+			diastolic.setText(ER.mostRecentVital(patientVitals.getAllVitals(), 1));
+			systolic.setText(ER.mostRecentVital(patientVitals.getAllVitals(), 2));
+			heartRate.setText(ER.mostRecentVital(patientVitals.getAllVitals(), 3));
 			symptoms.setText(current_vit_symps[4]);
 			
 			int urgencyValue = patient.getUrgency();
