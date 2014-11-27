@@ -2,6 +2,8 @@ Where to find Code:
  app -> Triage -> src -> defaultPackage: This contains all of the non-activity classes.
  app -> Triage -> src -> com -> Example -> triage: Contains all of the android activity classes.
 
+!!!IMPORTANT!!! Will have problems launching on some cdf machines if project is not cleaned first.
+
 Running application:
 Launch application, login to loginActivity using a nurse or physician. Takes you to PatientDisplayActivity. From here you can add patients, view patients information, or look up a patient by health card number. You can also select how you wish to display the patients from the dropdown menu. If you wish to view a patients info click the item in the list or search by health card number, this will take you to PatientInfoActivity. From here you can add to a patients record, add prescriptions, view all previous prescriptions vital records, and set the time a patient was visited by a doctor. Some features will not be allowed depending on your user type.
 
