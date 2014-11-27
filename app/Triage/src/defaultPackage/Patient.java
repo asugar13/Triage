@@ -51,7 +51,7 @@ public class Patient implements Serializable{
 			EmergencyRoom.getInstance().calcUrgency(this);
 		}
 		
-		if(getAge() <2){
+		if(getAge() < 2){
 			urgency = 1;
 		}	
 	}

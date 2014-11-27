@@ -112,9 +112,9 @@ public class EmergencyRoom {
 		Log.d("init","patients");
 		//Creates patients table
 		String[] patientColumns = {"'health_card_number'","'name'",
-								"'date_of_birth'","'seen_by_doctor'",
+								"'date_of_birth'",
 								"'vitals'","'prescriptions'"};
-		String[] patientColumnTypes = {"TEXT","TEXT","TEXT","TEXT","TEXT","TEXT"};
+		String[] patientColumnTypes = {"TEXT","TEXT","TEXT","TEXT","TEXT"};
 		dbManager.createTable(PATIENT_TABLE,patientColumns,patientColumnTypes);
 		//Copies patients to database for future use.
 		for(Patient p: getPatients()){
@@ -378,7 +378,6 @@ public class EmergencyRoom {
 		ContentValues patientValues = new ContentValues();
 		patientValues.put("health_card_number", patient.getHealthCardNum());
 		patientValues.put("name", patient.getName());
-		patientValues.put("seen_by_doctor", "false");
 		patientValues.put("date_of_birth", patient.getBirthDate());
 		patientValues.put("vitals", patient.getVitals().toString());
 		patientValues.put("prescriptions", patient.getPrescriptionString());
@@ -486,8 +485,8 @@ public class EmergencyRoom {
 			do{
 				Vitals currentVitals;
 				//Create vitals from string representation
-				if(c.getString(4) != ""){
-					currentVitals = new Vitals(c.getString(4).split("&"));
+				if(c.getString(3) != ""){
+					currentVitals = new Vitals(c.getString(3).split("&"));
 				}else{
 					currentVitals = new Vitals();
 				}
@@ -495,8 +494,8 @@ public class EmergencyRoom {
 				TreeMap<Date, String> allPrescriptions = new TreeMap<Date, String>();
 				
 				//Parse prescription record string
-				if(!TextUtils.isEmpty(c.getString(5))){
-					String[] prescriptionDBString = c.getString(5).split("[\\x7C]");
+				if(!TextUtils.isEmpty(c.getString(4))){
+					String[] prescriptionDBString = c.getString(4).split("[\\x7C]");
 					Log.d("ScriptInfo",Arrays.toString(prescriptionDBString));
 
 					for(String s: prescriptionDBString){
