@@ -271,7 +271,7 @@ public class EmergencyRoom {
 		catch (NoSuchElementException e){	
 		}
 		
-		Log.d("URGENCY CALCULATED",Integer.toString(urgency));
+		Log.d("URGENCY CALCULATED for " + patient.getName(),Integer.toString(urgency));
 		patient.addUrgency(urgency);
 		//do we want to save here?
 	}
