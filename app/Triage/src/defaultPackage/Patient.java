@@ -2,6 +2,7 @@ package defaultPackage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.TreeMap;
 
@@ -52,6 +53,7 @@ public class Patient implements Serializable{
 		}
 		
 		if(getAge() < 2){
+			Log.d("YOUNGER",Arrays.asList(this.name).toString() + "AGE is "+ Integer.toString(getAge()));
 			urgency = 1;
 		}	
 	}
@@ -94,7 +96,7 @@ public class Patient implements Serializable{
 		String[] birthDateSplit = birthDate.split("-");
 		int birthDay = Integer.parseInt(birthDateSplit[0]) + Integer.parseInt(birthDateSplit[1]) * 30 + Integer.parseInt(birthDateSplit[2]) * 365;
 		String[] currentDate = EmergencyRoom.SDF_NOTIME.format(new Date()).split("-");
-		int currentDay = Integer.parseInt(currentDate[0])  + Integer.parseInt(currentDate[1]) * 30 + Integer.parseInt(currentDate[2]) * 365;
+		int currentDay = Integer.parseInt(currentDate[0])+ Integer.parseInt(currentDate[1]) * 30 + Integer.parseInt(currentDate[2]) * 365 ;
 		int age = ((currentDay - birthDay)) / 365;
 		return age;
 	}
