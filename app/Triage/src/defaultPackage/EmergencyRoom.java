@@ -246,15 +246,20 @@ public class EmergencyRoom {
 					urgency++;
 				}
 			}
+			boolean added = false;
 			if (!diastolic.equals("N/A")){
 				if (Integer.parseInt(diastolic) >= 90){
 					urgency++;
+					added = true;
 				}
-				else if (!systolic.equals("N/A")){
+			if (!added){
+				if (!systolic.equals("N/A")){
 					if (Integer.parseInt(systolic) >= 140){
 						urgency++;
 					}
 				}
+			}
+			
 			}
 			if (!heartRate.equals("N/A")){
 				int HR = Integer.parseInt(heartRate);
