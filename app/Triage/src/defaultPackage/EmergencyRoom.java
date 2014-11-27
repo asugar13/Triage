@@ -421,6 +421,14 @@ public class EmergencyRoom {
 		}
 	}
 	
+	/**
+	 * Checks if the provided health card number already exists.
+	 * @param healthCardNumber
+	 */
+	public boolean healthCardExists(String healthCardNum){
+		return patients.keySet().contains(healthCardNum);
+	}
+	
 	
 	/**
 	 * Loads the passwords, usernames, and usertypes from passwords.txt
