@@ -236,6 +236,7 @@ public class EmergencyRoom {
 		
 		Vitals vitals = patient.getVitals();
 		TreeMap <Date, String[]> allVitals = vitals.getAllVitals();
+
 		String temp = mostRecentVital(allVitals, 0);
 		String diastolic = mostRecentVital(allVitals, 1);
 		String systolic = mostRecentVital(allVitals, 2);
