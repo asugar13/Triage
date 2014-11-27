@@ -51,10 +51,12 @@ public class PatientInfoActivity extends Activity {
 		TextView symptoms = (TextView) findViewById(R.id.symptoms_description_catch);
 		TextView urgency = (TextView) findViewById(R.id.urgency_level_field);
 		TextView seenByDoctor = (TextView) findViewById(R.id.seen_by_doctor_catch);
-
+		
+		//Set personal information
 		name_patient.setText(name);
 		patient_birthdate.setText(birthDate);
 		health_num_patient.setText(healthNum);
+		
 		ArrayList<Date> keys = new ArrayList<Date>(patientVitals.getVitSymps().keySet());
 		
 		if (!(keys.isEmpty())) {
@@ -95,8 +97,9 @@ public class PatientInfoActivity extends Activity {
 			systolic.setText("N/A");
 			heartRate.setText("N/A");
 			symptoms.setText("N/A");
-			if(patient.getUrgency() != -1){
-				urgency.setText(Integer.toString(patient.getUrgency()));
+			//Special case if new patient age <2 and no vitals
+			if(patient.getUrgency() == 1){
+				urgency.setText("Non Urgent");
 			}else{
 				urgency.setText("N/A");
 
