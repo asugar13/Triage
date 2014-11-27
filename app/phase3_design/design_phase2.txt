@@ -1,0 +1,57 @@
+Introduction - Triage Android application:
+The purpose of this application is to aid in the organization and management of an emergency room (ER). Nurses and physicians will use the application to track and manage patients' personal data, prescriptions, vitals, and symptoms. From this data the app will assign patients urgency based on the hospitals policy. 
+
+Emergency room:
+This class manages loading patients, storing and modifying patients during run time, and saving patients using DatabaseManager. Patients are stored as a map, mapping health card number to a patient object. Emergency room also handles calculating the urgency rating of patients, and organizing them based on this calculation
+
+Patient:
+Each instantiation of this class represents a single patient. The class stores patients personal information, as well as their vital object.
+
+Vitals:
+This class stores (as a map) all vital signs and symptoms (current and past) for a single patient. Each vital and symptom recording is mapped by date of time of recording.
+
+DatabaseManager:
+The DatabaseManager class manages creating, reading from, and writing to an SQLiteDatabase. 
+
+LogInActivity:
+This activity is the launcher activity. Nurses or physicians can use this screen to sign in with their username and password.
+
+AddNewPatientActivity:
+This activity allows nurses to add new patients.
+
+PatientDisplayActivity:
+Displays patients stored in emergency room unsorted, or patients unseen by a doctor sorted by descending urgency.
+
+PatientInfoActivity:
+This activity displays a specific patients personal information and most recent vital information. 
+
+EnterVitalsActivity:
+This activity allows nurses to record and update vitals signs of patients.
+
+ViewAllRecordsActivity:
+This activity allows nurses and physicians to view a patients vitals and symptom history, as well as prescription history. Each record is sorted by time (most recent first). 
+
+TimeDialogActivity:
+This activity allows the nurse to record a time that the patient has been seen by a doctor.
+
+AddPrescriptionActivity:
+This activity lets the doctor add a prescription to the patient's record. This activity can only be accessed by a physician.
+
+Description of Data persistence:
+We decided to store our data in an SQLiteDatabase. The first time the application is run, the data is read from the provided .txt files and saved to the database. The database contains two tables, patient_records and login_information. Patient_records is for the storage of all of the patients data. Log_information stores valid username and password combinations. Vital and symptom information, and prescriptions are saved to the database as their string representations. 
+
+Format of DatabaseFile:
+Patients name, birthday, health card number, 
+
+Vitals string format example:
+Date string representation*temp|systolic|diastolic|heartRate|symptoms description
+27-11-2014 09:58:08*23|80|100|80|Patient feels sick
+If there are multiple vitals readings they are separated by the & symbol.
+
+Prescription string format example:
+Date string representation*Prescription text
+27-11-2014 09:57 AM*Prescription description
+
+Argument for design:
+There are a few things to notice about our design. Our model consists of the classes Patient, EmergencyRoom, DatabaseManager, and Vitals. EmergencyRoom was created as a singleton class because there should only ever be one EmergencyRoom instantiation when running the app. Vitals were separated from the Patient in order to make them more easily accessible for calculating the urgency but mostly for displaying. We did not include a Nurse or Physician class because the differences in functionality are minimal and creating classes is not necessary. Instead we restrict access by specifying the current users type in EmergencyRoom upon log in. Our view consists of the six activity classes. The physician is the only type of user that has access to AddPrescription activity. All other activities are accessible to both types of users. We tried to separate the activities in a way that all of the responsibilities are as divided up as possible.
+Our controller consists of the xml activity files. The view permits nurses and physicians to use the app for all of the functions described. In activity_patients_display, we chose to use a ListView that lets physicians and nurses not only search by health card, but also click on a patient's name in order to access their files. This also permitted easy reorganization of the patients in the list when they needed to be listed by urgency.
