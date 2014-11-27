@@ -48,13 +48,11 @@ public class Patient implements Serializable{
 		this.allPrescriptions = allPrescriptions;
 		
 		if(!vitals.isEmpty){
-			//Was causing crashes, not sure if due to user generated vitals???
 			EmergencyRoom.getInstance().calcUrgency(this);
-		}
-		
-		if(getAge() < 2){
-			Log.d("YOUNGER",Arrays.asList(this.name).toString() + "AGE is "+ Integer.toString(getAge()));
-			urgency = 1;
+		}else{
+			if(getAge() < 2){
+				urgency = 1;
+				}			
 		}	
 	}
 	
