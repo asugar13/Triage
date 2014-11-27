@@ -105,6 +105,11 @@ public class PatientInfoActivity extends Activity {
 			seenByDoctor.setText("No");
 		}
 }
+	/**
+	 * OnClick for BackToEmergencyRoom button, starts PatientsDisplayActivity.
+	 * Only works for nurses.
+	 * @param view View of the clicked button.
+	 */
 	public void backToEmergencyRoom(View view) {
 		Intent intent = new Intent(this, PatientsDisplayActivity.class);
 //		intent.putExtra(EmergencyRoom.PATIENT_TAG, patient);
