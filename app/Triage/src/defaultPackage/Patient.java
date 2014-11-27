@@ -3,6 +3,7 @@ package defaultPackage;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.TreeMap;
 
@@ -47,6 +48,7 @@ public class Patient implements Serializable{
 		this.seenByDoctorStatus = false;
 		this.allPrescriptions = allPrescriptions;
 		
+		Log.d("Allscript",Arrays.asList(allPrescriptions).toString());
 		if(!vitals.isEmpty){
 			EmergencyRoom.getInstance().calcUrgency(this);
 		}else{
@@ -178,7 +180,7 @@ public class Patient implements Serializable{
 		
 		for(int i =0; i< keys.size(); i++){
 			Date this_date = keys.get(i);
-			scriptString = scriptString + EmergencyRoom.SDF_TIME.format(this_date) + "*";
+			scriptString = scriptString + EmergencyRoom.SDF_TIME_SEC.format(this_date) + "*";
 			scriptString = scriptString + allPrescriptions.get(keys.get(i));
 			if(!(i == keys.size() - 1)){
 				//If not the last prescription entry
@@ -194,13 +196,14 @@ public class Patient implements Serializable{
 	 * @return String representing prescription entries.
 	 */
 	public String[] getPrescriptions(){
-		String[] allScripts = new String[allPrescriptions.size()];
+		ArrayList<String> allScripts = new ArrayList<String>();
 		ArrayList<Date> keys = new ArrayList<Date>(allPrescriptions.keySet());
 		for(int i = 0; i< allPrescriptions.size();i++){
-			allScripts[i] = EmergencyRoom.SDF_TIME.format(keys.get(i)) + "\n" +
-						allPrescriptions.get(keys.get(i));
+			allScripts.add(EmergencyRoom.SDF_TIME.format(keys.get(i)) + "\n" +
+						allPrescriptions.get(keys.get(i)));
 		}
-		return allScripts;
+		Collections.reverse(allScripts);
+		return allScripts.toArray(new String[allScripts.size()]);
 	}
 	
 	/**
