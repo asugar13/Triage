@@ -87,7 +87,6 @@ public class AddNewPatientActivity extends Activity {
 		else {
 			Patient patient = new Patient(full_name, birthdate, hcn,vitals,new TreeMap<Date,String>());
 			EmergencyRoom.getInstance().savePatient(patient);
-			intent.putExtra(EmergencyRoom.PATIENT_TAG, patient);
 			startActivity(intent);
 		}
 	}

@@ -58,7 +58,7 @@ public class PatientInfoActivity extends Activity {
 		health_num_patient.setText(healthNum);
 		
 		ArrayList<Date> keys = new ArrayList<Date>(patientVitals.getVitSymps().keySet());
-		Log.d("PATIENTSURGENCY",Integer.toString(patient.getUrgency()));
+		
 		if (!(keys.isEmpty())) {
 			EmergencyRoom ER = EmergencyRoom.getInstance();
 			Date current_date = keys.get(keys.size() - 1);
