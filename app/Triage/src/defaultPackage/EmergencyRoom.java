@@ -292,7 +292,7 @@ public class EmergencyRoom {
 				break;
 			}
 			String currentVital = allVitals.get(key)[pos];
-			if (!currentVital.equals("N/A") && (currentVital != null)){
+			if ( (currentVital != null) && !currentVital.equals("N/A")){
 				return currentVital;
 			}
 		}
