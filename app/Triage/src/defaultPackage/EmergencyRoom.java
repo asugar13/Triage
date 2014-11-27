@@ -230,12 +230,7 @@ public class EmergencyRoom {
 	*/
 	public void calcUrgency(Patient patient){
 		int urgency = 0;
-		String[] birthDate = patient.getBirthDate().split("-");
-		int birthDay = Integer.parseInt(birthDate[0]) + Integer.parseInt(birthDate[1]) * 30 + Integer.parseInt(birthDate[2]) * 365;
-		String[] currentDate = SDF_NOTIME.format(new Date()).split("-");
-		int currentDay = Integer.parseInt(currentDate[0]) * 365 + Integer.parseInt(currentDate[1]) * 30 + Integer.parseInt(currentDate[2]);
-		float age = ((float) (currentDay - birthDay)) / 365;
-		if (age < 2){
+		if (patient.getAge() < 2){
 			urgency++;
 		}
 		
@@ -301,6 +296,14 @@ public class EmergencyRoom {
 		return "N/A";
 	}
 	
+	/**
+	 * Calculates whether two dates are within 24 hours of each other
+	 * 
+	 * @param d1 The first date
+	 * @param d2 The second date
+	 * @return true If the dates are within 24 hours of each other
+	 * @return false if the dates are not within 24 hours of each other
+	 */
 	public boolean past24Hours(Date d1, Date d2){
 		String[] dateString1 = SDF_TIME.format(d1).split(" ");
 		String[] dateString2 = SDF_TIME.format(d2).split(" ");
@@ -416,14 +419,6 @@ public class EmergencyRoom {
 			initLoginInfoDB();
 			return logIn(username,password);	
 		}
-	}
-	
-	/**
-	 * Checks if the provided health card number already exists.
-	 * @param healthCardNumber
-	 */
-	public boolean healthCardExists(String healthCardNum){
-		return patients.keySet().contains(healthCardNum);
 	}
 	
 	
